@@ -1,0 +1,45 @@
+name: Continuous Deployment
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+env:
+  IMAGE: gcr.io/deed-ie/nok-ie
+
+jobs:
+  svelte-deploy-gcp:
+    name: Svelte Deploy to Google Cloud Platform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Login to GCP
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: deed-ie
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Login to GCP docker
+        run: gcloud auth configure-docker --quiet
+
+      - name: Build docker image
+        run: |
+          docker build \
+            -t "${{ env.IMAGE }}:latest" \
+            -t "${{ env.IMAGE }}:sha-$(git rev-parse --short HEAD)" \
+            -t "${{ env.IMAGE }}:time-$(date '+%Y%m%d%H%M%S')" \
+            .
+
+      - name: Build docker image
+        run: docker image push --all-tags "${{ env.IMAGE }}"
+
+      - name: Deploy docker image
+        run: gcloud run deploy nok-ie --image "${{ env.IMAGE }}" --region europe-west1
