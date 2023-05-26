@@ -14,6 +14,11 @@ export default {
 				200: '#F9F9F9',
 				100: '#FFFFFF'
 			}
+		},
+		screens: {
+			sm: '480px',
+			md: '768px',
+			lg: '992px'
 		}
 	},
 	plugins: []
