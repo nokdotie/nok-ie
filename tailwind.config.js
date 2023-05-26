@@ -19,6 +19,9 @@ export default {
 			sm: '480px',
 			md: '768px',
 			lg: '992px'
+		},
+		fontFamily: {
+			sans: ['Thicccboi', 'sans-serif']
 		}
 	},
 	plugins: []
