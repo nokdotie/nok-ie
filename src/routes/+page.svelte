@@ -67,3 +67,12 @@
 		</div>
 	</div>
 </div>
+
+<div class="py-[40px] sm:py-[44px] border-t-[1px] boder-[#e9e9e9]">
+	<div
+		class="px-[16px] sm:px-[24px] mx-auto max-w-[1318px] flex items-center flex-col sm:flex-row sm:justify-between"
+	>
+		<img src="/images/logo.svg" alt="NOK.IE Logo" class="h-[49px] mb-[28px] sm:mb-0" />
+		<p>Copyright © NOK.IE</p>
+	</div>
+</div>
