@@ -42,14 +42,14 @@
 				use:enhance
 			>
 				<input
-					class="w-full min-h-[64px] sm:min-h-[86px] mb-[15px] sm:mb-0 px-[20px] py-[15px] sm:pr-[170px] lg:pr-[190px] border border-neutral-300 hover:border-primary focus:border-primary focus:outline-none rounded-[12px] bg-neutral-300 text-paragraph-md text-neutral-800"
+					class="w-full min-h-[64px] sm:min-h-[86px] mb-[15px] sm:mb-0 px-[20px] py-[15px] sm:pr-[170px] lg:pr-[190px] border border-neutral-300 duration-300 hover:border-primary focus:border-primary outline-none rounded-[12px] bg-neutral-300 text-paragraph-md text-neutral-800"
 					name="email"
 					type="email"
 					required
 					placeholder="Email address"
 				/>
 				<button
-					class="static sm:absolute sm:right-[11px] p-[20px] sm:px-[30px] self-stretch sm:self-center text-neutral-100 font-semibold bg-primary rounded-[12px]"
+					class="static sm:absolute sm:right-[11px] p-[20px] sm:px-[30px] self-stretch sm:self-center text-neutral-100 font-semibold bg-primary rounded-[12px] duration-300 hover:scale-[0.98] sm:hover:scale-[0.95]"
 					>Subscribe</button
 				>
 			</form>
