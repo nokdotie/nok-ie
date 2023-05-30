@@ -33,7 +33,7 @@ export default {
 			'paragraph-1': ['24px', { lineHeight: '1.083em' }],
 			'paragraph-2': ['20px', { lineHeight: '1.100em' }],
 			'paragraph-3': ['18px', { lineHeight: '1.111em' }],
-			'paragraph-4': ['16px', { lineHeight: '1.125em' }],
+			'paragraph-4': ['16px', { lineHeight: '1.125em' }]
 		}
 	},
 	plugins: []
