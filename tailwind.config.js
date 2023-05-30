@@ -24,19 +24,16 @@ export default {
 			sans: ['Thicccboi', 'sans-serif']
 		},
 		fontSize: {
-			'text-400': ['24px', { lineHeight: '1.083em' }],
-			'text-300': ['20px', { lineHeight: '1.100em' }],
-			'text-200': ['18px', { lineHeight: '1.111em' }],
-			'text-100': ['16px', { lineHeight: '1.125em' }],
 			'heading-1': ['48px', { lineHeight: '1.250em' }],
 			'heading-2': ['32px', { lineHeight: '1.375em' }],
 			'heading-3': ['22px', { lineHeight: '1.364em' }],
 			'heading-4': ['20px', { lineHeight: '1.400em' }],
 			'heading-5': ['18px', { lineHeight: '1.333em' }],
 			'heading-6': ['16px', { lineHeight: '1.375em' }],
-			'paragraph-sm': ['15px', { lineHeight: '1.600em' }],
-			'paragraph-md': ['18px', { lineHeight: '1.667em' }],
-			'paragraph-lg': ['24px', { lineHeight: '1.583em' }]
+			'paragraph-1': ['24px', { lineHeight: '1.083em' }],
+			'paragraph-2': ['20px', { lineHeight: '1.100em' }],
+			'paragraph-3': ['18px', { lineHeight: '1.111em' }],
+			'paragraph-4': ['16px', { lineHeight: '1.125em' }],
 		}
 	},
 	plugins: []
