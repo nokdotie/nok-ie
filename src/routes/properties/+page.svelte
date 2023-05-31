@@ -60,15 +60,15 @@
 	{/each}
 </div>
 
-<div class="mt-[50px] text-center">
+<div class="mt-[50px] flex gap-[15px] justify-center">
 	<a
-		class="text-center mt-[15px] py-[20px] block sm:inline-block sm:w-[200px] sm:mx-[6px] rounded-[12px] text-neutral-800 bg-neutral-100 hover:scale-95 duration-300 shadow text-paragraph-3 font-semibold"
+		class="text-center mt-[15px] py-[20px] w-[200px] rounded-[12px] text-neutral-800 bg-neutral-100 hover:scale-95 duration-300 shadow text-paragraph-3 font-semibold"
 		href="/properties?after="
 	>
 		Previous page
 	</a>
 	<a
-		class="text-center mt-[15px] py-[20px] block sm:inline-block sm:w-[200px] sm:mx-[6px] rounded-[12px] text-neutral-100 bg-primary hover:scale-95 duration-300 shadow text-paragraph-3 font-semibold"
+		class="text-center mt-[15px] py-[20px] w-[200px] rounded-[12px] text-neutral-100 bg-primary hover:scale-95 duration-300 shadow text-paragraph-3 font-semibold"
 		href="/properties?after="
 	>
 		Next page
