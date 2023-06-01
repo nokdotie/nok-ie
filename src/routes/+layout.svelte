@@ -7,7 +7,7 @@
 	}
 </script>
 
-<div class="min-h-screen bg-neutral-200">
+<div class="min-h-screen bg-neutral-100">
 	<div>
 		<div
 			class="py-[20px] sm:py-[23px] md:py-[28px] lg:py-[32px] px-[16px] sm:px-[24px] mx-auto max-w-[1318px] flex justify-between items-center"
@@ -53,13 +53,15 @@
 		</div>
 	</div>
 
-	<div
-		class="pb-[82px] sm:pb-[102px] md:pb-[128px] lg:pb-[160px] px-[16px] sm:px-[24px] mx-auto max-w-[1318px]"
-	>
-		<slot />
+	<div class="relative">
+		<div
+			class="pb-[82px] sm:pb-[102px] md:pb-[128px] lg:pb-[160px] px-[16px] sm:px-[24px] mx-auto max-w-[1318px]"
+		>
+			<slot />
+		</div>
 	</div>
 
-	<div class="py-[40px] sm:py-[44px] border-t-[1px] border-neutral-400">
+	<div class="py-[40px] sm:py-[44px] border-t-[1px] border-neutral-400 bg-neutral-100">
 		<div
 			class="px-[16px] sm:px-[24px] mx-auto max-w-[1318px] flex items-center flex-col sm:flex-row sm:justify-between"
 		>
