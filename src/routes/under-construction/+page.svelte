@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>NOK.IE | Coming Soon</title>
+	<title>NOK.IE | Under Construction</title>
 </svelte:head>
 
 <div
