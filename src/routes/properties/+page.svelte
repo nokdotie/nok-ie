@@ -2,6 +2,10 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>NOK.IE | Properties</title>
+</svelte:head>
+
 <div
 	class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[26px] gap-y-[45px] max-w-[660px] md:max-w-none mx-auto"
 >
