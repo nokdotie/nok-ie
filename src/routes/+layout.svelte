@@ -2,9 +2,9 @@
 	import '../app.css';
 
 	let humburgerMenuOpen = false;
-	function toggleHumburgerMenu() {
-		humburgerMenuOpen = !humburgerMenuOpen;
-	}
+	// function toggleHumburgerMenu() {
+	// 	humburgerMenuOpen = !humburgerMenuOpen;
+	// }
 </script>
 
 <div class="min-h-screen bg-neutral-100">
