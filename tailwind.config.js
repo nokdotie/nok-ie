@@ -36,5 +36,5 @@ export default {
 			'paragraph-4': ['16px', { lineHeight: '1.125em' }]
 		}
 	},
-	plugins: []
+	plugins: [require('@tailwindcss/typography')]
 };
