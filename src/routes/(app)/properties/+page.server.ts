@@ -1,4 +1,4 @@
-import { query, connectionFragment, type Connection } from '../../lib/GraphQl';
+import { query, connectionFragment, type Connection } from '$lib/GraphQl';
 
 type Advert = {
 	advertUrl: string;
