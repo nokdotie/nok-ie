@@ -61,10 +61,26 @@
 
 	<div class="py-[40px] sm:py-[44px] border-t-[1px] border-neutral-400 bg-neutral-100">
 		<div
-			class="px-[16px] sm:px-[24px] mx-auto max-w-[1318px] flex items-center flex-col sm:flex-row sm:justify-between"
+			class="px-[16px] sm:px-[24px] mx-auto max-w-[1318px] flex flex-col md:flex-row md:justify-between text-center gap-3"
 		>
-			<img src="/images/logo.svg" alt="NOK.IE Logo" class="h-[49px] mb-[28px] sm:mb-0" />
-			<p class="text-paragraph-4 text-neutral-600">Copyright © NOK.IE</p>
+			<div class="text-paragraph-4 text-neutral-600">© NOK.IE</div>
+			<div class="text-paragraph-4 text-neutral-400 flex divide-x justify-center">
+				<div class="px-[16px] sm:px-[24px]">
+					<a class=" text-neutral-600 hover:text-neutral-800 duration-300" href="/privacy-policy"
+						>Privacy Policy</a
+					>
+				</div>
+				<div class="px-[16px] sm:px-[24px]">
+					<a class="text-neutral-600 hover:text-neutral-800 duration-300" href="/cookie-policy"
+						>Cookie Policy</a
+					>
+				</div>
+				<div class="px-[16px] sm:px-[24px]">
+					<a class="text-neutral-600 hover:text-neutral-800 duration-300" href="/terms-service"
+						>Terms of Service</a
+					>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
