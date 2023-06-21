@@ -23,7 +23,7 @@
 			</div>
 			<div class="px-[25px] sm:px-[32px] pt-[32px] md:pt-[40px] pb-[28px]">
 				<div class="text-heading-4 md:text-heading-3 font-bold mb-[12px] text-neutral-800">
-					€ {edge.node.advertPrice.toLocaleString('en-IE')}
+					€ {edge.node.advertPriceInEur.toLocaleString('en-IE')}
 				</div>
 				<!-- <h2
 					class="text-heading-6 md:text-heading-5 font-bold mb-[10px] text-neutral-800 duration-300 group-hover:text-primary"
@@ -40,7 +40,7 @@
 						class="flex mr-[12px] mb-[12px] px-[14px] py-[10px] rounded-[40px] text-[14px] leading-[1.143em] text-neutral-800 font-semibold shadow"
 					>
 						<img class="max-w-[17px] mr-[6px]" src="/images/icons/size.svg" alt="Size Icon" />
-						{edge.node.propertySizeinSqtMtr.toLocaleString('en-IE')} &#13217;
+						{edge.node.propertySizeInSqtMtr.toLocaleString('en-IE')} &#13217;
 					</div>
 					<div
 						class="flex mr-[12px] mb-[12px] px-[14px] py-[10px] rounded-[40px] text-[14px] leading-[1.143em] text-neutral-800 font-semibold shadow"

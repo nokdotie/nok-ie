@@ -2,10 +2,10 @@ import { query, connectionFragment, type Connection } from '$lib/GraphQl';
 
 type Advert = {
 	advertUrl: string;
-	advertPrice: number;
+	advertPriceInEur: number;
 	propertyAddress: string;
 	propertyImageUrls: Array<string>;
-	propertySizeinSqtMtr: number;
+	propertySizeInSqtMtr: number;
 	propertyBedroomsCount: number;
 	propertyBathroomsCount: number;
 };
@@ -21,10 +21,10 @@ const graphQlQuery = `
         adverts(first: $first, after: $after) {
 			${connectionFragment(`
 				advertUrl
-				advertPrice
+				advertPriceInEur
 				propertyAddress
 				propertyImageUrls
-				propertySizeinSqtMtr
+				propertySizeInSqtMtr
 				propertyBedroomsCount
 				propertyBathroomsCount
 			`)}
