@@ -6,15 +6,15 @@
 	<title>NOK.IE | Properties</title>
 </svelte:head>
 
-<div>
-	<form>
-		<input
-			type="search"
-			name="address.contains"
-			placeholder="Search"
-			value={data.form?.address?.contains ?? ''}
-		/>
+<form class="flex flex-col sm:flex-row gap-3 my-[48px] sm:my-[58px] md:my-[68px]">
+	<input
+		name="address.contains"
+		placeholder="Search for properties..."
+		value={data.form?.address?.contains ?? ''}
+		class="grow min-h-[64px] sm:min-h-[83px] pl-[60px] pr-[24px] rounded-[14px] shadow duration-300 border border-neutral-300 hover:border-primary focus:border-primary outline-none text-paragraph-3 bg-[url('/images/icons/search.svg')] focus:bg-[url('/images/icons/search-focus.svg')] bg-no-repeat bg-[20px_50%] bg-[length:23px_23px]"
+	/>
 
+	<!--
 		<div>
 			Price
 
@@ -341,10 +341,14 @@
 				>
 			</select>
 		</div>
+		-->
 
-		<button type="submit">Search</button>
-	</form>
-</div>
+	<button
+		type="submit"
+		class="w-full sm:w-[150px] h-[64px] sm:h-[83px] rounded-[14px] bg-primary text-neutral-100 text-paragraph-3 font-semibold"
+		>Search</button
+	>
+</form>
 
 <div
 	class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[26px] gap-y-[45px] max-w-[660px] md:max-w-none mx-auto"
