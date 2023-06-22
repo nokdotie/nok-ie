@@ -10,7 +10,9 @@
 		<div
 			class="py-[20px] sm:py-[23px] md:py-[28px] lg:py-[32px] px-[16px] sm:px-[24px] mx-auto max-w-[1318px] flex justify-between items-center"
 		>
-			<img src="/images/logo.svg" alt="NOK.IE Logo" class="h-[40px] md:h-[49px]" />
+			<a href="/" class="duration-300 hover:scale-95">
+				<img src="/images/logo.svg" alt="NOK.IE Logo" class="h-[40px] md:h-[49px]" />
+			</a>
 
 			<!-- <div class="hidden md:flex gap-[15px] items-center">
 				<a class="text-paragraph-2 text-neutral-800 hover:text-primary duration-300" href="/_/properties">Buy</a>

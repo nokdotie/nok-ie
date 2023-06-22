@@ -11,7 +11,7 @@
 		name="address.contains"
 		placeholder="Search for properties..."
 		value={data.form?.address?.contains ?? ''}
-		class="grow min-h-[64px] sm:min-h-[83px] pl-[60px] pr-[24px] rounded-[14px] shadow duration-300 border border-neutral-300 hover:border-primary focus:border-primary outline-none text-paragraph-3 bg-[url('/images/icons/search.svg')] focus:bg-[url('/images/icons/search-focus.svg')] bg-no-repeat bg-[20px_50%] bg-[length:23px_23px]"
+		class="grow min-h-[64px] pl-[60px] pr-[24px] rounded-[14px] shadow duration-300 border border-neutral-300 hover:border-primary focus:border-primary outline-none text-paragraph-3 bg-[url('/images/icons/search.svg')] focus:bg-[url('/images/icons/search-focus.svg')] bg-no-repeat bg-[20px_50%] bg-[length:23px_23px]"
 	/>
 
 	<!--
@@ -345,7 +345,7 @@
 
 	<button
 		type="submit"
-		class="w-full sm:w-[150px] h-[64px] sm:h-[83px] rounded-[14px] bg-primary text-neutral-100 text-paragraph-3 font-semibold"
+		class="w-full sm:w-[150px] h-[64px] rounded-[14px] bg-primary text-neutral-100 text-paragraph-3 font-semibold duration-300 hover:scale-95"
 		>Search</button
 	>
 </form>
