@@ -50,6 +50,21 @@
 	Please be aware that while this information may not be personally identifying by itself, it may be
 	possible to combine it with other data to personally identify individual persons.
 </p>
+<h4>Device Data</h4>
+<p>
+	When you visit our website or interact with our services, we may automatically collect data about
+	your device, such as:
+</p>
+<ul>
+	<li>Device Type</li>
+	<li>Operating System</li>
+	<li>Browser Type</li>
+</ul>
+<p>
+	Data we collect can depend on the individual settings of your device and software. We recommend
+	checking the policies of your device manufacturer or software provider to learn what information
+	they make available to us.
+</p>
 <h4>Collection and Use of Information</h4>
 <p>We may collect personal information from you when you do any of the following on our website:</p>
 <ul>
@@ -99,6 +114,40 @@
 	We do not aim any of our products or services directly at children under the age of 13 and we do
 	not knowingly collect personal information about children under 13.
 </p>
+<h3>Disclosure of Personal Information to Third Parties</h3>
+<p>We may disclose personal information to:</p>
+<ul>
+	<li>a parent, subsidiary or affiliate of our company</li>
+	<li>
+		third-party service providers for the purpose of enabling them to provide their services
+		including (without limitation) IT service providers, data storage, hosting and server providers,
+		analytics, error loggers, debt collectors, maintenance or problem-solving providers,
+		professional advisors, and payment systems operators
+	</li>
+	<li>our employees, contractors, and/or related entities</li>
+	<li>our existing or potential agents or business partners</li>
+	<li>
+		credit reporting agencies, courts, tribunals, and regulatory authorities, in the event you fail
+		to pay for goods or services we have provided to you
+	</li>
+	<li>
+		courts, tribunals, regulatory authorities, and law enforcement officers, as required by law, in
+		connection with any actual or prospective legal proceedings, or in order to establish, exercise,
+		or defend our legal rights
+	</li>
+	<li>
+		third parties, including agents or sub-contractors who assist us in providing information,
+		products, services, or direct marketing to you
+	</li>
+	<li>third parties to collect and process data</li>
+	<li>
+		an entity that buys, or to which we transfer all or substantially all of our assets and business
+	</li>
+</ul>
+<p>Third parties we currently use include:</p>
+<ul>
+	<li>Umami</li>
+</ul>
 <h3>Your Rights and Controlling Your Personal Information</h3>
 <p>
 	<strong>Your choice:</strong> By providing personal information to us, you understand we will collect,

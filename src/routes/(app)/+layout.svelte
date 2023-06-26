@@ -73,11 +73,6 @@
 					>
 				</div>
 				<div class="px-[16px] sm:px-[24px]">
-					<a class="text-neutral-600 hover:text-neutral-800 duration-300" href="/cookie-policy"
-						>Cookie Policy</a
-					>
-				</div>
-				<div class="px-[16px] sm:px-[24px]">
 					<a class="text-neutral-600 hover:text-neutral-800 duration-300" href="/terms-service"
 						>Terms of Service</a
 					>
