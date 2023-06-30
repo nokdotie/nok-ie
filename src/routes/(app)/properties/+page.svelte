@@ -360,8 +360,8 @@
 		>
 			<div class="overflow-hidden">
 				<img
-					class="duration-300 group-hover:scale-105"
-					src={edge.node.propertyImageUrls[0]}
+					class="duration-300 group-hover:scale-105 w-full object-cover object-center aspect-photo"
+					src={edge.node.propertyImageUrls[0] ?? '/images/placeholder.svg'}
 					alt=""
 				/>
 			</div>
