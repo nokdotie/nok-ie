@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Advert } from './+page.server';
+	import type { Advert } from './Advert';
 
 	export let advert: Advert;
 </script>

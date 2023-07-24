@@ -1,6 +1,6 @@
 <script lang="ts">
-	import AdvertCardLists from './AdvertCardLists.svelte';
-	import NotFoundCard from './NotFoundCard.svelte';
+	import AdvertCardLists from '../AdvertCardLists.svelte';
+	import NotFoundCard from '../NotFoundCard.svelte';
 
 	export let data;
 </script>

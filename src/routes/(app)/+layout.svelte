@@ -8,7 +8,6 @@
 			<a href="/" class="shrink-0">
 				<img src="/images/logo.svg" alt="NOK.IE Logo" class="h-[48px] w-[48px]" />
 			</a>
-
 			<form class="grow relative group">
 				<input
 					name="q"
