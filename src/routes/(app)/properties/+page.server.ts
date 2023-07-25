@@ -33,17 +33,17 @@ const graphQlQuery = `
 `;
 
 export function load({ url }) {
-	const after= url.searchParams.get('after')
-	const q = url.searchParams.get('q') || ''
+	const after = url.searchParams.get('after');
+	const q = url.searchParams.get('q') || '';
 
 	const variables = {
 		first: 24,
 		after: after,
-		filter: { address: { contains: q } },
-	}
+		filter: { address: { contains: q } }
+	};
 
 	return {
-		url: { searchParams: { after: after, q: q, } },
+		url: { searchParams: { after: after, q: q } },
 		adverts: query<QueryApiKeysResponse>(graphQlQuery, variables).then(
 			(response) => response.data.adverts
 		)

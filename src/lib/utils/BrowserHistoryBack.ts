@@ -1,1 +1,1 @@
-export default () => history.back()
+export default () => history.back();

@@ -23,7 +23,9 @@
 			</form>
 		</div>
 	</div>
-	<div class="min-h-[calc(100vh-80px-129px)] sm:min-h-[calc(100vh-80px-107px)] mt-[80px] py-[25px] relative">
+	<div
+		class="min-h-[calc(100vh-80px-129px)] sm:min-h-[calc(100vh-80px-107px)] mt-[80px] py-[25px] relative"
+	>
 		<slot />
 	</div>
 	<div class="py-[40px] sm:py-[44px] border-t-[1px] border-neutral-400 bg-neutral-100">

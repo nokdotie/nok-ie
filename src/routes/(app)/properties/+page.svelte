@@ -18,6 +18,7 @@
 				<img
 					class="duration-300 group-hover:scale-105 w-full object-cover object-center aspect-photo"
 					src={edge.node.propertyImageUrls[0] ?? '/images/placeholder.svg'}
+					on:error={(event) => (event.currentTarget.src = '/images/placeholder.svg')}
 					alt=""
 				/>
 			</div>
@@ -64,7 +65,7 @@
 		<a
 			class="text-center mt-[15px] py-[20px] w-[175px] rounded-[12px] text-neutral-800 bg-neutral-100 hover:scale-95 duration-300 shadow text-paragraph-3 font-semibold"
 			href="/"
-			on:click={BrowserHistoryBack}
+			on:click|preventDefault={BrowserHistoryBack}
 		>
 			Previous page
 		</a>
