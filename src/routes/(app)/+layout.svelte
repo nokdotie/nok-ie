@@ -23,12 +23,12 @@
 			</form>
 		</div>
 	</div>
-	<div class="min-h-screen mt-[80px] pt-[10px] relative">
+	<div class="min-h-[calc(100vh-80px-129px)] sm:min-h-[calc(100vh-80px-107px)] mt-[80px] py-[25px] relative">
 		<slot />
 	</div>
 	<div class="py-[40px] sm:py-[44px] border-t-[1px] border-neutral-400 bg-neutral-100">
 		<div
-			class="px-[16px] sm:px-[24px] mx-auto max-w-[1318px] flex flex-col md:flex-row md:justify-between text-center gap-3"
+			class="px-[16px] sm:px-[24px] mx-auto max-w-[1318px] flex flex-col sm:flex-row sm:justify-between text-center gap-3"
 		>
 			<div class="text-paragraph-4 text-neutral-600">© NOK.IE</div>
 			<div class="text-paragraph-4 text-neutral-400 flex divide-x justify-center">
