@@ -17,7 +17,7 @@ type PageInfo = {
 
 const edgeFragment = (attributes: string) => `cursor node { ${attributes} }`;
 type Edge<A> = {
-	cursor: String;
+	cursor: string;
 	node: A;
 };
 
