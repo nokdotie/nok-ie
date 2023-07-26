@@ -6,8 +6,8 @@
 	import ErrorCardBody from '$lib/errors/ErrorCardBody.svelte';
 	import { derived } from 'svelte/store';
 
-	const status = derived(page, (page) => {
-		switch (page.error?.message) {
+	const status = derived(page, ($page) => {
+		switch ($page.error?.message) {
 			case 'Not Found':
 				return 404;
 			default:
