@@ -1,6 +1,6 @@
 import { query, connectionFragment, type Connection } from '$lib/GraphQl';
 
-type Advert = {
+export type Advert = {
 	advertUrl: string;
 	advertPriceInEur: number;
 	propertyAddress: string;
@@ -37,13 +37,12 @@ export function load({ url }) {
 	const q = url.searchParams.get('q') || '';
 
 	const variables = {
-		first: 24,
+		first: 60,
 		after: after,
 		filter: { address: { contains: q } }
 	};
 
 	return {
-		url: { searchParams: { after: after, q: q } },
 		adverts: query<QueryApiKeysResponse>(graphQlQuery, variables).then(
 			(response) => response.data.adverts
 		)
