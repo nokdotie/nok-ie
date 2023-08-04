@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Connection } from '$lib/GraphQl';
 	import BrowserHistoryBack from '$lib/utils/BrowserHistoryBack.js';
-	import type { Advert } from './+page.server';
+	import type { Advert } from '../Advert';
 	import AdvertCard from './AdvertCard.svelte';
 	import { derived } from 'svelte/store';
 	import { page } from '$app/stores';

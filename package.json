@@ -18,11 +18,13 @@
 		"@sveltejs/adapter-node": "^1.2.4",
 		"@sveltejs/kit": "^1.21.0",
 		"@tailwindcss/typography": "^0.5.9",
+		"@types/google.maps": "^3.53.6",
 		"@typescript-eslint/eslint-plugin": "^5.60.1",
 		"@typescript-eslint/parser": "^5.60.1",
 		"autoprefixer": "^10.4.14",
 		"eslint": "^8.43.0",
 		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-googlemaps": "^1.4.15",
 		"eslint-plugin-svelte": "^2.32.1",
 		"postcss": "^8.4.24",
 		"prettier": "^2.8.8",
@@ -35,5 +37,8 @@
 		"vite": "^4.3.9",
 		"vitest": "^0.32.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@googlemaps/js-api-loader": "^1.16.2"
+	}
 }
