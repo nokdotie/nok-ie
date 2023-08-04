@@ -89,9 +89,9 @@
 </svelte:head>
 
 <div class="relative">
-	<div id="map" class="min-h-[calc(100vh-120px)]" />
+	<div id="map" class="h-[calc(100vh-120px)]" />
 	{#if clickedMarker}
-		<div class="absolute bottom-0 left-0 m-[10px]">
+		<div class="absolute bottom-0 left-0">
 			<a href={clickedMarker.advertUrl}>
 				<AdvertCard advert={clickedMarker} />
 			</a>

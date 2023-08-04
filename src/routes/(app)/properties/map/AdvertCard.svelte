@@ -6,10 +6,12 @@
 	export let advert: Advert;
 </script>
 
-<div class="flex overflow-hidden rounded-[24px] bg-neutral-100 shadow">
-	<div class="w-[115px]">
+<div
+	class="group flex overflow-hidden rounded-[24px] bg-neutral-100 shadow duration-300 hover:scale-95 mx-[10px]"
+>
+	<div class="w-[115px] z-10">
 		<img
-			class="min-w-[115px] h-full object-cover object-center aspect-photo"
+			class="duration-300 group-hover:scale-105 min-w-[115px] h-full object-cover object-center aspect-photo"
 			src={advert.propertyImageUrls[0] ?? '/images/placeholder.svg'}
 			on:error|preventDefault={onError('/images/placeholder.svg')}
 			alt=""

@@ -2,7 +2,7 @@
 	export let data;
 </script>
 
-<div class="bg-neutral-100">
+<div class="bg-neutral-100 overflow-x-hidden">
 	<div class="fixed top-0 left-0 right-0 bg-neutral-100 z-50 shadow">
 		<div class="flex flex-row gap-3 my-[16px] mx-[10px]">
 			<a href="/" class="shrink-0">
