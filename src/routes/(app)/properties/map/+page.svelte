@@ -5,7 +5,7 @@
 	import type { Advert } from '../Advert';
 	import { onDestroy } from 'svelte';
 	import GoogleMap from './GoogleMap';
-	import AdvertCardClickable from '../AdvertCardClickable.svelte';
+	import AdvertCard from './AdvertCard.svelte';
 
 	const getAdverts = async (bounds: google.maps.LatLngBounds) => {
 		const northEast = bounds.getNorthEast();
@@ -92,7 +92,9 @@
 	<div id="map" class="min-h-[calc(100vh-120px)]" />
 	{#if clickedMarker}
 		<div class="absolute bottom-0 left-0 m-[10px]">
-			<AdvertCardClickable advert={clickedMarker} />
+			<a href={clickedMarker.advertUrl}>
+				<AdvertCard advert={clickedMarker} />
+			</a>
 		</div>
 	{/if}
 </div>

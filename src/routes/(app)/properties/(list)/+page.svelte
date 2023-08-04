@@ -1,6 +1,6 @@
 <script lang="ts">
-	import AdvertCardLists from '../AdvertCardLists.svelte';
-	import NotFoundCard from '../NotFoundCard.svelte';
+	import AdvertCardList from './AdvertCardList.svelte';
+	import NotFound from './NotFound.svelte';
 
 	export let data;
 </script>
@@ -10,7 +10,7 @@
 </svelte:head>
 
 {#if data.adverts.edges.length === 0}
-	<NotFoundCard />
+	<NotFound />
 {:else}
-	<AdvertCardLists connection={data.adverts} />
+	<AdvertCardList connection={data.adverts} />
 {/if}
