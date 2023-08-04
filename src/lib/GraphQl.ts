@@ -1,11 +1,11 @@
-function request(body) {
+function request(body: object) {
 	return fetch('https://api.nok.ie/graphql', {
 		method: 'POST',
 		body: JSON.stringify(body)
 	}).then((response) => response.json());
 }
 
-export function query<A>(query: string, variables): Promise<A> {
+export function query<A>(query: string, variables: object): Promise<A> {
 	return request({ query: query, variables: variables });
 }
 
