@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onError } from '$lib/utils/HtmlImageElement';
 	import type { Advert } from '../Advert';
 	import AdvertCardFooter from './AdvertCardFooter.svelte';
 
@@ -12,7 +13,7 @@
 		<img
 			class="duration-300 group-hover:scale-105 w-full object-cover object-center aspect-photo"
 			src={advert.propertyImageUrls[0] ?? '/images/placeholder.svg'}
-			on:error={(event) => (event.currentTarget.src = '/images/placeholder.svg')}
+			on:error|preventDefault={onError('/images/placeholder.svg')}
 			alt=""
 		/>
 	</div>
