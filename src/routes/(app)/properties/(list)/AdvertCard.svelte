@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onError } from '$lib/utils/HtmlImageElement';
-	import type { Advert } from '../Advert';
+	import route from '../[identifier]/route';
 	import AdvertCardFooter from './AdvertCardFooter.svelte';
 
 	export let advert: {
@@ -14,6 +14,7 @@
 	};
 </script>
 
+<a href={route(advert)}>
 <div
 	class="group bg-neutral-100 shadow rounded-[20px] overflow-hidden duration-300 hover:scale-95 w-[345px]"
 >
@@ -38,3 +39,4 @@
 		<AdvertCardFooter {advert} />
 	</div>
 </div>
+</a>

@@ -19,6 +19,6 @@
 	</div>
 	<div class="flex mb-[12px] px-[14px] py-[10px] rounded-[40px] shadow">
 		<img class="max-w-[17px] mr-[6px]" src="/images/icons/bathroom.svg" alt="Bathroom Icon" />
-		{advert.propertyBedroomsCount}
+		{advert.propertyBathroomsCount}
 	</div>
 </div>

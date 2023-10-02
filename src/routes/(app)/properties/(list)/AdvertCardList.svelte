@@ -26,9 +26,7 @@
 
 <div class="flex flex-wrap flex-row gap-3 justify-center">
 	{#each connection.edges as edge}
-		<a href={edge.node.advertUrl}>
-			<AdvertCard advert={edge.node} />
-		</a>
+		<AdvertCard advert={edge.node} />
 	{/each}
 </div>
 
