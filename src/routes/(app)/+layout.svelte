@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<div
-		class="min-h-[calc(100vh-80px-129px)] sm:min-h-[calc(100vh-80px-107px)] mt-[80px] py-[25px] relative"
+		class="min-h-[calc(100vh-80px-129px)] sm:min-h-[calc(100vh-80px-107px)] mt-[80px] relative"
 	>
 		<slot />
 	</div>
