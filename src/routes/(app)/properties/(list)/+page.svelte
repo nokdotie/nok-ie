@@ -10,9 +10,9 @@
 </svelte:head>
 
 <div class="py-[25px]">
-{#if data.adverts.edges.length === 0}
-	<NotFound />
-{:else}
-	<AdvertCardList connection={data.adverts} />
-{/if}
+	{#if data.adverts.edges.length === 0}
+		<NotFound />
+	{:else}
+		<AdvertCardList connection={data.adverts} />
+	{/if}
 </div>

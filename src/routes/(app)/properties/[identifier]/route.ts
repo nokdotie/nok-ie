@@ -1,3 +1,3 @@
 export default function (arg: { propertyIdentifier: string }) {
-    return `/properties/${arg.propertyIdentifier}`
+	return `/properties/${arg.propertyIdentifier}`;
 }

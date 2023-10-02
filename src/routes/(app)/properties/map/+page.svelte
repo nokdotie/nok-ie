@@ -12,7 +12,7 @@
 			latitude: number;
 			longitude: number;
 		};
-	}
+	};
 
 	const getAdverts = async (bounds: google.maps.LatLngBounds) => {
 		const northEast = bounds.getNorthEast();
