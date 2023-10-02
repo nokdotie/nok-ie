@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Loader } from '@googlemaps/js-api-loader';
-	import { graphQlQuery, type QueryApiKeysResponse } from '../GraphQl';
+	import { graphQlQuery, type GraphQlQueryResponse } from '../(list)/GraphQl';
 	import { query } from '$lib/GraphQl';
 	import { onDestroy } from 'svelte';
 	import GoogleMap from './GoogleMap';
@@ -30,7 +30,7 @@
 			}
 		};
 
-		const response = await query<QueryApiKeysResponse>(graphQlQuery, variables);
+		const response = await query<GraphQlQueryResponse>(graphQlQuery, variables);
 		return response.data.adverts.edges.map((edge) => edge.node);
 	};
 
