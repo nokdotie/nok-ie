@@ -1,5 +1,5 @@
 import { query } from '$lib/GraphQl';
-import { graphQlQuery, type QueryApiKeysResponse } from '../GraphQl';
+import { graphQlQuery, type GraphQlQueryResponse } from './GraphQl';
 
 export function load({ url }) {
 	const after = url.searchParams.get('after');
@@ -12,7 +12,7 @@ export function load({ url }) {
 	};
 
 	return {
-		adverts: query<QueryApiKeysResponse>(graphQlQuery, variables).then(
+		adverts: query<GraphQlQueryResponse>(graphQlQuery, variables).then(
 			(response) => response.data.adverts
 		)
 	};
