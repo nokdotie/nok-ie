@@ -5,13 +5,20 @@
 	import { onDestroy } from 'svelte';
 	import GoogleMap from './GoogleMap';
 	import AdvertCard from './AdvertCard.svelte';
+	import route from '../[identifier]/route';
 
 	type Advert = {
-		advertUrl: string;
+		advertPriceInEur: number;
+		propertyIdentifier: string;
+		propertyAddress: string;
 		propertyCoordinates: {
 			latitude: number;
 			longitude: number;
 		};
+		propertyImageUrls: Array<string>;
+		propertySizeInSqtMtr: number;
+		propertyBedroomsCount: number;
+		propertyBathroomsCount: number;
 	};
 
 	const getAdverts = async (bounds: google.maps.LatLngBounds) => {
@@ -98,8 +105,8 @@
 <div class="relative">
 	<div id="map" class="h-[calc(100vh-120px)]" />
 	{#if clickedMarker}
-		<div class="absolute bottom-0 left-0">
-			<a href={clickedMarker.advertUrl}>
+		<div class="absolute bottom-[10px] left-0">
+			<a href={route(clickedMarker)}>
 				<AdvertCard advert={clickedMarker} />
 			</a>
 		</div>
