@@ -2,10 +2,17 @@
 	import { Loader } from '@googlemaps/js-api-loader';
 	import { graphQlQuery, type QueryApiKeysResponse } from '../GraphQl';
 	import { query } from '$lib/GraphQl';
-	import type { Advert } from '../Advert';
 	import { onDestroy } from 'svelte';
 	import GoogleMap from './GoogleMap';
 	import AdvertCard from './AdvertCard.svelte';
+
+	type Advert = {
+		advertUrl: string;
+		propertyCoordinates: {
+			latitude: number;
+			longitude: number;
+		};
+	}
 
 	const getAdverts = async (bounds: google.maps.LatLngBounds) => {
 		const northEast = bounds.getNorthEast();

@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { onError } from '$lib/utils/HtmlImageElement';
 	import CardFooter from '../(list)/AdvertCardFooter.svelte';
-	import type { Advert } from '../Advert';
 
-	export let advert: Advert;
+	export let advert: {
+		advertPriceInEur: number;
+		propertyAddress: string;
+		propertyImageUrls: string[];
+		propertySizeInSqtMtr: number;
+		propertyBedroomsCount: number;
+		propertyBathroomsCount: number;
+	};
 </script>
 
 <div

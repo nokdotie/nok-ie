@@ -3,7 +3,15 @@
 	import type { Advert } from '../Advert';
 	import AdvertCardFooter from './AdvertCardFooter.svelte';
 
-	export let advert: Advert;
+	export let advert: {
+		advertPriceInEur: number;
+		propertyIdentifier: string;
+		propertyAddress: string;
+		propertyImageUrls: string[];
+		propertySizeInSqtMtr: number;
+		propertyBedroomsCount: number;
+		propertyBathroomsCount: number;
+	};
 </script>
 
 <div

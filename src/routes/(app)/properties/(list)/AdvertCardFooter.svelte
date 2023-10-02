@@ -1,7 +1,9 @@
 <script lang="ts">
-	import type { Advert } from '../Advert';
-
-	export let advert: Advert;
+	export let advert: {
+		propertySizeInSqtMtr: number;
+		propertyBedroomsCount: number;
+		propertyBathroomsCount: number;
+	};
 </script>
 
 <div
