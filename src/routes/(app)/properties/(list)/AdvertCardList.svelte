@@ -1,12 +1,19 @@
 <script lang="ts">
 	import type { Connection } from '$lib/GraphQl';
 	import BrowserHistoryBack from '$lib/utils/BrowserHistoryBack.js';
-	import type { Advert } from '../Advert';
 	import AdvertCard from './AdvertCard.svelte';
 	import { derived } from 'svelte/store';
 	import { page } from '$app/stores';
 
-	export let connection: Connection<Advert>;
+	export let connection: Connection<{
+		advertPriceInEur: number;
+		propertyIdentifier: string;
+		propertyAddress: string;
+		propertyImageUrls: string[];
+		propertySizeInSqtMtr: number;
+		propertyBedroomsCount: number;
+		propertyBathroomsCount: number;
+	}>;
 
 	const shouldShowPrevious = derived(page, ($page) => $page.url.searchParams.has('after'));
 	const urlSearchParams = derived(page, ($page) => {
@@ -19,9 +26,7 @@
 
 <div class="flex flex-wrap flex-row gap-3 justify-center">
 	{#each connection.edges as edge}
-		<a href={edge.node.advertUrl}>
-			<AdvertCard advert={edge.node} />
-		</a>
+		<AdvertCard advert={edge.node} />
 	{/each}
 </div>
 

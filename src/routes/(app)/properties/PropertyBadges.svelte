@@ -1,11 +1,13 @@
 <script lang="ts">
-	import type { Advert } from '../Advert';
-
-	export let advert: Advert;
+	export let advert: {
+		propertySizeInSqtMtr: number;
+		propertyBedroomsCount: number;
+		propertyBathroomsCount: number;
+	};
 </script>
 
 <div
-	class="flex gap-3 mb-[-12px] whitespace-nowrap justify-center text-[14px] leading-[1.143em] text-neutral-800 font-semibold"
+	class="flex gap-3 mb-[-12px] whitespace-nowrap text-[14px] leading-[1.143em] text-neutral-800 font-semibold"
 >
 	<div class="flex mb-[12px] px-[14px] py-[10px] rounded-[40px] shadow">
 		<img class="max-w-[17px] mr-[6px]" src="/images/icons/size.svg" alt="Size Icon" />
@@ -17,6 +19,6 @@
 	</div>
 	<div class="flex mb-[12px] px-[14px] py-[10px] rounded-[40px] shadow">
 		<img class="max-w-[17px] mr-[6px]" src="/images/icons/bathroom.svg" alt="Bathroom Icon" />
-		{advert.propertyBedroomsCount}
+		{advert.propertyBathroomsCount}
 	</div>
 </div>

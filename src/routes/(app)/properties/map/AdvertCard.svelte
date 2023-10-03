@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { onError } from '$lib/utils/HtmlImageElement';
-	import CardFooter from '../(list)/AdvertCardFooter.svelte';
-	import type { Advert } from '../Advert';
+	import PropertyBadges from '../PropertyBadges.svelte';
 
-	export let advert: Advert;
+	export let advert: {
+		advertPriceInEur: number;
+		propertyAddress: string;
+		propertyImageUrls: string[];
+		propertySizeInSqtMtr: number;
+		propertyBedroomsCount: number;
+		propertyBathroomsCount: number;
+	};
 </script>
 
 <div
@@ -29,6 +35,7 @@
 		</div>
 
 		<div class="min-h-[1px] my-[10px] bg-neutral-400" />
-		<CardFooter {advert} />
+
+		<PropertyBadges {advert} />
 	</div>
 </div>
