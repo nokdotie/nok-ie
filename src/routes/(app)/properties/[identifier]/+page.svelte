@@ -1,4 +1,6 @@
 <script lang="ts">
+	import PropertyBadges from '../PropertyBadges.svelte';
+
 	export let data;
 
 	let serviceTypeNames = [
@@ -28,20 +30,7 @@
 			{data.advert.propertyAddress}
 		</h1>
 
-		<div class="flex gap-3 text-[14px] leading-[1.143em] text-neutral-800 font-semibold">
-			<div class="flex mb-[12px] px-[14px] py-[10px] rounded-[40px] shadow">
-				<img class="max-w-[17px] mr-[6px]" src="/images/icons/size.svg" alt="Size Icon" />
-				{Math.floor(data.advert.propertySizeInSqtMtr).toLocaleString('en-IE')} &#13217;
-			</div>
-			<div class="flex mb-[12px] px-[14px] py-[10px] rounded-[40px] shadow">
-				<img class="max-w-[17px] mr-[6px]" src="/images/icons/bedroom.svg" alt="Bedroom Icon" />
-				{data.advert.propertyBedroomsCount}
-			</div>
-			<div class="flex mb-[12px] px-[14px] py-[10px] rounded-[40px] shadow">
-				<img class="max-w-[17px] mr-[6px]" src="/images/icons/bathroom.svg" alt="Bathroom Icon" />
-				{data.advert.propertyBathroomsCount}
-			</div>
-		</div>
+		<PropertyBadges advert={data.advert} />
 	</div>
 	<div class="min-w-[290px]">
 		<div class="mt-[20px] md:mt-[-184px] p-[48px] bg-neutral-100 rounded-[24px] shadow">

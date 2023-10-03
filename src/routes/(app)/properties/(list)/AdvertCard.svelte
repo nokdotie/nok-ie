@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onError } from '$lib/utils/HtmlImageElement';
+	import PropertyBadges from '../PropertyBadges.svelte';
 	import route from '../[identifier]/route';
-	import AdvertCardFooter from './AdvertCardFooter.svelte';
 
 	export let advert: {
 		advertPriceInEur: number;
@@ -36,7 +36,7 @@
 			</div>
 			<div class="min-h-[1px] mt-[36px] mb-[26px] bg-neutral-400" />
 
-			<AdvertCardFooter {advert} />
+			<PropertyBadges {advert} />
 		</div>
 	</div>
 </a>
