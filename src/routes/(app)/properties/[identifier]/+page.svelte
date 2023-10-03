@@ -10,11 +10,12 @@
 		'PropertyPalComAdvert',
 		'SherryFitzIeAdvert'
 	];
+
 	let services = data.advert.sources
 		.filter((source) => serviceTypeNames.includes(source.__typename))
 		.map((source) => ({
 			url: source.url,
-			icon: source.__typename.replace('Advert', '').toLowerCase()
+			hostname: new URL(source.url).hostname.replace('www.', '')
 		}));
 </script>
 
@@ -40,11 +41,12 @@
 			</div>
 			<div class="min-h-[1px] mt-[36px] mb-[26px] bg-neutral-400" />
 			<div>
-				<div class="text-heading-6 sm:text-heading-5 mb-[10px]">Property found on</div>
-				<div class="flex flex-wrap gap-3 justify-center">
+				<div class="text-heading-6 sm:text-heading-5 mb-[10px] font-bold">Details found on</div>
+				<div class="flex flex-col">
 					{#each services as service}
-						<a href={service.url} class="hover:scale-95 duration-300" target="_blank">
-							<img src="/images/services/{service.icon}.png" alt="" class="w-[50px]" />
+						<a href={service.url} class="hover:text-primary duration-300" target="_blank">
+							<img src="/images/services/{service.hostname}.png" alt="" class="w-[25px] inline" />
+							{service.hostname}
 						</a>
 					{/each}
 				</div>
