@@ -28,7 +28,7 @@
 		{advert.propertyAddress}
 	</h3>
 	<p class="mt-1 text-sm text-gray-700">
-		€ {advert.advertPriceInEur.toLocaleString('en-IE')}
+		€{advert.advertPriceInEur.toLocaleString('en-IE')}
 	</p>
 	<div class="my-3 hidden">
 		<span

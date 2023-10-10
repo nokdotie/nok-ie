@@ -2,7 +2,7 @@
 	import { onError } from '$lib/utils/HtmlImageElement';
 	import Gallery from './Gallery.svelte';
 	import Highlights from './Highlights.svelte';
-	import JsonLd from './JsonLd.svelte';
+	import Seo from './Seo.svelte';
 	import Sources from './Sources.svelte';
 
 	export let data;
@@ -12,10 +12,7 @@
 	let activeTab = tabs[0];
 </script>
 
-<svelte:head>
-	<title>NOK.IE | {data.advert.propertyAddress}</title>
-	<JsonLd advert={data.advert} />
-</svelte:head>
+<Seo advert={data.advert} />
 
 <div class="bg-white">
 	<div class="mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -39,7 +36,7 @@
 				</h1>
 
 				<p class="mt-1 text-xl sm:text-2xl text-gray-500">
-					€ {data.advert.advertPriceInEur.toLocaleString('en-IE')}
+					€{data.advert.advertPriceInEur.toLocaleString('en-IE')}
 				</p>
 
 				<Sources advert={data.advert} />
