@@ -2,6 +2,7 @@
 	import { onError } from '$lib/utils/HtmlImageElement';
 	import Gallery from './Gallery.svelte';
 	import Highlights from './Highlights.svelte';
+	import JsonLd from './JsonLd.svelte';
 	import Sources from './Sources.svelte';
 
 	export let data;
@@ -13,6 +14,7 @@
 
 <svelte:head>
 	<title>NOK.IE | {data.advert.propertyAddress}</title>
+	<JsonLd advert={data.advert} />
 </svelte:head>
 
 <div class="bg-white">
