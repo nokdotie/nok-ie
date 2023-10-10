@@ -1,5 +1,5 @@
 <script lang="ts">
-	const title = 'NOK.IE | Properties';
+	const title = 'Nok.ie | Properties';
 	const description = 'Property for sale around Ireland.';
 </script>
 

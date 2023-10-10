@@ -76,7 +76,7 @@
 		}
 	};
 
-	const title = `Nok.IE | ${advert.propertyAddress}`;
+	const title = `Nok.ie | ${advert.propertyAddress}`;
 	const description = `Property for sale: ${
 		advert.propertyAddress
 	}, €${advert.advertPriceInEur.toLocaleString('en-IE')}, ${Math.floor(
