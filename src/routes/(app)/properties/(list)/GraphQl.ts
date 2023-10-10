@@ -7,10 +7,6 @@ export type GraphQlQueryResponse = {
 			advertPriceInEur: number;
 			propertyIdentifier: string;
 			propertyAddress: string;
-			propertyCoordinates: {
-				latitude: number;
-				longitude: number;
-			};
 			propertyImageUrls: Array<string>;
 			propertySizeInSqtMtr: number;
 			propertyBedroomsCount: number;
@@ -27,10 +23,6 @@ export const graphQlQuery = `
 				advertPriceInEur
 				propertyIdentifier
 				propertyAddress
-				propertyCoordinates {
-					latitude
-					longitude
-				}
 				propertyImageUrls
 				propertySizeInSqtMtr
 				propertyBedroomsCount
