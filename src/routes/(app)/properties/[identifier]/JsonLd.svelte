@@ -77,4 +77,5 @@
 	};
 </script>
 
+<!-- eslint-disable -->
 {@html JsonLd(schema)}
