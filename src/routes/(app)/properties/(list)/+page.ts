@@ -12,6 +12,7 @@ export function load({ url }) {
 	};
 
 	return {
+		filters: { q },
 		adverts: query<GraphQlQueryResponse>(graphQlQuery, variables).then(
 			(response) => response.data.adverts
 		)

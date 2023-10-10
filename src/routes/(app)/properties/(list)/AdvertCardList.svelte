@@ -24,28 +24,36 @@
 	});
 </script>
 
-<div class="flex flex-wrap flex-row gap-3 justify-center">
-	{#each connection.edges as edge}
-		<AdvertCard advert={edge.node} />
-	{/each}
+<div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:max-w-7xl lg:px-8">
+	<h2 class="sr-only">Properties</h2>
+
+	<div
+		class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+	>
+		{#each connection.edges as edge}
+			<AdvertCard advert={edge.node} />
+		{/each}
+	</div>
 </div>
 
-<div class="my-[50px] flex gap-3 justify-center">
-	{#if $shouldShowPrevious}
-		<a
-			class="text-center mt-[15px] py-[20px] w-[175px] rounded-[12px] text-neutral-800 bg-neutral-100 hover:scale-95 duration-300 shadow text-paragraph-3 font-semibold"
-			href="/"
-			on:click|preventDefault={BrowserHistoryBack}
-		>
-			Previous page
-		</a>
-	{/if}
-	{#if connection.pageInfo.hasNextPage}
-		<a
-			class="text-center mt-[15px] py-[20px] w-[175px] rounded-[12px] text-neutral-100 bg-primary hover:scale-95 duration-300 shadow text-paragraph-3 font-semibold"
-			href="/properties?{$urlSearchParams.toString()}"
-		>
-			Next page
-		</a>
-	{/if}
+<div class="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6 lg:max-w-7xl lg:px-8">
+	<nav aria-label="Pagination">
+		<div class="flex flex-1 justify-between sm:justify-end">
+			{#if $shouldShowPrevious}
+				<a
+					href="/"
+					on:click|preventDefault={BrowserHistoryBack}
+					class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+					>Previous</a
+				>
+			{/if}
+			{#if connection.pageInfo.hasNextPage}
+				<a
+					href="/properties?{$urlSearchParams.toString()}"
+					class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+					>Next</a
+				>
+			{/if}
+		</div>
+	</nav>
 </div>
