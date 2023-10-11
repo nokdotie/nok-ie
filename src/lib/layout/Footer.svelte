@@ -1,12 +1,15 @@
 <script lang="ts">
+	import ContactRoute from '../../routes/(app)/contact/Route';
+
 	const navigation = [
+		{ label: 'Contact', href: ContactRoute() },
 		{ label: 'Privacy Policy', href: '/privacy-policy' },
 		{ label: 'Terms of Service', href: '/terms-of-service' }
 	];
 </script>
 
 <footer class="mx-auto max-w-7xl overflow-hidden px-6 py-10 sm:py-14 lg:px-8">
-	<nav class="-mb-6 flex justify-center space-x-12" aria-label="Footer">
+	<nav class="-mb-6 flex justify-center space-x-6" aria-label="Footer">
 		{#each navigation as item}
 			<div class="pb-6">
 				<a href={item.href} class="text-sm leading-6 text-gray-600 hover:text-gray-900"
