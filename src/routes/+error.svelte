@@ -19,7 +19,9 @@
 </script>
 
 <svelte:head>
-	<title>NOK.IE | {$error.status} {$error.title}</title>
+	<title>Nok.ie | {$error.status} {$error.title}</title>
+
+	<meta name="robots" content="noindex, follow" />
 </svelte:head>
 
 <div class="flex min-h-full flex-col bg-white pb-12 pt-16">

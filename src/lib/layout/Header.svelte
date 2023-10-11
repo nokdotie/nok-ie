@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
+	import PropertiesRoute from '../../routes/(app)/properties/(list)/Route';
 
 	const mobileMenuOpen = writable(false);
 
 	const navigation = [
-		{ label: 'Properties', href: '/properties' }
+		{ label: 'Properties', href: PropertiesRoute() }
 		// { label: 'Search', href: '/search' },
 	];
 </script>
