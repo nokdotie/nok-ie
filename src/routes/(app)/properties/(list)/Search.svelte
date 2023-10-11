@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
+	import PropertiesRoute from './Route';
 
 	export let filters: { q: string };
 
@@ -36,7 +37,7 @@
 	const menuOpen = writable(false);
 </script>
 
-<form action="/properties">
+<form action={PropertiesRoute()}>
 	<div class="w-full mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:max-w-7xl lg:px-8">
 		<div class="mt-2 flex">
 			<div class="relative rounded-md w-full min-w-0">

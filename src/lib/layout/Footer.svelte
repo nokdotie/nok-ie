@@ -1,7 +1,7 @@
 <script lang="ts">
 	const navigation = [
 		{ label: 'Privacy Policy', href: '/privacy-policy' },
-		{ label: 'Terms of Service', href: '/terms-service' }
+		{ label: 'Terms of Service', href: '/terms-of-service' }
 	];
 </script>
 

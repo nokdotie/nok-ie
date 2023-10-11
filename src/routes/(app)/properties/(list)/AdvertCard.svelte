@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onError } from '$lib/utils/HtmlImageElement';
-	import route from '../[identifier]/route';
+	import Route from '../[identifier]/Route';
 
 	export let advert: {
 		advertPriceInEur: number;
@@ -13,7 +13,7 @@
 	};
 </script>
 
-<a href={route(advert)} class="group">
+<a href={Route(advert)} class="group">
 	<div
 		class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
 	>
