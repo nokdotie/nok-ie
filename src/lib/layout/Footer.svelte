@@ -1,10 +1,12 @@
 <script lang="ts">
 	import ContactRoute from '../../routes/(app)/contact/Route';
+	import PrivacyPolicyRoute from '../../routes/(legal)/privacy-policy/Route';
+	import TermsOfServiceRoute from '../../routes/(legal)/terms-of-service/Route';
 
 	const navigation = [
 		{ label: 'Contact', href: ContactRoute() },
-		{ label: 'Privacy Policy', href: '/privacy-policy' },
-		{ label: 'Terms of Service', href: '/terms-of-service' }
+		{ label: 'Privacy Policy', href: PrivacyPolicyRoute() },
+		{ label: 'Terms of Service', href: TermsOfServiceRoute() }
 	];
 </script>
 
