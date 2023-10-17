@@ -14,7 +14,6 @@
 
 	<meta name="twitter:url" content={$page.url.toString()} />
          <meta name="twitter:creator" content="@NokDotIe"/>
-
 </svelte:head>
 
 <div class="flex flex-col min-h-full bg-white">
