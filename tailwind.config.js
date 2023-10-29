@@ -7,7 +7,7 @@ export default {
 				photo: '3 / 2'
 			},
 			colors: {
-				primary: '#FE6100'
+				primary: '#FF9900'
 			}
 		}
 		// 	neutral: {
