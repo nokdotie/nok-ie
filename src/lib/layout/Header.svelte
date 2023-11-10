@@ -5,7 +5,7 @@
 	const mobileMenuOpen = writable(false);
 
 	const navigation = [
-		{ label: 'Properties', href: PropertiesRoute() }
+		{ label: 'Buy', href: PropertiesRoute() }
 		// { label: 'Search', href: '/search' },
 	];
 </script>
