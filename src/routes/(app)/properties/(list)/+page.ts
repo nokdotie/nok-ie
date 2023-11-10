@@ -6,7 +6,7 @@ export function load({ url }) {
 	const q = url.searchParams.get('q') || '';
 
 	const variables = {
-		first: 60,
+		first: 24,
 		after: after,
 		filter: { address: { contains: q } }
 	};
