@@ -1,5 +1,5 @@
 function response(parentNode: string, childNode: string, urls: string[]) {
-	var lastmod = new Date().toISOString().slice(0, 10);
+	const lastmod = new Date().toISOString().slice(0, 10);
 
 	return new Response(
 		`
