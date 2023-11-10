@@ -5,13 +5,17 @@ function response(parentNode: string, childNode: string, urls: string[]) {
 		`
 		|<?xml version="1.0" encoding="UTF-8" ?>
 		|<${parentNode} xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-		|	${urls.map((url) => `
+		|	${urls
+			.map(
+				(url) => `
 		|		<${childNode}>
 		|			<loc>${url}</loc>
 		|			<lastmod>${lastmod}</lastmod>
 		|			<changefreq>daily</changefreq>
 		|		</${childNode}>
-		|	`).join('\n\t')}
+		|	`
+			)
+			.join('\n\t')}
 		|</${parentNode}>
         `
 			.trim()
