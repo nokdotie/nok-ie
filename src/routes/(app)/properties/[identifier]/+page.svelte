@@ -3,7 +3,6 @@
 	import Gallery from './Gallery.svelte';
 	import Highlights from './Highlights.svelte';
 	import Seo from './Seo.svelte';
-	import Sources from './Sources.svelte';
 	import Advertiser from './Advertiser.svelte';
 
 	export let data;
@@ -41,7 +40,6 @@
 				</p>
 
 				<Advertiser advert={data.advert} />
-				<Sources advert={data.advert} />
 				<Highlights advert={data.advert} />
 			</div>
 
