@@ -13,6 +13,13 @@
 		propertySizeInSqtMtr: number;
 		propertyBedroomsCount: number;
 		propertyBathroomsCount: number;
+		advertiser?: {
+			name: string;
+			pictureUrl: string;
+			emailAddresses: string[];
+			phoneNumbers: string[];
+			physicalAddresses: string[];
+		};
 	};
 
 	const schema: WithContext<RealEstateListing> = {
@@ -21,7 +28,15 @@
 		offers: {
 			'@type': 'Offer',
 			price: advert.advertPriceInEur,
-			priceCurrency: 'EUR'
+			priceCurrency: 'EUR',
+			offeredBy: {
+				'@type': 'RealEstateAgent',
+				name: advert.advertiser?.name ?? '',
+				logo: advert.advertiser?.pictureUrl ?? '',
+				address: advert.advertiser?.physicalAddresses ?? [],
+				telephone: advert.advertiser?.phoneNumbers ?? [],
+				email: advert.advertiser?.emailAddresses ?? []
+			}
 		},
 		mainEntity: {
 			'@type': 'Accommodation',
