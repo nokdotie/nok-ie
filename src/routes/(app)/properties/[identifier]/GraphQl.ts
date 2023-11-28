@@ -41,6 +41,13 @@ export type GraphQlQueryResponse = {
 						carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear?: number;
 				  }
 			>;
+			advertiser?: {
+				name: string;
+				pictureUrl: string;
+				emailAddresses: string[];
+				phoneNumbers: string[];
+				physicalAddresses: string[];
+			};
 		};
 	};
 };
@@ -82,6 +89,13 @@ export const graphQlQuery = `
 					energyRatingInKWhPerSqtMtrPerYear
 					carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear
 				}
+			}
+			advertiser {
+				name
+    			pictureUrl
+				emailAddresses
+				phoneNumbers
+				physicalAddresses
 			}
         }
     }
