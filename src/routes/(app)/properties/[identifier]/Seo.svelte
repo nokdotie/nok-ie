@@ -13,36 +13,6 @@
 		propertySizeInSqtMtr: number;
 		propertyBedroomsCount: number;
 		propertyBathroomsCount: number;
-		sources: Array<
-			| {
-					__typename: 'DaftIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'DngIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'MyHomeIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'PropertyPalComAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'SherryFitzIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'BuildingEnergyRatingCertificate';
-					url: string;
-					number?: string;
-					rating?: string;
-					energyRatingInKWhPerSqtMtrPerYear?: number;
-					carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear?: number;
-			  }
-		>;
 	};
 
 	const schema: WithContext<RealEstateListing> = {
@@ -71,8 +41,7 @@
 			photos: advert.propertyImageUrls.map((url) => ({
 				'@type': 'ImageObject',
 				contentUrl: url
-			})),
-			sameAs: advert.sources.map((source) => source.url)
+			}))
 		}
 	};
 

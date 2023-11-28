@@ -3,7 +3,7 @@
 	import Gallery from './Gallery.svelte';
 	import Highlights from './Highlights.svelte';
 	import Seo from './Seo.svelte';
-	import Sources from './Sources.svelte';
+	import Advertiser from './Advertiser.svelte';
 
 	export let data;
 
@@ -15,9 +15,9 @@
 <Seo advert={data.advert} />
 
 <div class="bg-white">
-	<div class="mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-		<div class="lg:grid lg:grid-cols-8 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
-			<div class="lg:col-span-5 lg:row-end-1">
+	<div class="mx-auto px-4 sm:px-6 md:max-w-7xl md:px-8">
+		<div class="md:grid md:grid-cols-8 md:grid-rows-1 md:gap-x-8 md:gap-y-10 xl:gap-x-16">
+			<div class="md:col-span-5 md:row-end-1">
 				<div class="aspect-photo overflow-hidden rounded-lg bg-gray-100">
 					<img
 						src={data.advert.propertyImageUrls[0]}
@@ -29,7 +29,7 @@
 			</div>
 
 			<div
-				class="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:w-full"
+				class="mx-auto mt-14 max-w-2xl sm:mt-16 md:col-span-3 md:row-span-2 md:row-end-2 md:mt-0 md:w-full"
 			>
 				<h1 class="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
 					{data.advert.propertyAddress}
@@ -39,11 +39,11 @@
 					€{data.advert.advertPriceInEur.toLocaleString('en-IE')}
 				</p>
 
-				<Sources advert={data.advert} />
+				<Advertiser advert={data.advert} />
 				<Highlights advert={data.advert} />
 			</div>
 
-			<div class="mx-auto mt-16 w-full max-w-2xl lg:col-span-5 lg:mt-0 lg:max-w-none">
+			<div class="mx-auto mt-16 w-full max-w-2xl md:col-span-5 md:mt-0 md:max-w-none">
 				<div>
 					<div class="border-b border-gray-200">
 						<div class="-mb-px flex space-x-8" aria-orientation="horizontal" role="tablist">
