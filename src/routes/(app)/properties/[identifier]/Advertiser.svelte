@@ -14,7 +14,7 @@
 	<div class="mt-10 pt-10 border-t border-gray-200">
 		<div class="flex items-center gap-2">
 			<img
-				class="h-20 w-20 object-contain flex-shrink-0 rounded-md bg-gray-300"
+				class="h-20 w-20 object-contain flex-shrink-0 rounded-md"
 				src={advert.advertiser.pictureUrl}
 				alt=""
 			/>
