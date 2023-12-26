@@ -1,7 +1,10 @@
 <script lang="ts">
+	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
 	import BrowserHistoryBack from '$lib/utils/BrowserHistoryBack';
 	import ContactRoute from '../../contact/Route';
 </script>
+
+<RobotsIndex />
 
 <div class="bg-white">
 	<div class="px-6 lg:px-8 py-24 sm:py-32">

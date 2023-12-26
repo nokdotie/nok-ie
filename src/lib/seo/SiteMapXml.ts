@@ -28,10 +28,7 @@ function response(parentNode: string, childNode: string, urls: string[]) {
 	);
 }
 
-export function sitemap(urls: string[]) {
-	return response('urlset', 'url', urls);
-}
-
-export function sitemapIndex(urls: string[]) {
-	return response('sitemapindex', 'sitemap', urls);
-}
+export default {
+	sitemap: (urls: string[]) => response('urlset', 'url', urls),
+	sitemapIndex: (urls: string[]) => response('sitemapindex', 'sitemap', urls)
+};

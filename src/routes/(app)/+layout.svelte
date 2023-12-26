@@ -5,8 +5,6 @@
 </script>
 
 <svelte:head>
-	<meta name="robots" content="index, follow" />
-
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Nok.ie" />
 	<meta property="og:url" content={$page.url.toString()} />
