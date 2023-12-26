@@ -4,16 +4,5 @@
 	import '../app.css';
 </script>
 
-<svelte:head>
-	<style>
-		html {
-			height: 100%;
-		}
-		body {
-			height: 100%;
-		}
-	</style>
-</svelte:head>
-
 <slot />
 <Analytics />
