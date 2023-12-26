@@ -52,8 +52,9 @@
 			>
 			<a
 				href="{PropertiesRoute()}?{$urlSearchParams.toString()}"
-				class="relative inline-flex items-center rounded-md bg-primary hover:bg-primary/90 text-white px-3 py-2 text-sm font-semibold focus:outline-none ml-3"
+				class="relative inline-flex items-center rounded-md hover:bg-primary/90 text-white px-3 py-2 text-sm font-semibold focus:outline-none ml-3"
 				class:pointer-events-none={!connection.pageInfo.hasNextPage}
+				class:bg-primary={connection.pageInfo.hasNextPage}
 				class:bg-gray-300={!connection.pageInfo.hasNextPage}>Next</a
 			>
 		</div>

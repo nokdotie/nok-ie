@@ -1,7 +1,6 @@
 <script lang="ts">
 	import AdvertCardList from './AdvertCardList.svelte';
 	import NotFound from './NotFound.svelte';
-	import Search from './Search.svelte';
 	import JsonLd from './JsonLd.svelte';
 	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
 
@@ -10,8 +9,6 @@
 
 <RobotsIndex />
 <JsonLd />
-
-<Search filters={data.filters} />
 
 {#if data.adverts.edges.length === 0}
 	<NotFound />
