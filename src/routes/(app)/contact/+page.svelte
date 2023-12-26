@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
 	export let form;
 
 	const title = 'Nok.ie | Contact';
@@ -17,6 +18,8 @@
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
 </svelte:head>
+
+<RobotsIndex />
 
 <div class="px-6 py-24 sm:py-32 lg:px-8">
 	<div class="mx-auto max-w-xl">
