@@ -14,7 +14,7 @@
 			<h1 class="font-bold tracking-tight text-gray-900 text-xl">Nok.ie</h1>
 		</a>
 
-		<div class="sm:w-96">
+		<div class="w-48 sm:w-96">
 			<form action={PropertiesRoute()}>
 				<label for="q" class="sr-only">Search</label>
 				<div class="relative">
