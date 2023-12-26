@@ -1,5 +1,5 @@
 import { query, type Connection } from '$lib/GraphQl';
-import { sitemap } from '$lib/utils/SiteMapXml';
+import SiteMapXml from '$lib/seo/SiteMapXml';
 import PropertiesRoute from '../(list)/Route';
 import PropertiesNewRoute from '../new/Route';
 import IdentifierRoute from '../[identifier]/Route';
@@ -39,5 +39,5 @@ export async function GET({ url }) {
 	const first = `${url.origin}${PropertiesRoute()}`;
 	const pages = nodes.map((node) => `${url.origin}${IdentifierRoute(node)}`);
 
-	return sitemap([create, first, ...pages]);
+	return SiteMapXml.sitemap([create, first, ...pages]);
 }
