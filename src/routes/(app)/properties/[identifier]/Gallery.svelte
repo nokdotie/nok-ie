@@ -10,12 +10,14 @@
 	{#each advert.propertyImageUrls as propertyImageUrl}
 		<li class="relative">
 			<div class="aspect-photo overflow-hidden rounded-lg">
-				<img
-					src={propertyImageUrl}
-					on:error|preventDefault={onError('/images/placeholder.svg')}
-					alt=""
-					class="h-full w-full object-cover object-center aspect-photo"
-				/>
+				<a href={propertyImageUrl} target="_blank">
+					<img
+						src={propertyImageUrl}
+						on:error|preventDefault={onError('/images/placeholder.svg')}
+						alt=""
+						class="h-full w-full object-cover object-center aspect-photo"
+					/>
+				</a>
 			</div>
 		</li>
 	{/each}
