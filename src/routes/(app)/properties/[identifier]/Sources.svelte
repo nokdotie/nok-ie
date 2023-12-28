@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let advert: {
-		advertiser: null | object;
 		sources: Array<
 			| {
 					__typename: 'DaftIeAdvert';
@@ -47,7 +46,7 @@
 		}));
 </script>
 
-{#if advert.advertiser === null}
+{#if 0 !== advert.sources.length}
 	<div class="mt-10 pt-10 border-t border-gray-200">
 		<h3 class="text-sm font-medium text-gray-900">Contact seller on</h3>
 
