@@ -26,8 +26,5 @@ module.exports = {
 				parser: '@typescript-eslint/parser'
 			}
 		}
-	],
-	globals: {
-		google: 'readonly'
-	}
+	]
 };
