@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let advert: {
-		advertiser?: {
+		advertiser: null | {
 			name: string;
 			pictureUrl: string;
 			emailAddresses: string[];
@@ -10,7 +10,7 @@
 	};
 </script>
 
-{#if advert.advertiser}
+{#if null !== advert.advertiser}
 	<div class="mt-10 pt-10 border-t border-gray-200">
 		<div class="flex items-center gap-2">
 			<img

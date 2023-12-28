@@ -11,13 +11,43 @@ export type GraphQlQueryResponse = {
 			propertySizeInSqtMtr: number;
 			propertyBedroomsCount: number;
 			propertyBathroomsCount: number;
-			advertiser?: {
+			advertiser: null | {
 				name: string;
 				pictureUrl: string;
 				emailAddresses: string[];
 				phoneNumbers: string[];
 				physicalAddresses: string[];
 			};
+			sources: Array<
+				| {
+						__typename: 'DaftIeAdvert';
+						url: string;
+				  }
+				| {
+						__typename: 'DngIeAdvert';
+						url: string;
+				  }
+				| {
+						__typename: 'MyHomeIeAdvert';
+						url: string;
+				  }
+				| {
+						__typename: 'PropertyPalComAdvert';
+						url: string;
+				  }
+				| {
+						__typename: 'SherryFitzIeAdvert';
+						url: string;
+				  }
+				| {
+						__typename: 'BuildingEnergyRatingCertificate';
+						url: string;
+						number?: string;
+						rating?: string;
+						energyRatingInKWhPerSqtMtrPerYear?: number;
+						carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear?: number;
+				  }
+			>;
 		};
 	};
 };
@@ -41,6 +71,31 @@ export const graphQlQuery = `
 				emailAddresses
 				phoneNumbers
 				physicalAddresses
+			}
+			sources {
+				__typename
+				... on DaftIeAdvert {
+					url
+				}
+				... on DngIeAdvert {
+					url
+				}
+				... on MyHomeIeAdvert {
+					url
+				}
+				... on PropertyPalComAdvert {
+					url
+				}
+				... on SherryFitzIeAdvert {
+					url
+				}
+				... on BuildingEnergyRatingCertificate {
+					url
+					number
+					rating
+					energyRatingInKWhPerSqtMtrPerYear
+					carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear
+				}
 			}
         }
     }

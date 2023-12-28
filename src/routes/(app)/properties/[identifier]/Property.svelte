@@ -6,6 +6,7 @@
 	import JsonLd from './JsonLd.svelte';
 	import Advertiser from './Advertiser.svelte';
 	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
+	import Sources from './Sources.svelte';
 
 	enum Tabs {
 		Gallery = 'Gallery',
@@ -25,13 +26,43 @@
 		propertySizeInSqtMtr: number;
 		propertyBedroomsCount: number;
 		propertyBathroomsCount: number;
-		advertiser?: {
+		advertiser: null | {
 			name: string;
 			pictureUrl: string;
 			emailAddresses: string[];
 			phoneNumbers: string[];
 			physicalAddresses: string[];
 		};
+		sources: Array<
+			| {
+					__typename: 'DaftIeAdvert';
+					url: string;
+			  }
+			| {
+					__typename: 'DngIeAdvert';
+					url: string;
+			  }
+			| {
+					__typename: 'MyHomeIeAdvert';
+					url: string;
+			  }
+			| {
+					__typename: 'PropertyPalComAdvert';
+					url: string;
+			  }
+			| {
+					__typename: 'SherryFitzIeAdvert';
+					url: string;
+			  }
+			| {
+					__typename: 'BuildingEnergyRatingCertificate';
+					url: string;
+					number?: string;
+					rating?: string;
+					energyRatingInKWhPerSqtMtrPerYear?: number;
+					carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear?: number;
+			  }
+		>;
 	};
 </script>
 
@@ -64,6 +95,7 @@
 				</p>
 
 				<Advertiser {advert} />
+				<Sources {advert} />
 				<Highlights {advert} />
 			</div>
 
