@@ -1,14 +1,18 @@
 <script lang="ts">
 	import { onError } from '$lib/utils/HtmlImageElement';
 	import Gallery from './Gallery.svelte';
+	import Map from './Map.svelte';
 	import Highlights from './Highlights.svelte';
 	import JsonLd from './JsonLd.svelte';
 	import Advertiser from './Advertiser.svelte';
 	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
 
-	let tabs = ['Gallery'];
+	enum Tabs {
+		Gallery = 'Gallery',
+		Map = 'Map'
+	}
 
-	let activeTab = tabs[0];
+	let activeTab = Tabs.Gallery;
 
 	export let advert: {
 		advertPriceInEur: number;
@@ -66,12 +70,16 @@
 			<div class="mx-auto mt-16 w-full max-w-2xl md:col-span-5 md:mt-0 md:max-w-none">
 				<div>
 					<div class="border-b border-gray-200">
-						<div class="-mb-px flex space-x-8" aria-orientation="horizontal" role="tablist">
-							{#each tabs as tab}
+						<div class="-mb-px flex" aria-orientation="horizontal" role="tablist">
+							{#each Object.values(Tabs) as tab}
 								<button
-									class="border-transparent {activeTab === tab
-										? 'text-primary  border-primary'
-										: 'text-gray-500 hover:text-gray-800 hover:border-gray-500'} whitespace-nowrap border-b-2 py-6 text-sm font-medium"
+									class="p-5 border-b-2 text-sm font-medium"
+									class:text-primary={activeTab === tab}
+									class:border-primary={activeTab === tab}
+									class:text-gray-500={activeTab !== tab}
+									class:border-transparent={activeTab !== tab}
+									class:hover:text-gray-800={activeTab !== tab}
+									class:hover:border-gray-800={activeTab !== tab}
 									aria-controls="tab-{tab}"
 									role="tab"
 									type="button"
@@ -83,11 +91,13 @@
 						</div>
 					</div>
 
-					{#if activeTab === 'Gallery'}
-						<div id="tab-panel-gallery" class="pt-10" aria-labelledby="tab-gallery" role="tabpanel">
+					<div class="pt-10">
+						{#if activeTab === Tabs.Gallery}
 							<Gallery {advert} />
-						</div>
-					{/if}
+						{:else if activeTab === Tabs.Map}
+							<Map {advert} />
+						{/if}
+					</div>
 				</div>
 			</div>
 		</div>
