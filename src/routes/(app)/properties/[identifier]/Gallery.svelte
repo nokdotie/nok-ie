@@ -37,6 +37,15 @@
 </script>
 
 <svelte:window on:keydown|preventDefault={onKeyDown} />
+<svelte:head>
+	{#if null !== clickedIndex}
+		<style>
+			body {
+				overflow: hidden;
+			}
+		</style>
+	{/if}
+</svelte:head>
 
 <ul role="list" class="grid grid-cols-2 gap-4 sm:grid-cols-3">
 	{#each advert.propertyImageUrls as propertyImageUrl, index}
