@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { swipe } from 'svelte-gestures';
 	import { onError } from '$lib/utils/HtmlImageElement';
 
 	export let advert: {
@@ -30,6 +31,26 @@
 				clickPrevious();
 				break;
 			case 'ArrowRight':
+				clickNext();
+				break;
+		}
+	};
+
+	const onSwipe = (
+		event: CustomEvent<{
+			direction: 'top' | 'right' | 'bottom' | 'left';
+			target: EventTarget;
+		}>
+	) => {
+		switch (event.detail.direction) {
+			case 'top':
+			case 'bottom':
+				clickedIndex = null;
+				break;
+			case 'right':
+				clickPrevious();
+				break;
+			case 'left':
 				clickNext();
 				break;
 		}
@@ -86,6 +107,8 @@
 		</div>
 		<img
 			src={advert.propertyImageUrls[clickedIndex]}
+			use:swipe={{ timeframe: 300, minSwipeDistance: 60 }}
+			on:swipe={onSwipe}
 			alt=""
 			class="m-auto object-scale-down h-[calc(100%-30px-44px)] w-full"
 		/>
