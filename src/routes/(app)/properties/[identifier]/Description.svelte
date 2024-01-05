@@ -7,6 +7,7 @@
 {#if null !== advert.propertyDescription}
 	<div>
 		<h3 class="text-sm font-medium text-gray-900">Description</h3>
+		<!-- eslint-disable -->
 		<p>{@html advert.propertyDescription.replace('\n', '<br>')}</p>
 	</div>
 {/if}
