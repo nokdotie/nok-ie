@@ -5,9 +5,8 @@
 </script>
 
 {#if null !== advert.propertyDescription}
-	<div>
-		<h3 class="text-sm font-medium text-gray-900">Description</h3>
+	<div class="prose prose-m text-gray-500">
 		<!-- eslint-disable -->
-		<p>{@html advert.propertyDescription.replace('\n', '<br>')}</p>
+		<p>{@html advert.propertyDescription.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>
 	</div>
 {/if}
