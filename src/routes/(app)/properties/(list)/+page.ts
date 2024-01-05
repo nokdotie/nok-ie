@@ -34,7 +34,6 @@ export async function load({ url }) {
 		first: 24,
 		after: after,
 		filter: {
-			address: { contains: filters.q },
 			coordinates: { withinRectangle },
 			priceInEur: {
 				lessThanOrEqual: filters.priceInEurMax,
