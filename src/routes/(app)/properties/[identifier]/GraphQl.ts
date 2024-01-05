@@ -2,6 +2,7 @@ export type GraphQlQueryResponse = {
 	data: {
 		advert: {
 			advertPriceInEur: number;
+			propertyDescription: string;
 			propertyAddress: string;
 			propertyCoordinates: {
 				latitude: number;
@@ -56,6 +57,7 @@ export const graphQlQuery = `
     query($identifier: String!) {
         advert(identifier: $identifier) {
 			advertPriceInEur
+			propertyDescription
 			propertyAddress
 			propertyCoordinates {
 				latitude

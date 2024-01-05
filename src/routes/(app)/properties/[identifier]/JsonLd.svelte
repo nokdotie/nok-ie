@@ -4,6 +4,7 @@
 
 	export let advert: {
 		advertPriceInEur: number;
+		propertyDescription: string;
 		propertyAddress: string;
 		propertyCoordinates: {
 			latitude: number;
@@ -96,7 +97,9 @@
 		advert.propertyAddress
 	}, €${advert.advertPriceInEur.toLocaleString('en-IE')}, ${Math.floor(
 		advert.propertySizeInSqtMtr
-	)} m², ${advert.propertyBedroomsCount} beds, ${advert.propertyBathroomsCount} bathrooms`;
+	)} m², ${advert.propertyBedroomsCount} beds, ${advert.propertyBathroomsCount} bathrooms, ${
+		advert.propertyDescription
+	}`;
 </script>
 
 <svelte:head>

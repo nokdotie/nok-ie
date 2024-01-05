@@ -5,18 +5,21 @@
 	import Highlights from './Highlights.svelte';
 	import JsonLd from './JsonLd.svelte';
 	import Advertiser from './Advertiser.svelte';
+	import Description from './Description.svelte';
 	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
 	import Sources from './Sources.svelte';
 
 	enum Tabs {
 		Gallery = 'Gallery',
-		Map = 'Map'
+		Map = 'Map',
+		Description = 'Description'
 	}
 
 	let activeTab = Tabs.Gallery;
 
 	export let advert: {
 		advertPriceInEur: number;
+		propertyDescription: string;
 		propertyAddress: string;
 		propertyCoordinates: {
 			latitude: number;
@@ -98,7 +101,6 @@
 				<Sources {advert} />
 				<Highlights {advert} />
 			</div>
-
 			<div class="mx-auto mt-16 w-full max-w-2xl md:col-span-5 md:mt-0 md:max-w-none">
 				<div>
 					<div class="border-b border-gray-200">
@@ -128,6 +130,8 @@
 							<Gallery {advert} />
 						{:else if activeTab === Tabs.Map}
 							<Map {advert} />
+						{:else if activeTab === Tabs.Description}
+							<Description {advert} />
 						{/if}
 					</div>
 				</div>
