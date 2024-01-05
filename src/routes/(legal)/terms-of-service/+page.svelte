@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Nok.ie | Terms of Service</title>
+</svelte:head>
+
 <h2>NOK.IE Terms of Service</h2>
 <p>
 	These Terms of Service govern your use of the website located at <a href="https://nok.ie"
