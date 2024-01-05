@@ -106,21 +106,23 @@
 					<div class="border-b border-gray-200">
 						<div class="-mb-px flex" aria-orientation="horizontal" role="tablist">
 							{#each Object.values(Tabs) as tab}
-								<button
-									class="p-5 border-b-2 text-sm font-medium"
-									class:text-primary={activeTab === tab}
-									class:border-primary={activeTab === tab}
-									class:text-gray-500={activeTab !== tab}
-									class:border-transparent={activeTab !== tab}
-									class:hover:text-gray-800={activeTab !== tab}
-									class:hover:border-gray-800={activeTab !== tab}
-									aria-controls="tab-{tab}"
-									role="tab"
-									type="button"
-									on:click={() => (activeTab = tab)}
-								>
-									{tab}
-								</button>
+								{#if tab !== Tabs.Description || null !== advert.propertyDescription}
+									<button
+										class="p-5 border-b-2 text-sm font-medium"
+										class:text-primary={activeTab === tab}
+										class:border-primary={activeTab === tab}
+										class:text-gray-500={activeTab !== tab}
+										class:border-transparent={activeTab !== tab}
+										class:hover:text-gray-800={activeTab !== tab}
+										class:hover:border-gray-800={activeTab !== tab}
+										aria-controls="tab-{tab}"
+										role="tab"
+										type="button"
+										on:click={() => (activeTab = tab)}
+									>
+										{tab}
+									</button>
+								{/if}
 							{/each}
 						</div>
 					</div>
