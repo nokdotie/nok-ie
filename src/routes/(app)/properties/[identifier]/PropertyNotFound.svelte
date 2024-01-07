@@ -1,9 +1,3 @@
-<script lang="ts">
-	import RobotsNoIndex from '$lib/seo/RobotsNoIndex.svelte';
-</script>
-
-<RobotsNoIndex />
-
 <div class="bg-white">
 	<div class="mx-auto px-4 sm:px-6 md:max-w-7xl md:px-8">
 		<div class="rounded-md bg-blue-50 p-4 mb-7">

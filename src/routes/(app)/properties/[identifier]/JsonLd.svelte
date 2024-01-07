@@ -91,34 +91,9 @@
 			sameAs: advert.sources.map((source) => source.url)
 		}
 	};
-
-	const title = `Nok.ie | ${advert.propertyAddress}`;
-	const description = `Property for sale: ${
-		advert.propertyAddress
-	}, €${advert.advertPriceInEur.toLocaleString('en-IE')}, ${Math.floor(
-		advert.propertySizeInSqtMtr
-	)} m², ${advert.propertyBedroomsCount} beds, ${advert.propertyBathroomsCount} bathrooms, ${
-		advert.propertyDescription
-	}`;
 </script>
 
 <svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={description} />
-
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-	{#each advert.propertyImageUrls as propertyImageUrl}
-		<meta property="og:image" content={propertyImageUrl} />
-	{/each}
-
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
-	{#each advert.propertyImageUrls as propertyImageUrl}
-		<meta name="twitter:image" content={propertyImageUrl} />
-	{/each}
-
 	<!-- eslint-disable -->
 	{@html JsonLd(schema)}
 </svelte:head>

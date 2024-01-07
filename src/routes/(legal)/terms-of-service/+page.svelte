@@ -1,6 +1,8 @@
-<svelte:head>
-	<title>Nok.ie | Terms of Service</title>
-</svelte:head>
+<script>
+	import Meta from '$lib/seo/Meta.svelte';
+</script>
+
+<Meta title="Terms of Service" description="NOK.IE Terms of Service" />
 
 <h2>NOK.IE Terms of Service</h2>
 <p>

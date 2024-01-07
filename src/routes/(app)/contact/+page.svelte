@@ -1,25 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
-	export let form;
+	import Meta from '$lib/seo/Meta.svelte';
 
-	const title = 'Nok.ie | Contact';
-	const description = "Questions? We've got answers. Reach out anytime!";
+	export let form;
 </script>
 
-<svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={description} />
-
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
-</svelte:head>
-
-<RobotsIndex />
+<Meta title="Contact" description="Questions? We've got answers. Reach out anytime!" />
 
 <div class="px-6 py-24 sm:py-32 lg:px-8">
 	<div class="mx-auto max-w-xl">

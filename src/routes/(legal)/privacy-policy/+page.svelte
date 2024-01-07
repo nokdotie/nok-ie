@@ -1,6 +1,8 @@
-<svelte:head>
-	<title>Nok.ie | Privacy Policy</title>
-</svelte:head>
+<script>
+	import Meta from '$lib/seo/Meta.svelte';
+</script>
+
+<Meta title="Privacy Policy" description="NOK.IE Privacy Policy" />
 
 <h2>NOK.IE Privacy Policy</h2>
 <p>

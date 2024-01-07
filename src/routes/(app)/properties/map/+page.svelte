@@ -6,6 +6,7 @@
 	import { query } from '$lib/GraphQl';
 	import { graphQlQuery, type GraphQlQueryResponse } from '../(list)/GraphQl';
 	import PropertyRoute from '../[identifier]/Route';
+	import Meta from '$lib/seo/Meta.svelte';
 
 	const searchFilters = SearchFilters.fromUrl($page.url);
 
@@ -159,5 +160,7 @@
 		});
 	});
 </script>
+
+<Meta title="Search" description="Search for properties in Ireland." />
 
 <div id="map" class="h-[calc(100vh-82px)] w-full" />

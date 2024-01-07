@@ -56,6 +56,7 @@ export async function load({ url }) {
 
 	return {
 		filters,
+		after,
 		adverts: query<GraphQlQueryResponse>(graphQlQuery, variables).then(
 			(response) => response.data.adverts
 		)

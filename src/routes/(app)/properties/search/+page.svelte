@@ -1,5 +1,4 @@
 <script lang="ts">
-	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
 	import PropertiesRoute from '../(list)/Route';
 	import Location from './Location.svelte';
 	import FilterPrice from './FilterPrice.svelte';
@@ -8,26 +7,12 @@
 	import FilterSize from './FilterSize.svelte';
 	import { SearchFilters } from './SearchFilters';
 	import { page } from '$app/stores';
+	import Meta from '$lib/seo/Meta.svelte';
 
 	let searchFilters = SearchFilters.fromUrl($page.url);
-
-	const title = 'Nok.ie | Search';
-	const description = 'Search for a property to buy in Ireland.';
 </script>
 
-<RobotsIndex />
-
-<svelte:head>
-	<title>Nok.ie | Search</title>
-	<meta name="description" content={title} />
-
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
-</svelte:head>
+<Meta title="Search" description="Search for properties in Ireland." />
 
 <div class="mx-auto w-full sm:w-[640px] px-4 mt-10">
 	<form action={PropertiesRoute()}>
