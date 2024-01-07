@@ -6,8 +6,8 @@
 	import JsonLd from './JsonLd.svelte';
 	import Advertiser from './Advertiser.svelte';
 	import Description from './Description.svelte';
-	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
 	import Sources from './Sources.svelte';
+	import Meta from '$lib/seo/Meta.svelte';
 
 	enum Tabs {
 		Gallery = 'Gallery',
@@ -69,7 +69,15 @@
 	};
 </script>
 
-<RobotsIndex />
+<Meta
+	title={advert.propertyAddress}
+	description={`Property for sale: €${advert.advertPriceInEur.toLocaleString(
+		'en-IE'
+	)}, ${Math.floor(advert.propertySizeInSqtMtr)} m², ${advert.propertyBedroomsCount} beds, ${
+		advert.propertyBathroomsCount
+	} bathrooms, ${advert.propertyDescription}`}
+	images={advert.propertyImageUrls}
+/>
 <JsonLd {advert} />
 
 <div class="bg-white">

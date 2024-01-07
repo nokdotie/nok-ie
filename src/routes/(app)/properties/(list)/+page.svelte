@@ -1,14 +1,16 @@
 <script lang="ts">
 	import AdvertCardList from './AdvertCardList.svelte';
 	import NotFound from './NotFound.svelte';
-	import JsonLd from './JsonLd.svelte';
-	import RobotsIndex from '$lib/seo/RobotsIndex.svelte';
+	import Meta from '$lib/seo/Meta.svelte';
 
 	export let data;
 </script>
 
-<RobotsIndex />
-<JsonLd />
+<Meta
+	title="Properties"
+	description="Properties for sale around Ireland."
+	index={null === data.after}
+/>
 
 {#if data.adverts.edges.length === 0}
 	<NotFound />
