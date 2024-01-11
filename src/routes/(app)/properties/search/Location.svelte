@@ -55,8 +55,6 @@
 		}
 
 		event.currentTarget.value = '';
-
-		return true;
 	};
 </script>
 
