@@ -1,4 +1,6 @@
 import { Float, Int } from '$lib/utils/Number';
+import type { Page } from '@sveltejs/kit';
+import { derived, type Readable } from 'svelte/store';
 
 export interface SearchFilters {
 	location: null | string;
@@ -49,47 +51,131 @@ export const SearchFilters = {
 		sizeInSqtMtrMin: null,
 		sizeInSqtMtrMax: null
 	},
-	fromUrl(url: URL): SearchFilters {
-		const search = url.searchParams;
+	fromPage(page: Readable<Page<Record<string, string>, string | null>>): Readable<SearchFilters> {
+		return derived(page, ($page) => this.fromUrlSearchParams($page.url.searchParams));
+	},
+	fromUrlSearchParams(urlSearchParams: URLSearchParams): SearchFilters {
+		const copy = new URLSearchParams(urlSearchParams.toString());
 
 		return {
-			location: search.get(SearchFiltersQueryStringNames.Location),
-			locationNorthEastLat: search.has(SearchFiltersQueryStringNames.LocationNorthEastLat)
-				? Float.fromString(search.get(SearchFiltersQueryStringNames.LocationNorthEastLat) as string)
+			location: copy.get(SearchFiltersQueryStringNames.Location),
+			locationNorthEastLat: copy.has(SearchFiltersQueryStringNames.LocationNorthEastLat)
+				? Float.fromString(copy.get(SearchFiltersQueryStringNames.LocationNorthEastLat) as string)
 				: null,
-			locationNorthEastLng: search.has(SearchFiltersQueryStringNames.LocationNorthEastLng)
-				? Float.fromString(search.get(SearchFiltersQueryStringNames.LocationNorthEastLng) as string)
+			locationNorthEastLng: copy.has(SearchFiltersQueryStringNames.LocationNorthEastLng)
+				? Float.fromString(copy.get(SearchFiltersQueryStringNames.LocationNorthEastLng) as string)
 				: null,
-			locationSouthWestLat: search.has(SearchFiltersQueryStringNames.LocationSouthWestLat)
-				? Float.fromString(search.get(SearchFiltersQueryStringNames.LocationSouthWestLat) as string)
+			locationSouthWestLat: copy.has(SearchFiltersQueryStringNames.LocationSouthWestLat)
+				? Float.fromString(copy.get(SearchFiltersQueryStringNames.LocationSouthWestLat) as string)
 				: null,
-			locationSouthWestLng: search.has(SearchFiltersQueryStringNames.LocationSouthWestLng)
-				? Float.fromString(search.get(SearchFiltersQueryStringNames.LocationSouthWestLng) as string)
+			locationSouthWestLng: copy.has(SearchFiltersQueryStringNames.LocationSouthWestLng)
+				? Float.fromString(copy.get(SearchFiltersQueryStringNames.LocationSouthWestLng) as string)
 				: null,
-			priceInEurMin: search.has(SearchFiltersQueryStringNames.PriceInEurMin)
-				? Int.fromString(search.get(SearchFiltersQueryStringNames.PriceInEurMin) as string)
+			priceInEurMin: copy.has(SearchFiltersQueryStringNames.PriceInEurMin)
+				? Int.fromString(copy.get(SearchFiltersQueryStringNames.PriceInEurMin) as string)
 				: null,
-			priceInEurMax: search.has(SearchFiltersQueryStringNames.PriceInEurMax)
-				? Int.fromString(search.get(SearchFiltersQueryStringNames.PriceInEurMax) as string)
+			priceInEurMax: copy.has(SearchFiltersQueryStringNames.PriceInEurMax)
+				? Int.fromString(copy.get(SearchFiltersQueryStringNames.PriceInEurMax) as string)
 				: null,
-			bedroomsCountMin: search.has(SearchFiltersQueryStringNames.BedroomsCountMin)
-				? Int.fromString(search.get(SearchFiltersQueryStringNames.BedroomsCountMin) as string)
+			bedroomsCountMin: copy.has(SearchFiltersQueryStringNames.BedroomsCountMin)
+				? Int.fromString(copy.get(SearchFiltersQueryStringNames.BedroomsCountMin) as string)
 				: null,
-			bedroomsCountMax: search.has(SearchFiltersQueryStringNames.BedroomsCountMax)
-				? Int.fromString(search.get(SearchFiltersQueryStringNames.BedroomsCountMax) as string)
+			bedroomsCountMax: copy.has(SearchFiltersQueryStringNames.BedroomsCountMax)
+				? Int.fromString(copy.get(SearchFiltersQueryStringNames.BedroomsCountMax) as string)
 				: null,
-			bathroomsCountMin: search.has(SearchFiltersQueryStringNames.BathroomsCountMin)
-				? Int.fromString(search.get(SearchFiltersQueryStringNames.BathroomsCountMin) as string)
+			bathroomsCountMin: copy.has(SearchFiltersQueryStringNames.BathroomsCountMin)
+				? Int.fromString(copy.get(SearchFiltersQueryStringNames.BathroomsCountMin) as string)
 				: null,
-			bathroomsCountMax: search.has(SearchFiltersQueryStringNames.BathroomsCountMax)
-				? Int.fromString(search.get(SearchFiltersQueryStringNames.BathroomsCountMax) as string)
+			bathroomsCountMax: copy.has(SearchFiltersQueryStringNames.BathroomsCountMax)
+				? Int.fromString(copy.get(SearchFiltersQueryStringNames.BathroomsCountMax) as string)
 				: null,
-			sizeInSqtMtrMin: search.has(SearchFiltersQueryStringNames.SizeInSqtMtrMin)
-				? Int.fromString(search.get(SearchFiltersQueryStringNames.SizeInSqtMtrMin) as string)
+			sizeInSqtMtrMin: copy.has(SearchFiltersQueryStringNames.SizeInSqtMtrMin)
+				? Int.fromString(copy.get(SearchFiltersQueryStringNames.SizeInSqtMtrMin) as string)
 				: null,
-			sizeInSqtMtrMax: search.has(SearchFiltersQueryStringNames.SizeInSqtMtrMax)
-				? Int.fromString(search.get(SearchFiltersQueryStringNames.SizeInSqtMtrMax) as string)
+			sizeInSqtMtrMax: copy.has(SearchFiltersQueryStringNames.SizeInSqtMtrMax)
+				? Int.fromString(copy.get(SearchFiltersQueryStringNames.SizeInSqtMtrMax) as string)
 				: null
 		};
+	},
+	toUrlSearchParams(filters: SearchFilters): URLSearchParams {
+		const urlSearchParams = new URLSearchParams();
+
+		if (filters.location)
+			urlSearchParams.set(SearchFiltersQueryStringNames.Location, filters.location);
+		if (filters.locationNorthEastLat)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.LocationNorthEastLat,
+				filters.locationNorthEastLat.toString()
+			);
+		if (filters.locationNorthEastLng)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.LocationNorthEastLng,
+				filters.locationNorthEastLng.toString()
+			);
+		if (filters.locationSouthWestLat)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.LocationSouthWestLat,
+				filters.locationSouthWestLat.toString()
+			);
+		if (filters.locationSouthWestLng)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.LocationSouthWestLng,
+				filters.locationSouthWestLng.toString()
+			);
+		if (filters.priceInEurMin)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.PriceInEurMin,
+				filters.priceInEurMin.toString()
+			);
+		if (filters.priceInEurMax)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.PriceInEurMax,
+				filters.priceInEurMax.toString()
+			);
+		if (filters.bedroomsCountMin)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.BedroomsCountMin,
+				filters.bedroomsCountMin.toString()
+			);
+		if (filters.bedroomsCountMax)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.BedroomsCountMax,
+				filters.bedroomsCountMax.toString()
+			);
+		if (filters.bathroomsCountMin)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.BathroomsCountMin,
+				filters.bathroomsCountMin.toString()
+			);
+		if (filters.bathroomsCountMax)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.BathroomsCountMax,
+				filters.bathroomsCountMax.toString()
+			);
+		if (filters.sizeInSqtMtrMin)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.SizeInSqtMtrMin,
+				filters.sizeInSqtMtrMin.toString()
+			);
+		if (filters.sizeInSqtMtrMax)
+			urlSearchParams.set(
+				SearchFiltersQueryStringNames.SizeInSqtMtrMax,
+				filters.sizeInSqtMtrMax.toString()
+			);
+
+		return urlSearchParams;
+	},
+	length(filters: SearchFilters): number {
+		return [
+			filters.location,
+			filters.priceInEurMin,
+			filters.priceInEurMax,
+			filters.bedroomsCountMin,
+			filters.bedroomsCountMax,
+			filters.bathroomsCountMin,
+			filters.bathroomsCountMax,
+			filters.sizeInSqtMtrMin,
+			filters.sizeInSqtMtrMax
+		].filter((value) => null !== value && '' !== value).length;
 	}
 };

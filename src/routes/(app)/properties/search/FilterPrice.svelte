@@ -19,7 +19,7 @@
 				type="number"
 				name={SearchFiltersQueryStringNames.PriceInEurMin}
 				id={SearchFiltersQueryStringNames.PriceInEurMin}
-				value={searchFilters.priceInEurMin}
+				bind:value={searchFilters.priceInEurMin}
 				class="peer block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-800 focus:outline-none sm:text-sm sm:leading-6"
 			/>
 			<div
@@ -43,7 +43,7 @@
 				type="number"
 				name={SearchFiltersQueryStringNames.PriceInEurMax}
 				id={SearchFiltersQueryStringNames.PriceInEurMax}
-				value={searchFilters.priceInEurMax}
+				bind:value={searchFilters.priceInEurMax}
 				class="peer block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-800 focus:outline-none sm:text-sm sm:leading-6"
 			/>
 			<div

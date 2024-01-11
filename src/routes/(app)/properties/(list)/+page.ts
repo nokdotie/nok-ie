@@ -3,27 +3,27 @@ import { SearchFilters } from '../search/SearchFilters';
 import { graphQlQuery, type GraphQlQueryResponse } from './GraphQl';
 
 export async function load({ url }) {
+	const searchFilters = SearchFilters.fromUrlSearchParams(url.searchParams);
 	const after = url.searchParams.get('after');
-	const filters = SearchFilters.fromUrl(url);
 
 	let withinRectangle: null | {
 		northEast: { latitude: number; longitude: number };
 		southWest: { latitude: number; longitude: number };
 	};
 	if (
-		filters.locationNorthEastLat &&
-		filters.locationNorthEastLng &&
-		filters.locationSouthWestLat &&
-		filters.locationSouthWestLng
+		searchFilters.locationNorthEastLat &&
+		searchFilters.locationNorthEastLng &&
+		searchFilters.locationSouthWestLat &&
+		searchFilters.locationSouthWestLng
 	) {
 		withinRectangle = {
 			northEast: {
-				latitude: filters.locationNorthEastLat,
-				longitude: filters.locationNorthEastLng
+				latitude: searchFilters.locationNorthEastLat,
+				longitude: searchFilters.locationNorthEastLng
 			},
 			southWest: {
-				latitude: filters.locationSouthWestLat,
-				longitude: filters.locationSouthWestLng
+				latitude: searchFilters.locationSouthWestLat,
+				longitude: searchFilters.locationSouthWestLng
 			}
 		};
 	} else {
@@ -36,26 +36,25 @@ export async function load({ url }) {
 		filter: {
 			coordinates: { withinRectangle },
 			priceInEur: {
-				lessThanOrEqual: filters.priceInEurMax,
-				greaterThanOrEqual: filters.priceInEurMin
+				lessThanOrEqual: searchFilters.priceInEurMax,
+				greaterThanOrEqual: searchFilters.priceInEurMin
 			},
 			bedroomsCount: {
-				lessThanOrEqual: filters.bedroomsCountMax,
-				greaterThanOrEqual: filters.bedroomsCountMin
+				lessThanOrEqual: searchFilters.bedroomsCountMax,
+				greaterThanOrEqual: searchFilters.bedroomsCountMin
 			},
 			bathroomsCount: {
-				lessThanOrEqual: filters.bathroomsCountMax,
-				greaterThanOrEqual: filters.bathroomsCountMin
+				lessThanOrEqual: searchFilters.bathroomsCountMax,
+				greaterThanOrEqual: searchFilters.bathroomsCountMin
 			},
 			sizeInSqtMtr: {
-				lessThanOrEqual: filters.sizeInSqtMtrMax,
-				greaterThanOrEqual: filters.sizeInSqtMtrMin
+				lessThanOrEqual: searchFilters.sizeInSqtMtrMax,
+				greaterThanOrEqual: searchFilters.sizeInSqtMtrMin
 			}
 		}
 	};
 
 	return {
-		filters,
 		after,
 		adverts: query<GraphQlQueryResponse>(graphQlQuery, variables).then(
 			(response) => response.data.adverts

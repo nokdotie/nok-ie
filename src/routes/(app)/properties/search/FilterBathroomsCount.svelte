@@ -20,7 +20,7 @@
 				type="number"
 				name={SearchFiltersQueryStringNames.BathroomsCountMin}
 				id={SearchFiltersQueryStringNames.BathroomsCountMin}
-				value={searchFilters.bathroomsCountMin}
+				bind:value={searchFilters.bathroomsCountMin}
 				class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-800 focus:outline-none sm:text-sm sm:leading-6"
 			/>
 		</div>
@@ -34,7 +34,7 @@
 				type="number"
 				name={SearchFiltersQueryStringNames.BathroomsCountMax}
 				id={SearchFiltersQueryStringNames.BathroomsCountMax}
-				value={searchFilters.bathroomsCountMax}
+				bind:value={searchFilters.bathroomsCountMax}
 				class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-800 focus:outline-none sm:text-sm sm:leading-6"
 			/>
 		</div>

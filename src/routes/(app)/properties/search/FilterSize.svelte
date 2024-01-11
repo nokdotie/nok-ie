@@ -19,7 +19,7 @@
 				type="number"
 				name={SearchFiltersQueryStringNames.SizeInSqtMtrMin}
 				id={SearchFiltersQueryStringNames.SizeInSqtMtrMin}
-				value={searchFilters.sizeInSqtMtrMin}
+				bind:value={searchFilters.sizeInSqtMtrMin}
 				class="peer block w-full rounded-md border-0 py-1.5 pl-3 pr-9 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-800 focus:outline-none sm:text-sm sm:leading-6"
 			/>
 			<div
@@ -38,7 +38,7 @@
 				type="number"
 				name={SearchFiltersQueryStringNames.SizeInSqtMtrMax}
 				id={SearchFiltersQueryStringNames.SizeInSqtMtrMax}
-				value={searchFilters.sizeInSqtMtrMax}
+				bind:value={searchFilters.sizeInSqtMtrMax}
 				class="peer block w-full rounded-md border-0 py-1.5 pl-3 pr-9 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-800 focus:outline-none sm:text-sm sm:leading-6"
 			/>
 			<div
