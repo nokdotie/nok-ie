@@ -2,8 +2,10 @@
 	import { derived } from 'svelte/store';
 	import SearchRoute from '../../routes/(app)/properties/search/Route';
 	import { page } from '$app/stores';
+	import { SearchFilters } from '../../routes/(app)/properties/search/SearchFilters';
 
-	const url = derived(page, ($page) => $page.url);
+	const searchFilters = SearchFilters.fromPage(page);
+	const length = derived(searchFilters, ($filters) => SearchFilters.length($filters));
 </script>
 
 <header class="bg-white">
@@ -15,7 +17,7 @@
 		</a>
 
 		<div>
-			<a href={SearchRoute($url)} class="text-gray-600 hover:text-gray-900">
+			<a href={SearchRoute($searchFilters)} class="text-gray-600 hover:text-gray-900">
 				<span class="relative inline-block">
 					<svg class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 						<path
@@ -25,10 +27,11 @@
 						/>
 					</svg>
 
-					{#if '' !== $url.search}
+					{#if 0 < $length}
 						<span
-							class="absolute right-0 top-0 block h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-white animate-bounce"
-						/>
+							class="absolute text-[8px] text-white text-center right-0 top-0 block h-3 w-3 rounded-full bg-primary ring-2 ring-white animate-bounce"
+							>{$length}
+						</span>
 					{/if}
 				</span>
 			</a>

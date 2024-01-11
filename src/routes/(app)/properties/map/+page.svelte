@@ -5,10 +5,22 @@
 	import { SearchFilters } from '../search/SearchFilters';
 	import { query } from '$lib/GraphQl';
 	import { graphQlQuery, type GraphQlQueryResponse } from '../(list)/GraphQl';
+	import PropertiesRoute from '../(list)/Route';
 	import PropertyRoute from '../[identifier]/Route';
 	import Meta from '$lib/seo/Meta.svelte';
 
-	const searchFilters = SearchFilters.fromUrl($page.url);
+	const searchFilters = SearchFilters.fromUrlSearchParams($page.url.searchParams);
+
+	const updateSearchFilters = (map: google.maps.Map) => {
+		const bounds = map.getBounds();
+		const northEast = bounds?.getNorthEast();
+		searchFilters.locationNorthEastLat = northEast?.lat() ?? null;
+		searchFilters.locationNorthEastLng = northEast?.lng() ?? null;
+
+		const southWest = bounds?.getSouthWest();
+		searchFilters.locationSouthWestLat = southWest?.lat() ?? null;
+		searchFilters.locationSouthWestLng = southWest?.lng() ?? null;
+	};
 
 	const getInitialBounds = () =>
 		searchFilters.locationNorthEastLat &&
@@ -157,10 +169,29 @@
 
 			hideAdverts(map, mutableMarkers);
 			showAdverts(map, mutableMarkers, mutableInfoWindow, adverts);
+
+			updateSearchFilters(map);
 		});
 	});
 </script>
 
 <Meta title="Search" description="Search for properties in Ireland." />
 
-<div id="map" class="h-[calc(100vh-82px)] w-full" />
+<div class="relative">
+	<a
+		class="absolute z-10 top-2 right-2 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 text-gray-900 gap-1"
+		href={PropertiesRoute(searchFilters, null)}
+	>
+		<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path
+				d="M8 6L21 6.00078M8 12L21 12.0008M8 18L21 18.0007M3 6.5H4V5.5H3V6.5ZM3 12.5H4V11.5H3V12.5ZM3 18.5H4V17.5H3V18.5Z"
+				stroke="#000000"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			/>
+		</svg>
+		List View
+	</a>
+	<div id="map" class="h-[calc(100vh-82px)] w-full" />
+</div>

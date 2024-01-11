@@ -9,21 +9,21 @@
 	import { page } from '$app/stores';
 	import Meta from '$lib/seo/Meta.svelte';
 
-	let searchFilters = SearchFilters.fromUrl($page.url);
+	let searchFilters = SearchFilters.fromPage(page);
 </script>
 
 <Meta title="Search" description="Search for properties in Ireland." />
 
 <div class="mx-auto w-full sm:w-[640px] px-4 mt-10">
-	<form action={PropertiesRoute()}>
-		<Location {searchFilters} />
+	<form action={PropertiesRoute(null, null)}>
+		<Location searchFilters={$searchFilters} />
 
 		<div class="my-7 w-full border-t border-gray-300 text-right" />
 
-		<FilterPrice {searchFilters} />
-		<FilterBedroomsCount {searchFilters} />
-		<FilterBathroomsCount {searchFilters} />
-		<FilterSize {searchFilters} />
+		<FilterPrice searchFilters={$searchFilters} />
+		<FilterBedroomsCount searchFilters={$searchFilters} />
+		<FilterBathroomsCount searchFilters={$searchFilters} />
+		<FilterSize searchFilters={$searchFilters} />
 
 		<div class="text-right mt-10">
 			<button

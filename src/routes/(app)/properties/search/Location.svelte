@@ -35,8 +35,6 @@
 		const geoCoder = await geoCoderPromise;
 		const geocoderResult = await geoCoder.geocode({ placeId: suggestion.place_id });
 
-		if (0 === geocoderResult.results.length) return;
-
 		location = geocoderResult.results[0].formatted_address.replace(', Ireland', '');
 
 		const viewport = geocoderResult.results[0].geometry.viewport;
@@ -45,43 +43,58 @@
 		locationSouthWestLat = viewport.getSouthWest().lat();
 		locationSouthWestLng = viewport.getSouthWest().lng();
 	};
+
+	const reset = (event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement }) => {
+		setTimeout(() => (suggestions = []), 100);
+
+		if ('' === event.currentTarget.value) {
+			locationNorthEastLat = null;
+			locationNorthEastLng = null;
+			locationSouthWestLat = null;
+			locationSouthWestLng = null;
+		}
+
+		event.currentTarget.value = '';
+
+		return true;
+	};
 </script>
 
 <div>
 	<div class="relative mt-2">
-		<input type="hidden" value={location} />
 		<input
 			type="hidden"
 			id={SearchFiltersQueryStringNames.LocationNorthEastLat}
 			name={SearchFiltersQueryStringNames.LocationNorthEastLat}
-			value={locationNorthEastLat}
+			bind:value={locationNorthEastLat}
 		/>
 		<input
 			type="hidden"
 			id={SearchFiltersQueryStringNames.LocationNorthEastLng}
 			name={SearchFiltersQueryStringNames.LocationNorthEastLng}
-			value={locationNorthEastLng}
+			bind:value={locationNorthEastLng}
 		/>
 		<input
 			type="hidden"
 			id={SearchFiltersQueryStringNames.LocationSouthWestLat}
 			name={SearchFiltersQueryStringNames.LocationSouthWestLat}
-			value={locationSouthWestLat}
+			bind:value={locationSouthWestLat}
 		/>
 		<input
 			type="hidden"
 			id={SearchFiltersQueryStringNames.LocationSouthWestLng}
 			name={SearchFiltersQueryStringNames.LocationSouthWestLng}
-			value={locationSouthWestLng}
+			bind:value={locationSouthWestLng}
 		/>
 
 		<input
 			id={SearchFiltersQueryStringNames.Location}
 			name={SearchFiltersQueryStringNames.Location}
-			value={location}
+			bind:value={location}
 			type="text"
 			class="peer w-full text-2xl leading-10 rounded-md border-0 bg-white py-1.5 pl-12 pr-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-800 focus:outline-none focus:placeholder:opacity-0"
 			on:input={suggest}
+			on:blur={reset}
 			placeholder="Region, county, town, ..."
 		/>
 

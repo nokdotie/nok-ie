@@ -41,7 +41,7 @@
 				</h1>
 				<p class="mt-2 text-base text-gray-500">{$error.message}</p>
 				<div class="mt-6">
-					<a href="/" class="text-base font-medium text-primary hover:text-primary/90">
+					<a href="/" class="text-base font-medium text-primary hover:text-primary/70">
 						Go back home
 						<span aria-hidden="true"> &rarr;</span>
 					</a>

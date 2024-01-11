@@ -36,7 +36,7 @@ async function getAllNodes(): Promise<{ propertyIdentifier: string }[]> {
 export async function GET({ url }) {
 	const nodes = await getAllNodes();
 
-	const first = `${url.origin}${PropertiesRoute()}`;
+	const first = `${url.origin}${PropertiesRoute(null, null)}`;
 	const map = `${url.origin}${MapRoute(null)}`;
 	const search = `${url.origin}${SearchRoute(null)}`;
 	const pages = nodes.map((node) => `${url.origin}${IdentifierRoute(node)}`);
