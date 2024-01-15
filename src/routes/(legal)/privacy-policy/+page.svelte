@@ -1,8 +1,13 @@
 <script>
-	import Meta from '$lib/seo/Meta.svelte';
+	import Meta from '$lib/components/seo/Meta.svelte';
 </script>
 
-<Meta title="Privacy Policy" description="NOK.IE Privacy Policy" />
+<Meta
+	index={true}
+	title="Privacy Policy"
+	description="NOK.IE Privacy Policy"
+	images={['https://nok.ie/android-chrome-512x512.png']}
+/>
 
 <h2>NOK.IE Privacy Policy</h2>
 <p>

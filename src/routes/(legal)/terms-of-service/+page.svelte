@@ -1,8 +1,13 @@
 <script>
-	import Meta from '$lib/seo/Meta.svelte';
+	import Meta from '$lib/components/seo/Meta.svelte';
 </script>
 
-<Meta title="Terms of Service" description="NOK.IE Terms of Service" />
+<Meta
+	index={true}
+	title="Terms of Service"
+	description="NOK.IE Terms of Service"
+	images={['https://nok.ie/android-chrome-512x512.png']}
+/>
 
 <h2>NOK.IE Terms of Service</h2>
 <p>

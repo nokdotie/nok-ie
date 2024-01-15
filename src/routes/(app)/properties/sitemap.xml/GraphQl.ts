@@ -1,4 +1,4 @@
-import { connectionFragment, type Connection } from '$lib/GraphQl';
+import { connectionFragment, type Connection } from '$lib/utils/GraphQl';
 
 export type GraphQlQueryResponse = {
 	data: {

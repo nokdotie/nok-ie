@@ -1,5 +1,5 @@
-import SiteMapXml from '$lib/seo/SiteMapXml';
-import PropertiesSiteMapRoute from '../../(app)/properties/sitemap.xml/Route';
+import SiteMapXml from '$lib/components/seo/SiteMapXml';
+import PropertiesSiteMapRoute from '$routes/(app)/properties/sitemap.xml/Route';
 
 export async function GET({ url }) {
 	return SiteMapXml.sitemapIndex([

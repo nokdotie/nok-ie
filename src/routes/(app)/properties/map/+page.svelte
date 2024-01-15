@@ -1,85 +1,48 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getDefaultBounds, mapPromise } from '$lib/google/Maps';
+	import { getDefaultBounds, mapPromise } from '$lib/utils/GoogleMaps';
 	import { page } from '$app/stores';
-	import { SearchFilters } from '../search/SearchFilters';
-	import { query } from '$lib/GraphQl';
-	import { graphQlQuery, type GraphQlQueryResponse } from '../(list)/GraphQl';
-	import PropertiesRoute from '../(list)/Route';
-	import PropertyRoute from '../[identifier]/Route';
-	import Meta from '$lib/seo/Meta.svelte';
+	import { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
+	import { Adverts } from '$lib/adverts/Adverts';
+	import PropertiesOneRoute from '$routes/(app)/properties/[identifier]/Route';
+	import Meta from '$lib/components/seo/Meta.svelte';
+	import DocumentHeader from '$lib/components/document/DocumentHeader.svelte';
+	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
+	import FilterButton from '$lib/adverts/list/FilterButton.svelte';
+	import ListViewButton from '$lib/adverts/list/ListViewButton.svelte';
 
-	const searchFilters = SearchFilters.fromUrlSearchParams($page.url.searchParams);
+	const advertsSearch = AdvertsSearch.fromUrlSearchParams($page.url.searchParams);
 
-	const updateSearchFilters = (map: google.maps.Map) => {
+	const updateAdvertsSearch = (map: google.maps.Map) => {
 		const bounds = map.getBounds();
 		const northEast = bounds?.getNorthEast();
-		searchFilters.locationNorthEastLat = northEast?.lat() ?? null;
-		searchFilters.locationNorthEastLng = northEast?.lng() ?? null;
+		advertsSearch.locationNorthEastLat = northEast?.lat() ?? null;
+		advertsSearch.locationNorthEastLng = northEast?.lng() ?? null;
 
 		const southWest = bounds?.getSouthWest();
-		searchFilters.locationSouthWestLat = southWest?.lat() ?? null;
-		searchFilters.locationSouthWestLng = southWest?.lng() ?? null;
+		advertsSearch.locationSouthWestLat = southWest?.lat() ?? null;
+		advertsSearch.locationSouthWestLng = southWest?.lng() ?? null;
 	};
 
 	const getInitialBounds = () =>
-		searchFilters.locationNorthEastLat &&
-		searchFilters.locationNorthEastLng &&
-		searchFilters.locationSouthWestLat &&
-		searchFilters.locationSouthWestLng
+		advertsSearch.locationNorthEastLat &&
+		advertsSearch.locationNorthEastLng &&
+		advertsSearch.locationSouthWestLat &&
+		advertsSearch.locationSouthWestLng
 			? new google.maps.LatLngBounds(
 					new google.maps.LatLng(
-						searchFilters.locationSouthWestLat,
-						searchFilters.locationSouthWestLng
+						advertsSearch.locationSouthWestLat,
+						advertsSearch.locationSouthWestLng
 					),
 					new google.maps.LatLng(
-						searchFilters.locationNorthEastLat,
-						searchFilters.locationNorthEastLng
+						advertsSearch.locationNorthEastLat,
+						advertsSearch.locationNorthEastLng
 					)
 			  )
 			: getDefaultBounds();
 
-	const getGraphQlVariables = (map: google.maps.Map) => {
-		const bounds = map.getBounds();
-		if (!bounds) return { first: 0 };
-
-		return {
-			first: 100,
-			filter: {
-				coordinates: {
-					withinRectangle: {
-						northEast: {
-							latitude: bounds.getNorthEast().lat(),
-							longitude: bounds.getNorthEast().lng()
-						},
-						southWest: {
-							latitude: bounds.getSouthWest().lat(),
-							longitude: bounds.getSouthWest().lng()
-						}
-					}
-				},
-				priceInEur: {
-					lessThanOrEqual: searchFilters.priceInEurMax,
-					greaterThanOrEqual: searchFilters.priceInEurMin
-				},
-				bedroomsCount: {
-					lessThanOrEqual: searchFilters.bedroomsCountMax,
-					greaterThanOrEqual: searchFilters.bedroomsCountMin
-				},
-				bathroomsCount: {
-					lessThanOrEqual: searchFilters.bathroomsCountMax,
-					greaterThanOrEqual: searchFilters.bathroomsCountMin
-				},
-				sizeInSqtMtr: {
-					lessThanOrEqual: searchFilters.sizeInSqtMtrMax,
-					greaterThanOrEqual: searchFilters.sizeInSqtMtrMin
-				}
-			}
-		};
-	};
-
-	const getAdverts = (variables: object) =>
-		query<GraphQlQueryResponse>(graphQlQuery, variables).then((response) =>
+	const getAdverts = (advertsSearch: AdvertsSearch) =>
+		Adverts.all(100, null, advertsSearch).then((response) =>
 			response.data.adverts.edges.map((edge) => edge.node)
 		);
 
@@ -107,6 +70,9 @@
 			propertyAddress: string;
 			propertyCoordinates: { latitude: number; longitude: number };
 			propertyImageUrls: Array<string>;
+			propertyBedroomsCount: number;
+			propertyBathroomsCount: number;
+			propertySizeInSqtMtr: number;
 		}[]
 	) =>
 		adverts.forEach((advert) => {
@@ -125,21 +91,32 @@
 			marker.addListener('click', () => {
 				mutableInfoWindow.setContent(`
 					<style>
-						#map div[role=dialog] { padding: 0; overflow: visible; }
-						#map div[role=dialog]>div { overflow: hidden !important; }
+						#map div[role=dialog] { padding: 0; background: transparent; overflow: visible; box-shadow: none}
+						#map div[role=dialog] > div { overflow: hidden !important }
 						#map div[role=dialog]>button { background-color: #fff !important; border-radius: 50%; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); top: -12px; right: -12px; opacity: 1; }
 					</style>
 
-					<div class="w-60 overflow-hidden rounded-[8px]">
-						<a href="${PropertyRoute(advert)}">
-							<img src="${advert.propertyImageUrls[0]}" class="w-full object-cover object-center aspect-photo" />
-							<div class="px-2 pt-2 pb-2">
-								<h3 class="text-lg font-medium text-gray-900 truncate">
+					<div
+						class="w-[250px] bg-neutral-100 shadow-400 overflow-hidden rounded-3xl"
+					>
+						<a href=${PropertiesOneRoute(advert.propertyIdentifier)}>
+							<img
+								src=${advert.propertyImageUrls[0]}
+								loading="eager"
+								alt=""
+								class="w-full object-cover object-center align-middle aspect-[4/3]"
+							/>
+							<div class="pt-2 p-3">
+								<div class="text-neutral-800 text-[22px] font-bold leading-[1.364em] mb-1">
+									${advert.advertPriceInEur.toLocaleString('en-IE', {
+										style: 'currency',
+										currency: 'EUR',
+										maximumFractionDigits: 0
+									})}
+								</div>
+								<h3 class="text-neutral-600 text-base font-medium leading-[1.125em] truncate">
 									${advert.propertyAddress}
 								</h3>
-								<p class="text-sm text-gray-700">
-									€${advert.advertPriceInEur.toLocaleString('en-IE')}
-								</p>
 							</div>
 						</a>
 					</div>
@@ -152,9 +129,9 @@
 		});
 
 	onMount(async () => {
-		const mapConstructor = await mapPromise;
-		const map = mapConstructor(document.getElementById('map') as HTMLElement, {
-			disableDefaultUI: true
+		const map = (await mapPromise)(document.getElementById('map') as HTMLElement, {
+			disableDefaultUI: true,
+			gestureHandling: 'greedy'
 		});
 
 		const mutableMarkers: google.maps.Marker[] = [];
@@ -164,34 +141,32 @@
 		map.fitBounds(bounds);
 
 		map.addListener('idle', async () => {
-			const variables = getGraphQlVariables(map);
-			const adverts = await getAdverts(variables);
+			updateAdvertsSearch(map);
+
+			const adverts = await getAdverts(advertsSearch);
 
 			hideAdverts(map, mutableMarkers);
 			showAdverts(map, mutableMarkers, mutableInfoWindow, adverts);
-
-			updateSearchFilters(map);
 		});
 	});
 </script>
 
-<Meta title="Search" description="Search for properties in Ireland." />
+<Meta
+	index={true}
+	title="Properties on a map"
+	description="Properties for sale in Ireland, on a map"
+	images={['https://nok.ie/android-chrome-512x512.png']}
+/>
+
+<DocumentHeader />
 
 <div class="relative">
-	<a
-		class="absolute z-10 top-2 right-2 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 text-gray-900 gap-1"
-		href={PropertiesRoute(searchFilters, null)}
-	>
-		<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path
-				d="M8 6L21 6.00078M8 12L21 12.0008M8 18L21 18.0007M3 6.5H4V5.5H3V6.5ZM3 12.5H4V11.5H3V12.5ZM3 18.5H4V17.5H3V18.5Z"
-				stroke="#000000"
-				stroke-width="1.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/>
-		</svg>
-		List View
-	</a>
-	<div id="map" class="h-[calc(100vh-82px)] w-full" />
+	<div id="map" class="h-[calc(100vh-80.5px)] md:h-[calc(100vh-84.5px)] w-full" />
+
+	<div class="absolute top-0 right-0 mt-[10px] mr-[10px] flex gap-x-2.5">
+		<ListViewButton {advertsSearch} />
+		<FilterButton {advertsSearch} />
+	</div>
 </div>
+
+<DocumentFooter />

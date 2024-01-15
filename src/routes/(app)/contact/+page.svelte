@@ -1,155 +1,77 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import Meta from '$lib/seo/Meta.svelte';
+	import Meta from '$lib/components/seo/Meta.svelte';
+	import DocumentHeader from '$lib/components/document/DocumentHeader.svelte';
+	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
+	import ContainerCenterSmall from '$lib/components/containers/ContainerCenterSmall.svelte';
+	import Label from '$lib/components/forms/Label.svelte';
+	import Input from '$lib/components/forms/Input.svelte';
+	import PrimaryButtonDark from '$lib/components/buttons/PrimaryButtonDark.svelte';
+	import { Status } from '$lib/utils/Status';
 
 	export let form;
 </script>
 
-<Meta title="Contact" description="Questions? We've got answers. Reach out anytime!" />
+<Meta
+	index={true}
+	title="Contact"
+	description="Questions? We've got answers. Reach out anytime!"
+	images={['https://nok.ie/android-chrome-512x512.png']}
+/>
 
-<div class="px-6 py-24 sm:py-32 lg:px-8">
-	<div class="mx-auto max-w-xl">
-		<h2 class="text-4xl font-bold tracking-tight text-gray-900">Let’s talk</h2>
-		<p class="mt-2 text-lg leading-8 text-gray-600">
-			Questions? We've got answers. Reach out anytime!
-		</p>
-		<div class="mt-5">
-			<form method="POST" class="w-full" use:enhance>
-				<div class="grid grid-cols-1 gap-x-8 gap-y-6">
-					<div>
-						<label for="name" class="block text-sm font-semibold leading-6 text-gray-900"
-							>Name</label
-						>
-						<div class="mt-2.5">
-							<input
-								type="text"
-								name="name"
-								id="name"
-								autocomplete="given-name"
-								class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary focus:outline-none sm:text-sm sm:leading-6"
-							/>
-						</div>
-					</div>
-					<div>
-						<label for="email" class="block text-sm font-semibold leading-6 text-gray-900"
-							>Email</label
-						>
-						<div class="mt-2.5">
-							<input
-								id="email"
-								name="email"
-								type="email"
-								class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary focus:outline-none sm:text-sm sm:leading-6"
-							/>
-						</div>
-					</div>
-					<div class="sm">
-						<label for="message" class="block text-sm font-semibold leading-6 text-gray-900"
-							>Message</label
-						>
-						<div class="mt-2.5">
-							<textarea
-								id="message"
-								name="message"
-								required
-								rows="4"
-								class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary focus:outline-none sm:text-sm sm:leading-6"
-							/>
-						</div>
-					</div>
-				</div>
-				<div class="mt-10">
-					<button
-						type="submit"
-						class="block w-full rounded-md bg-primary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-gray-300"
-						disabled={form !== null}>Send</button
-					>
-				</div>
-			</form>
+<DocumentHeader />
+
+<div>
+	<div class="bg-primary min-h-[60%] absolute top-0 inset-x-0" />
+	<ContainerCenterSmall class="relative py-[82px] sm:py-[102px] md:py-[128px] lg:py-[160px]">
+		<div class="mb-[40px] md:mb-[48px]">
+			<h1
+				class="text-center text-neutral-100 text-[33px] sm:text-[40px] md:text-5xl font-bold leading-[1.25em] mb-2.5 md:mb-3.5"
+			>
+				Get in touch
+			</h1>
+			<p class="text-center text-neutral-100 text-lg font-medium leading-[1.667em] mb-10">
+				Questions? We've got answers. Reach out anytime!
+			</p>
 		</div>
-	</div>
+
+		<div
+			class="bg-neutral-100 shadow-400 px-[25px] sm:px-[35px] md:px-[52px] py-[51px] sm:py-16 md:py-20 rounded-[20px] md:rounded-3xl"
+		>
+			{#if null === form?.status || undefined === form?.status}
+				<form method="POST" use:enhance class="space-y-[33px]">
+					<div>
+						<Label for="email">Email address</Label>
+						<Input id="email" type="email" />
+					</div>
+					<div>
+						<Label for="phone">Phone number</Label>
+						<Input id="phone" type="number" />
+					</div>
+					<div>
+						<Label for="message">Message</Label>
+						<Input id="message" type="textarea" required class="min-h-[225px] h-auto !py-4" />
+					</div>
+					<div class="text-right">
+						<PrimaryButtonDark>Send message</PrimaryButtonDark>
+					</div>
+				</form>
+			{:else if Status.Success === form?.status}
+				<div class="text-neutral-800 text-lg font-semibold leading-[1.667em] text-center">
+					Thanks for reaching out!<br /> We'll get back to you soon.
+				</div>
+			{:else if Status.Failure === form?.status}
+				<div
+					class="text-red-400 text-lg font-semibold leading-[1.667em] text-center mb-2.5 md:mb-3.5"
+				>
+					Oops! That didn't work.<br /> Want to send us an email instead?
+				</div>
+				<div class="text-neutral-800 text-lg font-semibold leading-[1.667em] text-center">
+					<a href="mailto:contact@nok.ie">contact@nok.ie</a>
+				</div>
+			{/if}
+		</div>
+	</ContainerCenterSmall>
 </div>
 
-{#if form}
-	<div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 sm:p-6">
-		{#if form.ok === true}
-			<div class="rounded-md bg-green-50 p-4 w-full">
-				<div class="flex">
-					<div class="flex-shrink-0">
-						<svg
-							class="h-5 w-5 text-green-400"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-								clip-rule="evenodd"
-							/>
-						</svg>
-					</div>
-					<div class="ml-3">
-						<p class="text-sm font-medium text-green-800">Successfully sent</p>
-					</div>
-					<div class="ml-auto pl-3">
-						<div class="-mx-1.5 -my-1.5">
-							<button
-								type="button"
-								class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50"
-								on:click|preventDefault={() => (form = null)}
-							>
-								<span class="sr-only">Dismiss</span>
-								<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-									<path
-										d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
-									/>
-								</svg>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		{:else}
-			<div class="rounded-md bg-red-50 p-4 w-full">
-				<div class="flex">
-					<div class="flex-shrink-0">
-						<svg
-							class="h-5 w-5 text-red-400"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
-								clip-rule="evenodd"
-							/>
-						</svg>
-					</div>
-					<div class="ml-3">
-						<p class="text-sm font-medium text-red-800">
-							FSomething went wrong, try again in a few minutes
-						</p>
-					</div>
-					<div class="ml-auto pl-3">
-						<div class="-mx-1.5 -my-1.5">
-							<button
-								type="button"
-								class="inline-flex rounded-md bg-red-50 p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
-								on:click|preventDefault={() => (form = null)}
-							>
-								<span class="sr-only">Dismiss</span>
-								<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-									<path
-										d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
-									/>
-								</svg>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		{/if}
-	</div>
-{/if}
+<DocumentFooter />

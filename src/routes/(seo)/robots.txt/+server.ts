@@ -4,7 +4,7 @@ export async function GET({ url }) {
 		|User-agent: *
 		|Disallow:
 
-		|Sitemap: ${url.origin}/sitemap.xml
+		|Sitemap: ${url.origin}/sitemap_index.xml
 		`
 			.trim()
 			.replaceAll(/[\t ]*\|/g, ''),
