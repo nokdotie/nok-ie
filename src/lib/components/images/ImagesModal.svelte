@@ -85,7 +85,7 @@
 				<Image
 					src={imageUrls[selectedIndex]}
 					alt=""
-					class="w-full sm:w-[calc(100%-64px-64px)] max-h-full object-cover object-center grow shrink"
+					class="w-full sm:w-[calc(100%-64px-64px)] max-h-full object-contain object-center grow shrink"
 				/>
 				<button on:click={selectNext} class="p-[20px] hidden sm:block">
 					<ArrowRightIcon class="w-[24px] h-[24px]" />
