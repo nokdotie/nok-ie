@@ -1,3 +1,5 @@
+import { Status } from '$lib/utils/Status';
+
 const staticformsUrl = 'https://api.staticforms.xyz/submit';
 const staticformAccessKey = '9ea74cf6-e1b7-4b1d-9612-48c6b587a000';
 
@@ -17,7 +19,7 @@ export const actions = {
 		};
 
 		return fetch(staticformsUrl, options)
-			.then((value) => ({ ok: value.ok }))
-			.catch(() => ({ ok: false }));
+			.then(() => ({ status: Status.Success }))
+			.catch(() => ({ status: Status.Failure }));
 	}
 };

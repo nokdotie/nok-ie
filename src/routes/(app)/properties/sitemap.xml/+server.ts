@@ -1,9 +1,9 @@
-import { query, type Connection } from '$lib/GraphQl';
-import SiteMapXml from '$lib/seo/SiteMapXml';
-import PropertiesRoute from '../(list)/Route';
-import IdentifierRoute from '../[identifier]/Route';
-import MapRoute from '../map/Route';
-import SearchRoute from '../search/Route';
+import { query, type Connection } from '$lib/utils/GraphQl';
+import SiteMapXml from '$lib/components/seo/SiteMapXml';
+import PropertiesListRoute from '$routes/(app)/properties/(list)/Route';
+import PropertiesOneRoute from '$routes/(app)/properties/[identifier]/Route';
+import MapRoute from '$routes/(app)/properties/map/Route';
+import SearchRoute from '$routes/(app)/properties/search/Route';
 import { type GraphQlQueryResponse, graphQlQuery } from './GraphQl';
 
 async function getConnection(
@@ -36,10 +36,10 @@ async function getAllNodes(): Promise<{ propertyIdentifier: string }[]> {
 export async function GET({ url }) {
 	const nodes = await getAllNodes();
 
-	const first = `${url.origin}${PropertiesRoute(null, null)}`;
+	const first = `${url.origin}${PropertiesListRoute(null, null)}`;
 	const map = `${url.origin}${MapRoute(null)}`;
 	const search = `${url.origin}${SearchRoute(null)}`;
-	const pages = nodes.map((node) => `${url.origin}${IdentifierRoute(node)}`);
+	const pages = nodes.map((node) => `${url.origin}${PropertiesOneRoute(node.propertyIdentifier)}`);
 
 	return SiteMapXml.sitemap([first, map, search, ...pages]);
 }

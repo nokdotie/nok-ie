@@ -1,8 +1,8 @@
-import { SearchFilters } from '../search/SearchFilters';
+import { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
 
-export default (searchFilter: null | SearchFilters) => {
+export default (advertsSearch: null | AdvertsSearch) => {
 	const prefix = '/properties/map';
 
-	if (null === searchFilter) return prefix;
-	return `${prefix}?${SearchFilters.toUrlSearchParams(searchFilter).toString()}`;
+	if (null === advertsSearch) return prefix;
+	return `${prefix}?${AdvertsSearch.toUrlSearchParams(advertsSearch).toString()}`;
 };

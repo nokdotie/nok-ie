@@ -1,12 +1,104 @@
 <script lang="ts">
-	import Property from './Property.svelte';
-	import PropertyNotFound from './PropertyNotFound.svelte';
+	import Meta from '$lib/components/seo/Meta.svelte';
+	import AdvertJsonLd from '$lib/adverts/AdvertJsonLd.svelte';
+	import DocumentHeader from '$lib/components/document/DocumentHeader.svelte';
+	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
+	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
+	import AdvertImageWide from '$lib/adverts/identifier/AdvertImageWide.svelte';
+	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
+	import AdvertAdvertiser from '$lib/adverts/identifier/AdvertAdvertiser.svelte';
+	import AdvertDescription from '$lib/adverts/identifier/AdvertDescription.svelte';
+	import AdvertImagesGallery from '$lib/adverts/identifier/AdvertImagesGallery.svelte';
+	import ImagesModal from '$lib/components/images/ImagesModal.svelte';
+	import AdvertMap from '$lib/adverts/identifier/AdvertMap.svelte';
+	import ContainerCenterLarge from '$lib/components/containers/ContainerCenterLarge.svelte';
+	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
 
 	export let data;
+
+	const galleryIdentifier = 'gallery';
+	const scrollToGallery = () =>
+		document.getElementById(galleryIdentifier)?.scrollIntoView({ behavior: 'smooth' });
+	let selectedImageIndex: null | number = null;
 </script>
 
-{#if data.advert === null}
-	<PropertyNotFound />
-{:else}
-	<Property advert={data.advert} />
+<Meta
+	index={true}
+	title={data.response.data.advert.propertyAddress}
+	description={`Property for sale: ${data.response.data.advert.advertPriceInEur.toLocaleString(
+		'en-IE',
+		{
+			style: 'currency',
+			currency: 'EUR',
+			maximumFractionDigits: 0
+		}
+	)}, ${data.response.data.advert.propertySizeInSqtMtr.toLocaleString('en-IE', {
+		maximumFractionDigits: 0
+	})} m², ${data.response.data.advert.propertyBedroomsCount} bedrooms, ${
+		data.response.data.advert.propertyBathroomsCount
+	} bathrooms, ${data.response.data.advert.propertyDescription}`}
+	images={data.response.data.advert.propertyImageUrls}
+/>
+
+<AdvertJsonLd advert={data.response.data.advert} />
+
+<DocumentHeader />
+
+<AdvertImageWide
+	imageUrl={data.response.data.advert.propertyImageUrls[0]}
+	onBrowseGalleryButtonClick={0 === data.response.data.advert.propertyImageUrls.length
+		? null
+		: scrollToGallery}
+/>
+
+<ContainerCenterLarge
+	class="pb-[82px] sm:pb-[102px] md:pb-32 lg:pb-40 pt-[60px] md:pt-[67px] lg:pt-[84px]"
+>
+	<div class="flex flex-col lg:flex-row justify-between">
+		<div>
+			<div
+				class="text-neutral-800 text-[23px] sm:text-[28px] md:text-[32px] font-bold leading-[1.375em] mb-1.5"
+			>
+				{data.response.data.advert.advertPriceInEur.toLocaleString('en-IE', {
+					style: 'currency',
+					currency: 'EUR',
+					maximumFractionDigits: 0
+				})}
+			</div>
+			<h1
+				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
+			>
+				<MapMarkerIcon class="w-[18px]" />
+				<span class="flex-1 truncate">{data.response.data.advert.propertyAddress}</span>
+			</h1>
+			<AdvertPills advert={data.response.data.advert} />
+		</div>
+		<AdvertAdvertiser advert={data.response.data.advert} />
+	</div>
+</ContainerCenterLarge>
+
+{#if null !== data.response.data.advert.propertyDescription}
+	<HorizontalLine class="my-[40px] sm:my-[42px] md:my-[50px] lg:my-[60px]" />
+	<AdvertDescription description={data.response.data.advert.propertyDescription} />
 {/if}
+
+{#if 0 !== data.response.data.advert.propertyImageUrls.length}
+	<HorizontalLine class="my-[40px] sm:my-[42px] md:my-[50px] lg:my-[60px]" />
+	<div id={galleryIdentifier} />
+
+	<AdvertImagesGallery
+		imageUrls={data.response.data.advert.propertyImageUrls}
+		onImageClick={(index) => (selectedImageIndex = index)}
+	/>
+	<ImagesModal
+		imageUrls={data.response.data.advert.propertyImageUrls}
+		selectedIndex={selectedImageIndex}
+	/>
+{/if}
+
+{#if 0 !== data.response.data.advert.propertyCoordinates.latitude && 0 !== data.response.data.advert.propertyCoordinates.longitude}
+	<HorizontalLine class="my-[40px] sm:my-[42px] md:my-[50px] lg:my-[60px]" />
+	<AdvertMap coordinates={data.response.data.advert.propertyCoordinates} />
+{/if}
+
+<DocumentFooter />

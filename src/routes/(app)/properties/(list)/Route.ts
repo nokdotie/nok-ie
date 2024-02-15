@@ -1,11 +1,11 @@
-import { SearchFilters } from '../search/SearchFilters';
+import { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
 
-export default (searchFilter: null | SearchFilters, after: null | string) => {
+export default (advertsSearch: null | AdvertsSearch, after: null | string) => {
 	const prefix = '/properties';
 
-	if (null === searchFilter && null === after) return prefix;
-	if (null === searchFilter) return `${prefix}?after=${after}`;
-	if (null === after) return `${prefix}?${SearchFilters.toUrlSearchParams(searchFilter)}`;
+	if (null === advertsSearch && null === after) return prefix;
+	if (null === advertsSearch) return `${prefix}?after=${after}`;
+	if (null === after) return `${prefix}?${AdvertsSearch.toUrlSearchParams(advertsSearch)}`;
 
-	return `${prefix}?${SearchFilters.toUrlSearchParams(searchFilter).toString()}&after=${after}`;
+	return `${prefix}?${AdvertsSearch.toUrlSearchParams(advertsSearch).toString()}&after=${after}`;
 };
