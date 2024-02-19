@@ -55,18 +55,24 @@
 <ContainerCenterLarge class="pt-[60px] md:pt-[67px] lg:pt-[84px] mb-10">
 	<div class="flex flex-col lg:flex-row justify-between">
 		<div>
-			<div class="text-neutral-800 text-[23px] sm:text-[28px] md:text-[32px] font-bold leading-[1.375em] mb-1.5">
+			<div
+				class="text-neutral-800 text-[23px] sm:text-[28px] md:text-[32px] font-bold leading-[1.375em] mb-1.5"
+			>
 				{data.response.data.advert.advertPriceInEur.toLocaleString('en-IE', {
 					style: 'currency',
 					currency: 'EUR',
 					maximumFractionDigits: 0
 				})}
 			</div>
-			<h1 class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5">
+			<h1
+				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
+			>
 				<MapMarkerIcon class="w-[18px]" />
 				<span class="flex-1">{data.response.data.advert.propertyAddress}</span>
 			</h1>
-			<h1 class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5">
+			<h1
+				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
+			>
 				<HomeIcon class="w-[18px]" />
 				<span class="flex-1">{data.response.data.advert.propertyType}</span>
 			</h1>
