@@ -12,7 +12,7 @@
 	<Image
 		src={imageUrl || ''}
 		alt=""
-		class="w-full min-h-[415px] max-h-[515px] object-cover object-center"
+		class="w-full min-h-[415px] max-h-[615px] object-cover object-center"
 	/>
 
 	{#if null !== onBrowseGalleryButtonClick}

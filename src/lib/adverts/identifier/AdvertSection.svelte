@@ -3,7 +3,7 @@
 </script>
 
 <ContainerCenterLarge
-	class="w-full pb-[82px] sm:pb-[102px] md:pb-32 lg:pb-40 pt-[60px] md:pt-[67px] lg:pt-[84px]"
+	class="w-full pb-[12px] sm:pb-[22px] md:pb-12 lg:pb-10 pt-[10px] md:pt-[17px] lg:pt-[24px]"
 >
 	<h2
 		class="text-neutral-800 text-[23px] sm:text-[28px] md:text-[32px] font-bold leading-[1.375em] mb-10"

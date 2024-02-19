@@ -68,6 +68,7 @@
 			advertPriceInEur: number;
 			propertyIdentifier: string;
 			propertyAddress: string;
+			propertyType: string;
 			propertyCoordinates: { latitude: number; longitude: number };
 			propertyImageUrls: Array<string>;
 			propertyBedroomsCount: number;
