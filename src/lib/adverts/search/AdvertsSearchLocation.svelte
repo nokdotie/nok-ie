@@ -103,7 +103,6 @@
 		on:input={onInput}
 		on:blur={onBlur}
 		placeholder="County, town, street, ..."
-		required
 	/>
 
 	{#if 0 < predictions.length}
