@@ -28,7 +28,6 @@
 			predictions = await predict(location);
 		} else {
 			dirty = false;
-			predictions = [];
 
 			const result = await select(prediction);
 
