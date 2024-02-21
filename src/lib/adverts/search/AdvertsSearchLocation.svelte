@@ -17,7 +17,10 @@
 	const onInput = async () => {
 		dirty = true;
 
-		const prediction = predictions.find((prediction) => prediction.description === location);
+		const prediction = predictions.find(
+			(prediction) =>
+				prediction.description.trim().toLowerCase() === location?.trim()?.toLowerCase()
+		);
 
 		if (null === location || '' === location) {
 			predictions = [];
