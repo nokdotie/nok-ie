@@ -7,7 +7,7 @@
 	export let advert: Advert;
 </script>
 
-<div class="flex flex-wrap">
+<div class="{$$props.class} flex flex-wrap">
 	<AdvertPillSizeInSqtMtr sizeInSqtMtr={advert.propertySizeInSqtMtr} />
 	<AdvertPillBedroomsCount count={advert.propertyBedroomsCount} />
 	<AdvertPillBathroomsCount count={advert.propertyBathroomsCount} />
