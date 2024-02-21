@@ -1,23 +1,22 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getDefaultBounds, mapPromise } from '$lib/utils/GoogleMaps';
+	import { getDefaultBounds, mapPromise, markerPromise } from '$lib/utils/GoogleMaps';
 	import { page } from '$app/stores';
 	import { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
-	import { Adverts } from '$lib/adverts/Adverts';
+	import { Adverts, type Advert } from '$lib/adverts/Adverts';
 	import PropertiesOneRoute from '$routes/(app)/properties/[identifier]/Route';
 	import Meta from '$lib/components/seo/Meta.svelte';
 	import DocumentHeader from '$lib/components/document/DocumentHeader.svelte';
 	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
 	import FilterButton from '$lib/adverts/list/FilterButton.svelte';
 	import ListViewButton from '$lib/adverts/list/ListViewButton.svelte';
-	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
 	import Image from '$lib/components/images/Image.svelte';
-	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
-	import AdvertCard from '$lib/adverts/list/AdvertCard.svelte';
 
 	const advertsSearch = AdvertsSearch.fromUrlSearchParams($page.url.searchParams);
+
 	let clickedAdvert: null | Advert = null;
+	let clickedMarkerContent: null | HTMLDivElement = null;
 
 	const updateAdvertsSearch = (map: google.maps.Map) => {
 		const bounds = map.getBounds();
@@ -52,56 +51,56 @@
 			response.data.adverts.edges.map((edge) => edge.node)
 		);
 
-	const hideAdverts = (map: google.maps.Map, mutableMarkers: google.maps.Marker[]) =>
+	const hideAdverts = (
+		map: google.maps.Map,
+		mutableMarkers: google.maps.marker.AdvancedMarkerElement[]
+	) =>
 		mutableMarkers.forEach((marker, index) => {
-			const markerPosition = marker.getPosition();
 			if (
-				null !== markerPosition &&
-				undefined !== markerPosition &&
-				map.getBounds()?.contains(markerPosition)
+				null !== marker.position &&
+				undefined !== marker.position &&
+				map.getBounds()?.contains(marker.position)
 			)
 				return;
 
-			marker.setMap(null);
+			marker.map = null;
 			mutableMarkers.splice(index, 1);
 		});
 
 	const showAdverts = (
 		map: google.maps.Map,
-		mutableMarkers: google.maps.Marker[],
-		mutableInfoWindow: google.maps.InfoWindow,
-		adverts: {
-			advertPriceInEur: number;
-			propertyIdentifier: string;
-			propertyAddress: string;
-			propertyCoordinates: { latitude: number; longitude: number };
-			propertyImageUrls: Array<string>;
-			propertyBedroomsCount: number;
-			propertyBathroomsCount: number;
-			propertySizeInSqtMtr: number;
-		}[]
+		mutableMarkers: google.maps.marker.AdvancedMarkerElement[],
+		adverts: Advert[]
 	) =>
-		adverts.forEach((advert) => {
+		adverts.forEach(async (advert) => {
 			const latLng = new google.maps.LatLng(
 				advert.propertyCoordinates.latitude,
 				advert.propertyCoordinates.longitude
 			);
 
-			if (mutableMarkers.some((marker) => marker.getPosition()?.equals(latLng))) return;
+			if (mutableMarkers.some((marker) => marker.position === latLng)) return;
 
-			const marker = new google.maps.Marker({
+			const markerContent = document.createElement('div');
+			markerContent.className =
+				'bg-neutral-800 text-neutral-100 text-sm font-semibold leading-[1.143em] px-2.5 py-1.5 rounded-[20px]';
+			markerContent.textContent = advert.advertPriceInEur.toLocaleString('en-IE', {
+				style: 'currency',
+				currency: 'EUR',
+				maximumFractionDigits: 0
+			});
+
+			const marker = new (await markerPromise).AdvancedMarkerElement({
 				map,
-				position: latLng
+				position: latLng,
+				content: markerContent
 			});
 
 			marker.addListener('click', () => {
-				clickedAdvert = advert;
+				clickedMarkerContent?.classList?.remove('!bg-primary');
 
-				setTimeout(() => {
-					const content = document.getElementById('infoWindow')?.innerHTML;
-					mutableInfoWindow.setContent(content);
-					mutableInfoWindow.open(map, marker);
-				}, 1);
+				clickedAdvert = advert;
+				clickedMarkerContent = markerContent;
+				clickedMarkerContent?.classList?.add('!bg-primary');
 			});
 
 			mutableMarkers.push(marker);
@@ -110,11 +109,11 @@
 	onMount(async () => {
 		const map = (await mapPromise)(document.getElementById('map') as HTMLElement, {
 			disableDefaultUI: true,
-			gestureHandling: 'greedy'
+			gestureHandling: 'greedy',
+			mapId: 'f37cbb8cb4ea72ca'
 		});
 
-		const mutableMarkers: google.maps.Marker[] = [];
-		const mutableInfoWindow: google.maps.InfoWindow = new google.maps.InfoWindow();
+		const mutableMarkers: google.maps.marker.AdvancedMarkerElement[] = [];
 
 		const bounds = getInitialBounds();
 		map.fitBounds(bounds);
@@ -125,7 +124,7 @@
 			const adverts = await getAdverts(advertsSearch);
 
 			hideAdverts(map, mutableMarkers);
-			showAdverts(map, mutableMarkers, mutableInfoWindow, adverts);
+			showAdverts(map, mutableMarkers, adverts);
 		});
 	});
 </script>
@@ -140,41 +139,43 @@
 <DocumentHeader />
 
 <div class="relative">
-	<div id="map" class="h-[calc(100vh-80.5px)] md:h-[calc(100vh-84.5px)] w-full" />
+	<div
+		id="map"
+		class="h-[calc(100vh-80.1px)] sm:h-[calc(100vh-86.1px)] md:h-[calc(100vh-96.1px)] lg:h-[calc(100vh-104.1px)] w-full"
+	/>
 
 	<div class="absolute top-0 right-0 mt-[10px] mr-[10px] flex gap-x-2.5">
 		<ListViewButton {advertsSearch} />
 		<FilterButton {advertsSearch} />
 	</div>
-</div>
 
-{#if null !== clickedAdvert}
-	<div id="infoWindow" class="hidden">
-		<style>
-			#map div[role='dialog'] {
-				padding: 0;
-				background: transparent;
-				overflow: visible;
-				box-shadow: none;
-				max-width: none !important;
-			}
-			#map div[role='dialog'] > div {
-				overflow: hidden !important;
-			}
-			#map div[role='dialog'] > button {
-				background-color: #fff !important;
-				border-radius: 50%;
-				box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-				top: -12px;
-				right: -12px;
-				opacity: 1;
-			}
-		</style>
-
-		<div class="w-[250px] h-[360px]">
-			<AdvertCard advert={clickedAdvert} class="scale-75 origin-top-left w-[calc(100%/0.75)]" />
+	{#if null !== clickedAdvert}
+		<div class="absolute bottom-0 m-2">
+			<a
+				href={PropertiesOneRoute(clickedAdvert.propertyIdentifier)}
+				class="flex items-center bg-neutral-100 overflow-hidden rounded-xl"
+			>
+				<Image
+					src={clickedAdvert.propertyImageUrls[0]}
+					alt=""
+					class="object-cover object-center aspect-square w-[120px]"
+				/>
+				<div class="px-4 sm:px-6">
+					<div class="text-neutral-800 text-xl md:text-[22px] font-bold leading-[1.364em] mb-3">
+						{clickedAdvert.advertPriceInEur.toLocaleString('en-IE', {
+							style: 'currency',
+							currency: 'EUR',
+							maximumFractionDigits: 0
+						})}
+					</div>
+					<AdvertPills
+						advert={clickedAdvert}
+						class="origin-top-left scale-75 w-[calc(100%/0.75)] -mb-4"
+					/>
+				</div>
+			</a>
 		</div>
-	</div>
-{/if}
+	{/if}
+</div>
 
 <DocumentFooter />
