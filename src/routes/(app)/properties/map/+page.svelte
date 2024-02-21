@@ -10,8 +10,14 @@
 	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
 	import FilterButton from '$lib/adverts/list/FilterButton.svelte';
 	import ListViewButton from '$lib/adverts/list/ListViewButton.svelte';
+	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
+	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
+	import Image from '$lib/components/images/Image.svelte';
+	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
+	import AdvertCard from '$lib/adverts/list/AdvertCard.svelte';
 
 	const advertsSearch = AdvertsSearch.fromUrlSearchParams($page.url.searchParams);
+	let clickedAdvert: null | Advert = null;
 
 	const updateAdvertsSearch = (map: google.maps.Map) => {
 		const bounds = map.getBounds();
@@ -89,40 +95,13 @@
 			});
 
 			marker.addListener('click', () => {
-				mutableInfoWindow.setContent(`
-					<style>
-						#map div[role=dialog] { padding: 0; background: transparent; overflow: visible; box-shadow: none}
-						#map div[role=dialog] > div { overflow: hidden !important }
-						#map div[role=dialog]>button { background-color: #fff !important; border-radius: 50%; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); top: -12px; right: -12px; opacity: 1; }
-					</style>
+				clickedAdvert = advert;
 
-					<div
-						class="w-[250px] bg-neutral-100 shadow-400 overflow-hidden rounded-3xl"
-					>
-						<a href=${PropertiesOneRoute(advert.propertyIdentifier)}>
-							<img
-								src=${advert.propertyImageUrls[0]}
-								loading="eager"
-								alt=""
-								class="w-full object-cover object-center align-middle aspect-[4/3]"
-							/>
-							<div class="pt-2 p-3">
-								<div class="text-neutral-800 text-[22px] font-bold leading-[1.364em] mb-1">
-									${advert.advertPriceInEur.toLocaleString('en-IE', {
-										style: 'currency',
-										currency: 'EUR',
-										maximumFractionDigits: 0
-									})}
-								</div>
-								<h3 class="text-neutral-600 text-base font-medium leading-[1.125em] truncate">
-									${advert.propertyAddress}
-								</h3>
-							</div>
-						</a>
-					</div>
-				`);
-
-				mutableInfoWindow.open(map, marker);
+				setTimeout(() => {
+					const content = document.getElementById('infoWindow')?.innerHTML;
+					mutableInfoWindow.setContent(content);
+					mutableInfoWindow.open(map, marker);
+				}, 1);
 			});
 
 			mutableMarkers.push(marker);
@@ -168,5 +147,34 @@
 		<FilterButton {advertsSearch} />
 	</div>
 </div>
+
+{#if null !== clickedAdvert}
+	<div id="infoWindow" class="hidden">
+		<style>
+			#map div[role='dialog'] {
+				padding: 0;
+				background: transparent;
+				overflow: visible;
+				box-shadow: none;
+				max-width: none !important;
+			}
+			#map div[role='dialog'] > div {
+				overflow: hidden !important;
+			}
+			#map div[role='dialog'] > button {
+				background-color: #fff !important;
+				border-radius: 50%;
+				box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+				top: -12px;
+				right: -12px;
+				opacity: 1;
+			}
+		</style>
+
+		<div class="w-[250px] h-[360px]">
+			<AdvertCard advert={clickedAdvert} class="scale-75 origin-top-left w-[calc(100%/0.75)]" />
+		</div>
+	</div>
+{/if}
 
 <DocumentFooter />

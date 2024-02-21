@@ -10,7 +10,7 @@
 </script>
 
 <div
-	class="bg-neutral-100 shadow-400 transition duration-300 rounded-[20px] sm:rounded-3xl overflow-hidden hover:shadow-500"
+	class="{$$props.class} bg-neutral-100 shadow-400 transition duration-300 rounded-[20px] sm:rounded-3xl overflow-hidden hover:shadow-500"
 >
 	<a href={PropertiesOneRoute(advert.propertyIdentifier)}>
 		<Image
