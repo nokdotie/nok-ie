@@ -12,6 +12,8 @@
 	import ListViewButton from '$lib/adverts/list/ListViewButton.svelte';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
 	import Image from '$lib/components/images/Image.svelte';
+	import { priceInEur, priceInEurAbbrieviated } from '$lib/utils/Number';
+	import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
 	const advertsSearch = AdvertsSearch.fromUrlSearchParams($page.url.searchParams);
 
@@ -188,11 +190,7 @@
 				/>
 				<div class="px-4 sm:px-6">
 					<div class="text-neutral-800 text-xl md:text-[22px] font-bold leading-[1.364em] mb-3">
-						{clickedAdvert.advertPriceInEur.toLocaleString('en-IE', {
-							style: 'currency',
-							currency: 'EUR',
-							maximumFractionDigits: 0
-						})}
+						{priceInEur(clickedAdvert.advertPriceInEur)}
 					</div>
 					<AdvertPills
 						advert={clickedAdvert}
