@@ -67,29 +67,29 @@
 			mutableMarkers.splice(index, 1);
 		});
 
-	const showAdverts = (
+	const showAdverts = async (
 		map: google.maps.Map,
 		mutableMarkers: google.maps.marker.AdvancedMarkerElement[],
 		adverts: Advert[]
-	) =>
+	) => {
+		const markerPackage = await markerPromise
+
 		adverts.forEach(async (advert) => {
 			const latLng = new google.maps.LatLng(
 				advert.propertyCoordinates.latitude,
 				advert.propertyCoordinates.longitude
 			);
 
-			if (mutableMarkers.some((marker) => marker.position === latLng)) return;
+			if (mutableMarkers.some((marker) =>
+				marker.position?.lat === latLng.lat() &&
+				marker.position?.lng === latLng.lng())) return;
 
 			const markerContent = document.createElement('div');
+			markerContent.textContent = priceInEurAbbrieviated(advert.advertPriceInEur);
 			markerContent.className =
-				'bg-neutral-800 text-neutral-100 text-sm font-semibold leading-[1.143em] px-2.5 py-1.5 rounded-[20px]';
-			markerContent.textContent = advert.advertPriceInEur.toLocaleString('en-IE', {
-				style: 'currency',
-				currency: 'EUR',
-				maximumFractionDigits: 0
-			});
+				'bg-neutral-100 text-neutral-800 border border-neutral-800 text-sm font-semibold leading-[1.143em] px-2.5 py-1.5 rounded';
 
-			const marker = new (await markerPromise).AdvancedMarkerElement({
+			const marker = new markerPackage.AdvancedMarkerElement({
 				map,
 				position: latLng,
 				content: markerContent
@@ -97,14 +97,40 @@
 
 			marker.addListener('click', () => {
 				clickedMarkerContent?.classList?.remove('!bg-primary');
+				clickedMarkerContent?.classList?.remove('!text-neutral-100');
+				clickedMarkerContent?.classList?.remove('!border-primary');
 
 				clickedAdvert = advert;
 				clickedMarkerContent = markerContent;
 				clickedMarkerContent?.classList?.add('!bg-primary');
+				clickedMarkerContent?.classList?.add('!text-neutral-100');
+				clickedMarkerContent?.classList?.add('!border-primary');
 			});
 
 			mutableMarkers.push(marker);
 		});
+
+		new MarkerClusterer({
+			markers: mutableMarkers,
+			map,
+			renderer: {
+				render: ({ count, position }) => {
+					const markerContent = document.createElement('div');
+					markerContent.textContent = `${count}`
+					markerContent.className =
+						'bg-neutral-800 text-neutral-100 text-lg font-semibold leading-[1.143em] px-2.5 py-1.5 rounded-full';
+
+
+					return new markerPackage.AdvancedMarkerElement({
+						content: markerContent,
+					position,
+					// adjust zIndex to be above other markers
+					zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+				})
+				}
+		}
+		});
+	}
 
 	onMount(async () => {
 		const map = (await mapPromise)(document.getElementById('map') as HTMLElement, {
