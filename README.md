@@ -38,3 +38,29 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+Before creating a PR:
+
+- Format the code using command:
+
+```bash
+npm run format
+```
+
+- Lint the code using command:
+
+```bash
+npm run lint
+```
+
+- Check the code formatting using command:
+
+```bash
+npm run format && npm run lint && npm run check
+```
+
+Or all together:
+
+```bash
+npm run build
+```

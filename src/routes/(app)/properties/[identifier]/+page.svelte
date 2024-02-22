@@ -4,6 +4,7 @@
 	import DocumentHeader from '$lib/components/document/DocumentHeader.svelte';
 	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
 	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
+	import HomeIcon from '$lib/components/icons/HomeIcon.svelte';
 	import AdvertImageWide from '$lib/adverts/identifier/AdvertImageWide.svelte';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
 	import AdvertAdvertiser from '$lib/adverts/identifier/AdvertAdvertiser.svelte';
@@ -51,9 +52,7 @@
 		: scrollToGallery}
 />
 
-<ContainerCenterLarge
-	class="pb-[82px] sm:pb-[102px] md:pb-32 lg:pb-40 pt-[60px] md:pt-[67px] lg:pt-[84px]"
->
+<ContainerCenterLarge class="pt-[60px] md:pt-[67px] lg:pt-[84px] mb-10">
 	<div class="flex flex-col lg:flex-row justify-between">
 		<div>
 			<div
@@ -69,8 +68,14 @@
 				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
 			>
 				<MapMarkerIcon class="w-[18px]" />
-				<span class="flex-1 truncate">{data.response.data.advert.propertyAddress}</span>
+				<span class="flex-1">{data.response.data.advert.propertyAddress}</span>
 			</h1>
+			<div
+				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
+			>
+				<HomeIcon class="w-[18px]" />
+				<span class="flex-1">{data.response.data.advert.propertyType}</span>
+			</div>
 			<AdvertPills advert={data.response.data.advert} />
 		</div>
 		<AdvertAdvertiser advert={data.response.data.advert} />
@@ -78,12 +83,12 @@
 </ContainerCenterLarge>
 
 {#if null !== data.response.data.advert.propertyDescription}
-	<HorizontalLine class="my-[40px] sm:my-[42px] md:my-[50px] lg:my-[60px]" />
+	<HorizontalLine class="my-[10px] sm:my-[12px] md:my-[20px] lg:my-[30px]" />
 	<AdvertDescription description={data.response.data.advert.propertyDescription} />
 {/if}
 
 {#if 0 !== data.response.data.advert.propertyImageUrls.length}
-	<HorizontalLine class="my-[40px] sm:my-[42px] md:my-[50px] lg:my-[60px]" />
+	<HorizontalLine class="my-[10px] sm:my-[12px] md:my-[20px] lg:my-[30px]" />
 	<div id={galleryIdentifier} />
 
 	<AdvertImagesGallery
@@ -97,7 +102,7 @@
 {/if}
 
 {#if 0 !== data.response.data.advert.propertyCoordinates.latitude && 0 !== data.response.data.advert.propertyCoordinates.longitude}
-	<HorizontalLine class="my-[40px] sm:my-[42px] md:my-[50px] lg:my-[60px]" />
+	<HorizontalLine class="my-[10px] sm:my-[12px] md:my-[20px] lg:my-[30px]" />
 	<AdvertMap coordinates={data.response.data.advert.propertyCoordinates} />
 {/if}
 

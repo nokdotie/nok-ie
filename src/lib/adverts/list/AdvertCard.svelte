@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Advert } from '$lib/adverts/Adverts';
 	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
+	import HomeIcon from '$lib/components/icons/HomeIcon.svelte';
 	import PropertiesOneRoute from '$routes/(app)/properties/[identifier]/Route';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
 	import Image from '$lib/components/images/Image.svelte';
@@ -26,14 +27,23 @@
 					maximumFractionDigits: 0
 				})}
 			</div>
-			<h3 class="flex flex-row items-center gap-x-2">
+			<h3 class="flex flex-row items-center gap-x-2 mb-2">
 				<MapMarkerIcon class="w-[15px] text-neutral-600" />
 
 				<div class="flex-1 text-neutral-600 text-base font-medium leading-[1.125em] truncate">
 					{advert.propertyAddress}
 				</div>
 			</h3>
-			<HorizontalLine class="mt-9 mb-[26px]" />
+			<h3 class="flex flex-row items-center gap-x-2 mb-2 min-h-[15px]">
+				{#if advert.propertyType != 'Unknown'}
+					<HomeIcon class="w-[15px] text-neutral-600" />
+
+					<div class="flex-1 text-neutral-600 text-base font-medium leading-[1.125em]">
+						{advert.propertyType}
+					</div>
+				{/if}
+			</h3>
+			<HorizontalLine class="mt-5 mb-3" />
 			<AdvertPills {advert} />
 		</div>
 	</a>

@@ -5,6 +5,7 @@ export type Advert = {
 	propertyIdentifier: string;
 	advertPriceInEur: number;
 	propertyDescription: string;
+	propertyType: string;
 	propertyAddress: string;
 	propertyCoordinates: {
 		latitude: number;
@@ -58,6 +59,7 @@ const graphQlAdvertFragment = `
 	advertPriceInEur
 	propertyDescription
 	propertyAddress
+	propertyType
 	propertyCoordinates {
 		latitude
 		longitude
