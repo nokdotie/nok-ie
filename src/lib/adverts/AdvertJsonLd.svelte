@@ -6,7 +6,6 @@
 		advertPriceInEur: number;
 		propertyDescription: string;
 		propertyAddress: string;
-		propertyType: string;
 		propertyCoordinates: {
 			latitude: number;
 			longitude: number;

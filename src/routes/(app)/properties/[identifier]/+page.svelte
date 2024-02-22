@@ -70,12 +70,12 @@
 				<MapMarkerIcon class="w-[18px]" />
 				<span class="flex-1">{data.response.data.advert.propertyAddress}</span>
 			</h1>
-			<h1
+			<div
 				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
 			>
 				<HomeIcon class="w-[18px]" />
 				<span class="flex-1">{data.response.data.advert.propertyType}</span>
-			</h1>
+			</div>
 			<AdvertPills advert={data.response.data.advert} />
 		</div>
 		<AdvertAdvertiser advert={data.response.data.advert} />
