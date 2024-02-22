@@ -10,3 +10,19 @@ export const Float = {
 		return isNaN(parsed) ? null : parsed;
 	}
 };
+
+export const priceInEur = (value: number) =>
+	value.toLocaleString('en-IE', {
+		style: 'currency',
+		currency: 'EUR',
+		minimumFractionDigits: 0
+	});
+
+export const priceInEurAbbrieviated = (value: number) =>
+	value.toLocaleString('en-IE', {
+		style: 'currency',
+		currency: 'EUR',
+		notation: "compact",
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 1
+	});
