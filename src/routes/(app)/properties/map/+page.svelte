@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getDefaultBounds, mapPromise, markerPromise } from '$lib/utils/GoogleMaps';
+	import { getDefaultBounds, mapPromise } from '$lib/utils/GoogleMaps';
 	import { page } from '$app/stores';
 	import { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
 	import { Adverts, type Advert } from '$lib/adverts/Adverts';
@@ -12,13 +12,15 @@
 	import ListViewButton from '$lib/adverts/list/ListViewButton.svelte';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
 	import Image from '$lib/components/images/Image.svelte';
-	import { priceInEur, priceInEurAbbrieviated } from '$lib/utils/Number';
-	import { MarkerClusterer } from "@googlemaps/markerclusterer";
+	import { priceInEur } from '$lib/utils/Number';
+	import { AdvertMapMarker } from '$lib/adverts/map/AdvertMapMarker';
+	import { AdvertMapMarkerCluster } from '$lib/adverts/map/AdvertMapMarkerCluster';
+	import type { MarkerClusterer } from '@googlemaps/markerclusterer';
 
 	const advertsSearch = AdvertsSearch.fromUrlSearchParams($page.url.searchParams);
 
 	let clickedAdvert: null | Advert = null;
-	let clickedMarkerContent: null | HTMLDivElement = null;
+	let clickedMarker: null | google.maps.marker.AdvancedMarkerElement = null;
 
 	const updateAdvertsSearch = (map: google.maps.Map) => {
 		const bounds = map.getBounds();
@@ -53,86 +55,45 @@
 			response.data.adverts.edges.map((edge) => edge.node)
 		);
 
-	const hideAdverts = (
-		map: google.maps.Map,
-		mutableMarkers: google.maps.marker.AdvancedMarkerElement[]
-	) =>
-		mutableMarkers.forEach((marker, index) => {
-			if (
-				null !== marker.position &&
-				undefined !== marker.position &&
-				map.getBounds()?.contains(marker.position)
-			)
-				return;
+	const getMarker = (advert: Advert) => {
+		const marker = AdvertMapMarker.fromAdvert(advert);
 
-			marker.map = null;
-			mutableMarkers.splice(index, 1);
+		marker.addListener('click', () => {
+			if (null !== clickedMarker) AdvertMapMarker.deactivate(clickedMarker);
+
+			clickedAdvert = advert;
+			clickedMarker = marker;
+			AdvertMapMarker.activate(clickedMarker);
 		});
 
-	const showAdverts = async (
+		return marker;
+	};
+
+	const hideMarkers = (
 		map: google.maps.Map,
-		mutableMarkers: google.maps.marker.AdvancedMarkerElement[],
-		adverts: Advert[]
+		markersCache: google.maps.marker.AdvancedMarkerElement[],
+		cluster: MarkerClusterer
 	) => {
-		const markerPackage = await markerPromise
+		markersCache.forEach((marker, index) => {
+			if (AdvertMapMarker.isInBounds(map, marker)) return;
 
-		adverts.forEach(async (advert) => {
-			const latLng = new google.maps.LatLng(
-				advert.propertyCoordinates.latitude,
-				advert.propertyCoordinates.longitude
-			);
-
-			if (mutableMarkers.some((marker) =>
-				marker.position?.lat === latLng.lat() &&
-				marker.position?.lng === latLng.lng())) return;
-
-			const markerContent = document.createElement('div');
-			markerContent.textContent = priceInEurAbbrieviated(advert.advertPriceInEur);
-			markerContent.className =
-				'bg-neutral-100 text-neutral-800 border border-neutral-800 text-sm font-semibold leading-[1.143em] px-2.5 py-1.5 rounded';
-
-			const marker = new markerPackage.AdvancedMarkerElement({
-				map,
-				position: latLng,
-				content: markerContent
-			});
-
-			marker.addListener('click', () => {
-				clickedMarkerContent?.classList?.remove('!bg-primary');
-				clickedMarkerContent?.classList?.remove('!text-neutral-100');
-				clickedMarkerContent?.classList?.remove('!border-primary');
-
-				clickedAdvert = advert;
-				clickedMarkerContent = markerContent;
-				clickedMarkerContent?.classList?.add('!bg-primary');
-				clickedMarkerContent?.classList?.add('!text-neutral-100');
-				clickedMarkerContent?.classList?.add('!border-primary');
-			});
-
-			mutableMarkers.push(marker);
+			markersCache.splice(index, 1);
+			cluster.removeMarker(marker);
 		});
+	};
 
-		new MarkerClusterer({
-			markers: mutableMarkers,
-			map,
-			renderer: {
-				render: ({ count, position }) => {
-					const markerContent = document.createElement('div');
-					markerContent.textContent = `${count}`
-					markerContent.className =
-						'bg-neutral-800 text-neutral-100 text-lg font-semibold leading-[1.143em] px-2.5 py-1.5 rounded-full';
+	const showMarkers = async (
+		markersCache: google.maps.marker.AdvancedMarkerElement[],
+		cluster: MarkerClusterer,
+		newMarkers: google.maps.marker.AdvancedMarkerElement[]
+	) => {
+		newMarkers.forEach(async (marker) => {
+			if (markersCache.some((existing) => AdvertMapMarker.equals(existing, marker))) return;
 
-
-					return new markerPackage.AdvancedMarkerElement({
-						content: markerContent,
-					position,
-					// adjust zIndex to be above other markers
-					zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
-				})
-				}
-		}
+			markersCache.push(marker);
+			cluster.addMarker(marker);
 		});
-	}
+	};
 
 	onMount(async () => {
 		const map = (await mapPromise)(document.getElementById('map') as HTMLElement, {
@@ -141,18 +102,22 @@
 			mapId: 'f37cbb8cb4ea72ca'
 		});
 
-		const mutableMarkers: google.maps.marker.AdvancedMarkerElement[] = [];
+		const cluster = AdvertMapMarkerCluster.new();
+		cluster.setMap(map);
+
+		const markersCache: google.maps.marker.AdvancedMarkerElement[] = [];
 
 		const bounds = getInitialBounds();
 		map.fitBounds(bounds);
 
 		map.addListener('idle', async () => {
+			hideMarkers(map, markersCache, cluster);
+
 			updateAdvertsSearch(map);
-
 			const adverts = await getAdverts(advertsSearch);
+			const newMarkers = adverts.map(getMarker);
 
-			hideAdverts(map, mutableMarkers);
-			showAdverts(map, mutableMarkers, adverts);
+			showMarkers(markersCache, cluster, newMarkers);
 		});
 	});
 </script>
