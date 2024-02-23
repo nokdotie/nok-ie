@@ -22,7 +22,7 @@ export const priceInEurAbbrieviated = (value: number) =>
 	value.toLocaleString('en-IE', {
 		style: 'currency',
 		currency: 'EUR',
-		notation: "compact",
+		notation: 'compact',
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 1
 	});
