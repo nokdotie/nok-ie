@@ -159,7 +159,7 @@
 					</div>
 					<AdvertPills
 						advert={clickedAdvert}
-						class="origin-top-left scale-75 w-[calc(100%/0.75)] -mb-4"
+						class="origin-top-left scale-75 sm:scale-90 md:scale-100 w-[calc(100%/0.75)] sm:w-[calc(100%/0.90)] md:w-auto -mb-4"
 					/>
 				</div>
 			</a>
