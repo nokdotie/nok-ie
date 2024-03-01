@@ -1,10 +1,12 @@
 import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
 
+const className =
+	'bg-neutral-800 text-neutral-100 text-xs font-semibold px-2.5 py-1.5 rounded-full flex justify-center gap-x-[1px] items-center w-[30px] h-[30px]';
+
 const content = (count: number) => {
 	const div = document.createElement('div');
 	div.innerHTML = count < 10 ? `${count}` : `<div>9</div><div>+</div>`;
-	div.className =
-		'bg-neutral-800 text-neutral-100 text-xs font-semibold px-2.5 py-1.5 rounded-full flex justify-center gap-x-[1px] items-center w-[30px] h-[30px]';
+	div.className = className;
 
 	return div;
 };

@@ -89,7 +89,7 @@
 		newMarkers: google.maps.marker.AdvancedMarkerElement[]
 	) => {
 		newMarkers.forEach(async (marker) => {
-			if (markersCache.some((existing) => AdvertMapMarker.equals(existing, marker))) return;
+			if (markersCache.some((existing) => AdvertMapMarker.isTooClose(existing, marker))) return;
 
 			markersCache.push(marker);
 			cluster.addMarker(marker);

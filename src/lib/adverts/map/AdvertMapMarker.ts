@@ -16,7 +16,9 @@ const content = (advert: Advert) => {
 	return div;
 };
 
-const simplify = (value: number) => value.toPrecision(5).slice(0, -1);
+const distance = (a: google.maps.LatLng, b: google.maps.LatLng) =>
+	Math.sqrt(Math.pow(a.lat() - b.lat(), 2) + Math.pow(a.lng() - b.lng(), 2));
+
 const latLngFromMarker = (marker: google.maps.marker.AdvancedMarkerElement) => {
 	if (typeof marker.position?.lat === 'number' && typeof marker.position?.lng === 'number')
 		return new google.maps.LatLng(marker.position.lat, marker.position.lng);
@@ -40,17 +42,14 @@ export const AdvertMapMarker = {
 		const div = marker.content as HTMLDivElement;
 		div.classList.remove(...activeClassName);
 	},
-	equals: (
+	isTooClose: (
 		a: google.maps.marker.AdvancedMarkerElement,
 		b: google.maps.marker.AdvancedMarkerElement
 	) => {
 		const aLatLng = latLngFromMarker(a) ?? new google.maps.LatLng(0, 0);
 		const bLatLng = latLngFromMarker(b) ?? new google.maps.LatLng(0, 0);
 
-		return (
-			simplify(aLatLng?.lat()) === simplify(bLatLng?.lat()) &&
-			simplify(aLatLng?.lng()) === simplify(bLatLng?.lng())
-		);
+		return distance(aLatLng, bLatLng) < 0.0001;
 	},
 	isInBounds: (map: google.maps.Map, marker: google.maps.marker.AdvancedMarkerElement) =>
 		null !== marker.position &&
