@@ -151,7 +151,7 @@
 				<Image
 					src={clickedAdvert.propertyImageUrls[0]}
 					alt=""
-					class="object-cover object-center aspect-square w-[120px]"
+					class="object-cover object-center aspect-square w-[120px] sm:w-[130px] md:w-[150px]"
 				/>
 				<div class="px-4 sm:px-6">
 					<div class="text-neutral-800 text-xl md:text-[22px] font-bold leading-[1.364em] mb-3">
