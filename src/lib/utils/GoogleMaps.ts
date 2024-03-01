@@ -5,6 +5,7 @@ export let autoCompleteServicePromise: Promise<google.maps.places.AutocompleteSe
 export let mapPromise: Promise<
 	(mapDiv: HTMLElement, opts: google.maps.MapOptions | undefined) => google.maps.Map
 >;
+export let markerPromise: Promise<google.maps.MarkerLibrary>;
 
 export let getDefaultBounds: () => google.maps.LatLngBounds;
 
@@ -33,6 +34,8 @@ if (browser) {
 			(mapDiv: HTMLElement, opts: google.maps.MapOptions | undefined) =>
 				new Map(mapDiv, opts)
 	);
+
+	markerPromise = loaderPromise.then((loader) => loader.importLibrary('marker'));
 
 	getDefaultBounds = () =>
 		new google.maps.LatLngBounds(

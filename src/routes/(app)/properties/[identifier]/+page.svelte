@@ -14,6 +14,7 @@
 	import AdvertMap from '$lib/adverts/identifier/AdvertMap.svelte';
 	import ContainerCenterLarge from '$lib/components/containers/ContainerCenterLarge.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
+	import { priceInEur, priceInEurAbbrieviated } from '$lib/utils/Number.js';
 
 	export let data;
 
@@ -26,13 +27,8 @@
 <Meta
 	index={true}
 	title={data.response.data.advert.propertyAddress}
-	description={`Property for sale: ${data.response.data.advert.advertPriceInEur.toLocaleString(
-		'en-IE',
-		{
-			style: 'currency',
-			currency: 'EUR',
-			maximumFractionDigits: 0
-		}
+	description={`Property for sale: ${priceInEurAbbrieviated(
+		data.response.data.advert.advertPriceInEur
 	)}, ${data.response.data.advert.propertySizeInSqtMtr.toLocaleString('en-IE', {
 		maximumFractionDigits: 0
 	})} m², ${data.response.data.advert.propertyBedroomsCount} bedrooms, ${
@@ -58,11 +54,7 @@
 			<div
 				class="text-neutral-800 text-[23px] sm:text-[28px] md:text-[32px] font-bold leading-[1.375em] mb-1.5"
 			>
-				{data.response.data.advert.advertPriceInEur.toLocaleString('en-IE', {
-					style: 'currency',
-					currency: 'EUR',
-					maximumFractionDigits: 0
-				})}
+				{priceInEur(data.response.data.advert.advertPriceInEur)}
 			</div>
 			<h1
 				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"

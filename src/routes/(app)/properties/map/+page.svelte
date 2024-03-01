@@ -3,15 +3,25 @@
 	import { getDefaultBounds, mapPromise } from '$lib/utils/GoogleMaps';
 	import { page } from '$app/stores';
 	import { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
-	import { Adverts } from '$lib/adverts/Adverts';
+	import { Adverts, type Advert } from '$lib/adverts/Adverts';
 	import PropertiesOneRoute from '$routes/(app)/properties/[identifier]/Route';
 	import Meta from '$lib/components/seo/Meta.svelte';
 	import DocumentHeader from '$lib/components/document/DocumentHeader.svelte';
 	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
 	import FilterButton from '$lib/adverts/list/FilterButton.svelte';
 	import ListViewButton from '$lib/adverts/list/ListViewButton.svelte';
+	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
+	import Image from '$lib/components/images/Image.svelte';
+	import { priceInEur } from '$lib/utils/Number';
+	import { AdvertMapMarker } from '$lib/adverts/map/AdvertMapMarker';
+	import { AdvertMapMarkerCluster } from '$lib/adverts/map/AdvertMapMarkerCluster';
+	import type { MarkerClusterer } from '@googlemaps/markerclusterer';
+	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
 
 	const advertsSearch = AdvertsSearch.fromUrlSearchParams($page.url.searchParams);
+
+	let clickedAdvert: null | Advert = null;
+	let clickedMarker: null | google.maps.marker.AdvancedMarkerElement = null;
 
 	const updateAdvertsSearch = (map: google.maps.Map) => {
 		const bounds = map.getBounds();
@@ -46,107 +56,69 @@
 			response.data.adverts.edges.map((edge) => edge.node)
 		);
 
-	const hideAdverts = (map: google.maps.Map, mutableMarkers: google.maps.Marker[]) =>
-		mutableMarkers.forEach((marker, index) => {
-			const markerPosition = marker.getPosition();
-			if (
-				null !== markerPosition &&
-				undefined !== markerPosition &&
-				map.getBounds()?.contains(markerPosition)
-			)
-				return;
+	const getMarker = (advert: Advert) => {
+		const marker = AdvertMapMarker.fromAdvert(advert);
 
-			marker.setMap(null);
-			mutableMarkers.splice(index, 1);
+		marker.addListener('click', () => {
+			if (null !== clickedMarker) AdvertMapMarker.deactivate(clickedMarker);
+
+			clickedAdvert = advert;
+			clickedMarker = marker;
+			AdvertMapMarker.activate(clickedMarker);
 		});
 
-	const showAdverts = (
+		return marker;
+	};
+
+	const hideMarkers = (
 		map: google.maps.Map,
-		mutableMarkers: google.maps.Marker[],
-		mutableInfoWindow: google.maps.InfoWindow,
-		adverts: {
-			advertPriceInEur: number;
-			propertyIdentifier: string;
-			propertyAddress: string;
-			propertyCoordinates: { latitude: number; longitude: number };
-			propertyImageUrls: Array<string>;
-			propertyBedroomsCount: number;
-			propertyBathroomsCount: number;
-			propertySizeInSqtMtr: number;
-		}[]
-	) =>
-		adverts.forEach((advert) => {
-			const latLng = new google.maps.LatLng(
-				advert.propertyCoordinates.latitude,
-				advert.propertyCoordinates.longitude
-			);
+		markersCache: google.maps.marker.AdvancedMarkerElement[],
+		cluster: MarkerClusterer
+	) => {
+		markersCache.forEach((marker, index) => {
+			if (AdvertMapMarker.isInBounds(map, marker)) return;
 
-			if (mutableMarkers.some((marker) => marker.getPosition()?.equals(latLng))) return;
-
-			const marker = new google.maps.Marker({
-				map,
-				position: latLng
-			});
-
-			marker.addListener('click', () => {
-				mutableInfoWindow.setContent(`
-					<style>
-						#map div[role=dialog] { padding: 0; background: transparent; overflow: visible; box-shadow: none}
-						#map div[role=dialog] > div { overflow: hidden !important }
-						#map div[role=dialog]>button { background-color: #fff !important; border-radius: 50%; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); top: -12px; right: -12px; opacity: 1; }
-					</style>
-
-					<div
-						class="w-[250px] bg-neutral-100 shadow-400 overflow-hidden rounded-3xl"
-					>
-						<a href=${PropertiesOneRoute(advert.propertyIdentifier)}>
-							<img
-								src=${advert.propertyImageUrls[0]}
-								loading="eager"
-								alt=""
-								class="w-full object-cover object-center align-middle aspect-[4/3]"
-							/>
-							<div class="pt-2 p-3">
-								<div class="text-neutral-800 text-[22px] font-bold leading-[1.364em] mb-1">
-									${advert.advertPriceInEur.toLocaleString('en-IE', {
-										style: 'currency',
-										currency: 'EUR',
-										maximumFractionDigits: 0
-									})}
-								</div>
-								<h3 class="text-neutral-600 text-base font-medium leading-[1.125em] truncate">
-									${advert.propertyAddress}
-								</h3>
-							</div>
-						</a>
-					</div>
-				`);
-
-				mutableInfoWindow.open(map, marker);
-			});
-
-			mutableMarkers.push(marker);
+			markersCache.splice(index, 1);
+			cluster.removeMarker(marker);
 		});
+	};
+
+	const showMarkers = async (
+		markersCache: google.maps.marker.AdvancedMarkerElement[],
+		cluster: MarkerClusterer,
+		newMarkers: google.maps.marker.AdvancedMarkerElement[]
+	) => {
+		newMarkers.forEach(async (marker) => {
+			if (markersCache.some((existing) => AdvertMapMarker.isTooClose(existing, marker))) return;
+
+			markersCache.push(marker);
+			cluster.addMarker(marker);
+		});
+	};
 
 	onMount(async () => {
 		const map = (await mapPromise)(document.getElementById('map') as HTMLElement, {
 			disableDefaultUI: true,
-			gestureHandling: 'greedy'
+			gestureHandling: 'greedy',
+			mapId: 'f37cbb8cb4ea72ca'
 		});
 
-		const mutableMarkers: google.maps.Marker[] = [];
-		const mutableInfoWindow: google.maps.InfoWindow = new google.maps.InfoWindow();
+		const cluster = AdvertMapMarkerCluster.new();
+		cluster.setMap(map);
+
+		const markersCache: google.maps.marker.AdvancedMarkerElement[] = [];
 
 		const bounds = getInitialBounds();
 		map.fitBounds(bounds);
 
 		map.addListener('idle', async () => {
+			hideMarkers(map, markersCache, cluster);
+
 			updateAdvertsSearch(map);
-
 			const adverts = await getAdverts(advertsSearch);
+			const newMarkers = adverts.map(getMarker);
 
-			hideAdverts(map, mutableMarkers);
-			showAdverts(map, mutableMarkers, mutableInfoWindow, adverts);
+			showMarkers(markersCache, cluster, newMarkers);
 		});
 	});
 </script>
@@ -161,12 +133,46 @@
 <DocumentHeader />
 
 <div class="relative">
-	<div id="map" class="h-[calc(100vh-80.5px)] md:h-[calc(100vh-84.5px)] w-full" />
+	<div
+		id="map"
+		class="h-[calc(100vh-80.1px)] sm:h-[calc(100vh-86.1px)] md:h-[calc(100vh-96.1px)] lg:h-[calc(100vh-104.1px)] w-full"
+	/>
 
 	<div class="absolute top-0 right-0 mt-[10px] mr-[10px] flex gap-x-2.5">
 		<ListViewButton {advertsSearch} />
 		<FilterButton {advertsSearch} />
 	</div>
+
+	{#if null !== clickedAdvert}
+		<div class="absolute bottom-0 p-2 w-full max-w-xl">
+			<a
+				href={PropertiesOneRoute(clickedAdvert.propertyIdentifier)}
+				class="flex items-center bg-neutral-100 overflow-hidden rounded-xl"
+			>
+				<Image
+					src={clickedAdvert.propertyImageUrls[0]}
+					alt=""
+					class="object-cover object-center aspect-square w-[120px] sm:w-[130px]"
+				/>
+				<div class="px-3 sm:px-6 overflow-hidden">
+					<div class="text-neutral-800 text-lg font-bold leading-[1.364em] mb-1">
+						{priceInEur(clickedAdvert.advertPriceInEur)}
+					</div>
+					<div class="flex flex-row items-center gap-x-2 mb-3">
+						<MapMarkerIcon class="w-[12px] text-neutral-600" />
+
+						<div class="flex-1 text-neutral-600 text-sm font-medium leading-[1.125em] truncate">
+							{clickedAdvert.propertyAddress}
+						</div>
+					</div>
+					<AdvertPills
+						advert={clickedAdvert}
+						class="origin-top-left scale-75 sm:scale-90 w-[calc(100%/0.75)] sm:w-[calc(100%/0.90)] -mb-4 flex-nowrap"
+					/>
+				</div>
+			</a>
+		</div>
+	{/if}
 </div>
 
 <DocumentFooter />
