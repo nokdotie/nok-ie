@@ -1,13 +1,8 @@
-<script>
-  export let options = [];
-  export let display_func = a => a;
-  export let index = 0;
-  export let value;
-
-  $: {
-    value = options[index];
-    console.log(value);
-  }
+<script lang="ts">
+  export let id: string;
+  export let options: {label: string, value: string}[];
+  export let placeholder = '';
+  export let value: string | null;
 
   const defaultClass = [
   	'bg-neutral-300',
@@ -26,16 +21,19 @@
   	'focus:border-primary',
   	'transition',
   	'duration-300',
-  	'placeholder:text-neutral-600'
   ].join(' ');
 
 </script>
 
 <select
-    bind:value={index}
+	{id}
+	name={id}
+    bind:value={value}
     class="{$$props.class} {defaultClass}"
+	class:!text-neutral-600={value === null}
     >
-  {#each options as option, i}
-    <option value={i}>{display_func(option)}</option>
+    <option value={null} disabled>{placeholder}</option>
+  {#each options as {value, label}}
+    <option value={value}>{label}</option>
   {/each}
 </select>
