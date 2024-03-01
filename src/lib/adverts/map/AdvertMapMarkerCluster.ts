@@ -2,9 +2,9 @@ import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
 
 const content = (count: number) => {
 	const div = document.createElement('div');
-	div.textContent = `${count}`;
+	div.innerHTML = count < 10 ? `${count}` : `<div>9</div><div>+</div>`;
 	div.className =
-		'bg-neutral-800 text-neutral-100 text-lg font-semibold leading-[1.143em] px-2.5 py-1.5 rounded-full';
+		'bg-neutral-800 text-neutral-100 text-xs font-semibold px-2.5 py-1.5 rounded-full flex justify-center gap-x-[1px] items-center w-[30px] h-[30px]';
 
 	return div;
 };
