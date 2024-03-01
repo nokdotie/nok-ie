@@ -1,7 +1,8 @@
 import type { Advert } from '$lib/adverts/Adverts';
 import { priceInEurAbbrieviated } from '$lib/utils/Number';
 
-const className = 'bg-neutral-100 text-neutral-800 border border-neutral-800 text-sm font-semibold leading-[1.143em] px-1.5 py-1 rounded';
+const className =
+	'bg-neutral-100 text-neutral-800 border border-neutral-800 text-sm font-semibold leading-[1.143em] px-1.5 py-1 rounded';
 const activeClassName = ['!bg-primary', '!border-primary', '!text-neutral-100'];
 
 const position = (advert: Advert) =>
@@ -10,7 +11,7 @@ const position = (advert: Advert) =>
 const content = (advert: Advert) => {
 	const div = document.createElement('div');
 	div.textContent = priceInEurAbbrieviated(advert.advertPriceInEur);
-	div.className = className
+	div.className = className;
 
 	return div;
 };
@@ -33,11 +34,11 @@ export const AdvertMapMarker = {
 	},
 	activate: (marker: google.maps.marker.AdvancedMarkerElement) => {
 		const div = marker.content as HTMLDivElement;
-		div.classList.add(...activeClassName)
+		div.classList.add(...activeClassName);
 	},
 	deactivate: (marker: google.maps.marker.AdvancedMarkerElement) => {
 		const div = marker.content as HTMLDivElement;
-		div.classList.remove(...activeClassName)
+		div.classList.remove(...activeClassName);
 	},
 	equals: (
 		a: google.maps.marker.AdvancedMarkerElement,
