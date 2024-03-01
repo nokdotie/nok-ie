@@ -179,6 +179,9 @@ const graphQlAdvertsVariables = (
 			sizeInSqtMtr: {
 				lessThanOrEqual: advertsSearch?.sizeInSqtMtrMax,
 				greaterThanOrEqual: advertsSearch?.sizeInSqtMtrMin
+			},
+			propertyType: {
+				equal: advertsSearch?.propertyType
 			}
 		}
 	};
