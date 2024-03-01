@@ -13,6 +13,7 @@
 	import AdvertsSearchBedroomsCount from '$lib/adverts/search/AdvertsSearchBedroomsCount.svelte';
 	import AdvertsSearchBathroomsCount from '$lib/adverts/search/AdvertsSearchBathroomsCount.svelte';
 	import AdvertsSearchLocation from '$lib/adverts/search/AdvertsSearchLocation.svelte';
+	import AdvertsSearchPropertyType from '$lib/adverts/search/AdvertsSearchPropertyType.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
 
 	export let data;
@@ -62,6 +63,7 @@
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8 mb-10 sm:mb-[50px]">
 							<AdvertsSearchLocation class="md:col-span-2" advertsSearch={data.advertsSearch} />
 							<HorizontalLine class="md:col-span-2 my-[18px]" />
+							<AdvertsSearchPropertyType class="md:col-span-2" advertsSearch={data.advertsSearch} />
 							<AdvertsSearchPriceInEur advertsSearch={data.advertsSearch} />
 							<AdvertsSearchSizeInSqtMtr advertsSearch={data.advertsSearch} />
 							<AdvertsSearchBedroomsCount advertsSearch={data.advertsSearch} />
