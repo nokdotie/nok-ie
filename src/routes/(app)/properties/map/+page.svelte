@@ -16,6 +16,7 @@
 	import { AdvertMapMarker } from '$lib/adverts/map/AdvertMapMarker';
 	import { AdvertMapMarkerCluster } from '$lib/adverts/map/AdvertMapMarkerCluster';
 	import type { MarkerClusterer } from '@googlemaps/markerclusterer';
+	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
 
 	const advertsSearch = AdvertsSearch.fromUrlSearchParams($page.url.searchParams);
 
@@ -143,7 +144,7 @@
 	</div>
 
 	{#if null !== clickedAdvert}
-		<div class="absolute bottom-0 m-2">
+		<div class="absolute bottom-0 p-2 w-full max-w-xl">
 			<a
 				href={PropertiesOneRoute(clickedAdvert.propertyIdentifier)}
 				class="flex items-center bg-neutral-100 overflow-hidden rounded-xl"
@@ -151,15 +152,22 @@
 				<Image
 					src={clickedAdvert.propertyImageUrls[0]}
 					alt=""
-					class="object-cover object-center aspect-square w-[120px] sm:w-[130px] md:w-[150px]"
+					class="object-cover object-center aspect-square w-[120px] sm:w-[130px]"
 				/>
-				<div class="px-4 sm:px-6">
-					<div class="text-neutral-800 text-xl md:text-[22px] font-bold leading-[1.364em] mb-3">
+				<div class="px-3 sm:px-6 overflow-hidden">
+					<div class="text-neutral-800 text-lg font-bold leading-[1.364em] mb-1">
 						{priceInEur(clickedAdvert.advertPriceInEur)}
+					</div>
+					<div class="flex flex-row items-center gap-x-2 mb-3">
+						<MapMarkerIcon class="w-[12px] text-neutral-600" />
+
+						<div class="flex-1 text-neutral-600 text-sm font-medium leading-[1.125em] truncate">
+							{clickedAdvert.propertyAddress}
+						</div>
 					</div>
 					<AdvertPills
 						advert={clickedAdvert}
-						class="origin-top-left scale-75 sm:scale-90 md:scale-100 w-[calc(100%/0.75)] sm:w-[calc(100%/0.90)] md:w-auto -mb-4"
+						class="origin-top-left scale-75 sm:scale-90 w-[calc(100%/0.75)] sm:w-[calc(100%/0.90)] -mb-4 flex-nowrap"
 					/>
 				</div>
 			</a>
