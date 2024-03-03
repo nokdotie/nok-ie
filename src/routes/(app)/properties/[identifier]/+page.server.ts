@@ -5,7 +5,7 @@ export const load = async ({ params }) => {
 	const response = await Adverts.one(params.identifier);
 
 	if (null === response.data.advert) {
-		throw error(404);
+		error(404);
 	}
 
 	return {

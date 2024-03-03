@@ -8,7 +8,7 @@ export const load = async ({ url }) => {
 	const response = await Adverts.all(24, after, advertsSearch);
 
 	if (0 === response.data.adverts.edges.length) {
-		throw error(404);
+		error(404);
 	}
 
 	return {

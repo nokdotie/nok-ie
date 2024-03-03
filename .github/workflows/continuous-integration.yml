@@ -25,16 +25,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: NPM Check
+        run: npm run check
+
+      - name: NPM Lint
+        run: npm run lint
+
       - name: NPM Test
         run: |
           npx playwright install
           npm run test
-
-      - name: NPM Check
-        run: npm run check
-
-      - name: NPM Test Unit
-        run: npm run test:unit
-
-      - name: NPM Lint
-        run: npm run lint

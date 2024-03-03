@@ -1,4 +1,4 @@
-import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
+import { type Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
 
 const className =
 	'bg-neutral-800 text-neutral-100 text-xs font-semibold px-2.5 py-1.5 rounded-full flex justify-center gap-x-[1px] items-center w-[30px] h-[30px]';
