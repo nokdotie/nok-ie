@@ -14,7 +14,6 @@
 	import Image from '$lib/components/images/Image.svelte';
 	import { priceInEur } from '$lib/utils/Number';
 	import { AdvertMapMarker } from '$lib/adverts/map/AdvertMapMarker';
-	import { AdvertMapMarkerCluster } from '$lib/adverts/map/AdvertMapMarkerCluster';
 	import type { MarkerClusterer } from '@googlemaps/markerclusterer';
 	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
 
@@ -48,7 +47,7 @@
 						advertsSearch.locationNorthEastLat,
 						advertsSearch.locationNorthEastLng
 					)
-			  )
+				)
 			: getDefaultBounds();
 
 	const getAdverts = (advertsSearch: AdvertsSearch) =>
@@ -97,6 +96,9 @@
 	};
 
 	onMount(async () => {
+		const AdvertMapMarkerCluster = (await import('$lib/adverts/map/AdvertMapMarkerCluster'))
+			.AdvertMapMarkerCluster;
+
 		const map = (await mapPromise)(document.getElementById('map') as HTMLElement, {
 			disableDefaultUI: true,
 			gestureHandling: 'greedy',
