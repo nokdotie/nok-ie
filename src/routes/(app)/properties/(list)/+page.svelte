@@ -7,6 +7,7 @@
 	import FilterButton from '$lib/adverts/list/FilterButton.svelte';
 	import MapViewButton from '$lib/adverts/list/MapViewButton.svelte';
 	import PaginationButtons from '$lib/adverts/list/PaginationButtons.svelte';
+	import PropertiesRoute from '$routes/(app)/properties/(list)/Route';
 
 	export let data;
 </script>
@@ -37,7 +38,7 @@
 
 		<PaginationButtons
 			pageInfo={data.response.data.adverts.pageInfo}
-			advertsSearch={data.advertsSearch}
+			nextPageHref={(after) => PropertiesRoute(data.advertsSearch, after)}
 		/>
 	</ContainerCenterLarge>
 </div>
