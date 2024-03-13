@@ -8,6 +8,7 @@ export interface AdvertsSearch {
 	locationNorthEastLng: null | number;
 	locationSouthWestLat: null | number;
 	locationSouthWestLng: null | number;
+	propertyType: null | string;
 	priceInEurMin: null | number;
 	priceInEurMax: null | number;
 	bedroomsCountMin: null | number;
@@ -24,6 +25,7 @@ export enum AdvertsSearchQueryStringNames {
 	LocationNorthEastLng = 'locationNorthEastLng',
 	LocationSouthWestLat = 'locationSouthWestLat',
 	LocationSouthWestLng = 'locationSouthWestLng',
+	PropertyType = 'propertyType',
 	Coordinates = 'coordinates',
 	PriceInEurMin = 'priceInEurMin',
 	PriceInEurMax = 'priceInEurMax',
@@ -42,6 +44,7 @@ export const AdvertsSearch = {
 		locationNorthEastLng: null,
 		locationSouthWestLat: null,
 		locationSouthWestLng: null,
+		propertyType: null,
 		priceInEurMin: null,
 		priceInEurMax: null,
 		bedroomsCountMin: null,
@@ -70,6 +73,9 @@ export const AdvertsSearch = {
 				: null,
 			locationSouthWestLng: copy.has(AdvertsSearchQueryStringNames.LocationSouthWestLng)
 				? Float.fromString(copy.get(AdvertsSearchQueryStringNames.LocationSouthWestLng) as string)
+				: null,
+			propertyType: copy.has(AdvertsSearchQueryStringNames.PropertyType)
+				? copy.get(AdvertsSearchQueryStringNames.PropertyType)
 				: null,
 			priceInEurMin: copy.has(AdvertsSearchQueryStringNames.PriceInEurMin)
 				? Int.fromString(copy.get(AdvertsSearchQueryStringNames.PriceInEurMin) as string)
@@ -122,6 +128,8 @@ export const AdvertsSearch = {
 				AdvertsSearchQueryStringNames.LocationSouthWestLng,
 				advertsSearch.locationSouthWestLng.toString()
 			);
+		if (advertsSearch.propertyType)
+			urlSearchParams.set(AdvertsSearchQueryStringNames.PropertyType, advertsSearch.propertyType);
 		if (advertsSearch.priceInEurMin)
 			urlSearchParams.set(
 				AdvertsSearchQueryStringNames.PriceInEurMin,
@@ -168,6 +176,7 @@ export const AdvertsSearch = {
 	length(advertsSearch: AdvertsSearch): number {
 		return [
 			advertsSearch.location,
+			advertsSearch.propertyType,
 			advertsSearch.priceInEurMin,
 			advertsSearch.priceInEurMax,
 			advertsSearch.bedroomsCountMin,
