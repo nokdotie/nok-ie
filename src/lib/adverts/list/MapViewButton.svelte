@@ -8,6 +8,6 @@
 </script>
 
 <PrimaryButtonLight href={PropertiesMapRoute(advertsSearch)} class="!w-auto">
-	<MapMarkerIcon class="w-[20px] h-[20px] mr-0 sm:mr-[6px]" />
-	<span class="hidden sm:block">Map View</span>
+	<MapMarkerIcon class="w-[20px] h-[20px] mr-0 md:mr-[6px]" />
+	<span class="hidden md:block">Map View</span>
 </PrimaryButtonLight>
