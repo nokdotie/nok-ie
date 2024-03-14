@@ -15,6 +15,7 @@ export type Advert = {
 	propertySizeInSqtMtr: number;
 	propertyBedroomsCount: number;
 	propertyBathroomsCount: number;
+	propertyBuildingEnergyRating: string;
 	advertiser: null | {
 		name: string;
 		pictureUrl: string;
@@ -68,6 +69,7 @@ const graphQlAdvertFragment = `
 	propertySizeInSqtMtr
 	propertyBedroomsCount
 	propertyBathroomsCount
+	propertyBuildingEnergyRating
 	advertiser {
 		name
 		pictureUrl

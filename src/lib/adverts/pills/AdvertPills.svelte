@@ -3,6 +3,7 @@
 	import AdvertPillBathroomsCount from '$lib/adverts/pills/AdvertPillBathroomsCount.svelte';
 	import AdvertPillBedroomsCount from '$lib/adverts/pills/AdvertPillBedroomsCount.svelte';
 	import AdvertPillSizeInSqtMtr from '$lib/adverts/pills/AdvertPillSizeInSqtMtr.svelte';
+	import AdvertPillBerRating from '$lib/adverts/pills/AdvertPillBERRating.svelte';
 
 	export let advert: Advert;
 </script>
@@ -11,4 +12,5 @@
 	<AdvertPillSizeInSqtMtr sizeInSqtMtr={advert.propertySizeInSqtMtr} />
 	<AdvertPillBedroomsCount count={advert.propertyBedroomsCount} />
 	<AdvertPillBathroomsCount count={advert.propertyBathroomsCount} />
+	<AdvertPillBerRating berRating={advert.propertyBuildingEnergyRating} />
 </div>
