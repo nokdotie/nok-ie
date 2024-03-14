@@ -1,3 +1,9 @@
+<script>
+	import Meta from '$lib/seo/Meta.svelte';
+</script>
+
+<Meta title="Privacy Policy" description="NOK.IE Privacy Policy" />
+
 <h2>NOK.IE Privacy Policy</h2>
 <p>
 	Your privacy is important to us. It is NOK.IE&#39;s policy to respect your privacy and comply with

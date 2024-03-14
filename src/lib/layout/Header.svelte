@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
-	import PropertiesRoute from '../../routes/(app)/properties/(list)/Route';
+	import { derived } from 'svelte/store';
+	import SearchRoute from '../../routes/(app)/properties/search/Route';
+	import { page } from '$app/stores';
+	import { SearchFilters } from '../../routes/(app)/properties/search/SearchFilters';
 
-	const mobileMenuOpen = writable(false);
-
-	const navigation = [
-		{ label: 'Properties', href: PropertiesRoute() }
-		// { label: 'Search', href: '/search' },
-	];
+	const searchFilters = SearchFilters.fromPage(page);
+	const length = derived(searchFilters, ($filters) => SearchFilters.length($filters));
 </script>
 
 <header class="bg-white">
@@ -17,53 +15,26 @@
 			<img class="h-8 w-auto" src="/images/logo.svg" alt="Nok.ie Logo" />
 			<h1 class="font-bold tracking-tight text-gray-900 text-xl">Nok.ie</h1>
 		</a>
-		<div class="flex sm:hidden">
-			<button
-				type="button"
-				class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-				on:click={() => mobileMenuOpen.update((v) => !v)}
-			>
-				<span class="sr-only">Toggle menu</span>
-				<svg
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					{#if $mobileMenuOpen}
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-					{:else}
+
+		<div>
+			<a href={SearchRoute($searchFilters)} class="text-gray-600 hover:text-gray-900">
+				<span class="relative inline-block">
+					<svg class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+							fill-rule="evenodd"
+							d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+							clip-rule="evenodd"
 						/>
+					</svg>
+
+					{#if 0 < $length}
+						<span
+							class="absolute text-[8px] text-white text-center right-0 top-0 block h-3 w-3 rounded-full bg-primary ring-2 ring-white animate-bounce"
+							>{$length}
+						</span>
 					{/if}
-				</svg>
-			</button>
-		</div>
-		<div class="hidden sm:flex sm:gap-x-12">
-			{#each navigation as item}
-				<a href={item.href} class="text-sm font-semibold leading-6 text-gray-900">{item.label}</a>
-			{/each}
+				</span>
+			</a>
 		</div>
 	</nav>
-
-	{#if $mobileMenuOpen}
-		<div class="sm:hidden" role="dialog" aria-modal="true">
-			<div class="fixed top-14 bottom-0 left-0 z-10 w-full overflow-y-auto bg-white px-6 py-6">
-				<div class="space-y-2">
-					{#each navigation as item}
-						<a
-							href={item.href}
-							class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-							on:click={() => mobileMenuOpen.set(false)}>{item.label}</a
-						>
-					{/each}
-				</div>
-			</div>
-		</div>
-	{/if}
 </header>

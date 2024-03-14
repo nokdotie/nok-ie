@@ -2,6 +2,7 @@ export type GraphQlQueryResponse = {
 	data: {
 		advert: {
 			advertPriceInEur: number;
+			propertyDescription: string;
 			propertyAddress: string;
 			propertyCoordinates: {
 				latitude: number;
@@ -11,6 +12,13 @@ export type GraphQlQueryResponse = {
 			propertySizeInSqtMtr: number;
 			propertyBedroomsCount: number;
 			propertyBathroomsCount: number;
+			advertiser: null | {
+				name: string;
+				pictureUrl: string;
+				emailAddresses: string[];
+				phoneNumbers: string[];
+				physicalAddresses: string[];
+			};
 			sources: Array<
 				| {
 						__typename: 'DaftIeAdvert';
@@ -49,6 +57,7 @@ export const graphQlQuery = `
     query($identifier: String!) {
         advert(identifier: $identifier) {
 			advertPriceInEur
+			propertyDescription
 			propertyAddress
 			propertyCoordinates {
 				latitude
@@ -58,6 +67,13 @@ export const graphQlQuery = `
 			propertySizeInSqtMtr
 			propertyBedroomsCount
 			propertyBathroomsCount
+			advertiser {
+				name
+    			pictureUrl
+				emailAddresses
+				phoneNumbers
+				physicalAddresses
+			}
 			sources {
 				__typename
 				... on DaftIeAdvert {

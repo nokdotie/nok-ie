@@ -1,7 +1,9 @@
 import { query, type Connection } from '$lib/GraphQl';
-import { sitemap } from '$lib/utils/SiteMapXml';
+import SiteMapXml from '$lib/seo/SiteMapXml';
 import PropertiesRoute from '../(list)/Route';
 import IdentifierRoute from '../[identifier]/Route';
+import MapRoute from '../map/Route';
+import SearchRoute from '../search/Route';
 import { type GraphQlQueryResponse, graphQlQuery } from './GraphQl';
 
 async function getConnection(
@@ -34,8 +36,10 @@ async function getAllNodes(): Promise<{ propertyIdentifier: string }[]> {
 export async function GET({ url }) {
 	const nodes = await getAllNodes();
 
-	const first = `${url.origin}${PropertiesRoute()}`;
+	const first = `${url.origin}${PropertiesRoute(null, null)}`;
+	const map = `${url.origin}${MapRoute(null)}`;
+	const search = `${url.origin}${SearchRoute(null)}`;
 	const pages = nodes.map((node) => `${url.origin}${IdentifierRoute(node)}`);
 
-	return sitemap([first, ...pages]);
+	return SiteMapXml.sitemap([first, map, search, ...pages]);
 }

@@ -1,22 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	export let form;
+	import Meta from '$lib/seo/Meta.svelte';
 
-	const title = 'Nok.ie | Contact';
-	const description = "Questions? We've got answers. Reach out anytime!";
+	export let form;
 </script>
 
-<svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={description} />
-
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
-</svelte:head>
+<Meta title="Contact" description="Questions? We've got answers. Reach out anytime!" />
 
 <div class="px-6 py-24 sm:py-32 lg:px-8">
 	<div class="mx-auto max-w-xl">
@@ -72,7 +61,7 @@
 				<div class="mt-10">
 					<button
 						type="submit"
-						class="block w-full rounded-md bg-primary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-gray-300"
+						class="block w-full rounded-md bg-primary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-gray-300"
 						disabled={form !== null}>Send</button
 					>
 				</div>

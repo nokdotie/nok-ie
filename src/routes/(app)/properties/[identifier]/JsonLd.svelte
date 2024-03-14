@@ -4,6 +4,7 @@
 
 	export let advert: {
 		advertPriceInEur: number;
+		propertyDescription: string;
 		propertyAddress: string;
 		propertyCoordinates: {
 			latitude: number;
@@ -13,6 +14,13 @@
 		propertySizeInSqtMtr: number;
 		propertyBedroomsCount: number;
 		propertyBathroomsCount: number;
+		advertiser: null | {
+			name: string;
+			pictureUrl: string;
+			emailAddresses: string[];
+			phoneNumbers: string[];
+			physicalAddresses: string[];
+		};
 		sources: Array<
 			| {
 					__typename: 'DaftIeAdvert';
@@ -51,7 +59,15 @@
 		offers: {
 			'@type': 'Offer',
 			price: advert.advertPriceInEur,
-			priceCurrency: 'EUR'
+			priceCurrency: 'EUR',
+			offeredBy: {
+				'@type': 'RealEstateAgent',
+				name: advert.advertiser?.name ?? '',
+				logo: advert.advertiser?.pictureUrl ?? '',
+				address: advert.advertiser?.physicalAddresses ?? [],
+				telephone: advert.advertiser?.phoneNumbers ?? [],
+				email: advert.advertiser?.emailAddresses ?? []
+			}
 		},
 		mainEntity: {
 			'@type': 'Accommodation',
@@ -75,32 +91,9 @@
 			sameAs: advert.sources.map((source) => source.url)
 		}
 	};
-
-	const title = `Nok.ie | ${advert.propertyAddress}`;
-	const description = `Property for sale: ${
-		advert.propertyAddress
-	}, €${advert.advertPriceInEur.toLocaleString('en-IE')}, ${Math.floor(
-		advert.propertySizeInSqtMtr
-	)} m², ${advert.propertyBedroomsCount} beds, ${advert.propertyBathroomsCount} bathrooms`;
 </script>
 
 <svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={description} />
-
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-	{#each advert.propertyImageUrls as propertyImageUrl}
-		<meta property="og:image" content={propertyImageUrl} />
-	{/each}
-
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
-	{#each advert.propertyImageUrls as propertyImageUrl}
-		<meta name="twitter:image" content={propertyImageUrl} />
-	{/each}
-
 	<!-- eslint-disable -->
 	{@html JsonLd(schema)}
 </svelte:head>

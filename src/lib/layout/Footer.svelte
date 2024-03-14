@@ -21,6 +21,6 @@
 		{/each}
 	</nav>
 	<p class="mt-10 text-center text-xs leading-5 text-gray-500">
-		&copy; 2023 Nok.ie. All rights reserved.
+		&copy; 2024 Nok.ie. All rights reserved.
 	</p>
 </footer>

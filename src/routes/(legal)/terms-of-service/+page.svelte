@@ -1,3 +1,9 @@
+<script>
+	import Meta from '$lib/seo/Meta.svelte';
+</script>
+
+<Meta title="Terms of Service" description="NOK.IE Terms of Service" />
+
 <h2>NOK.IE Terms of Service</h2>
 <p>
 	These Terms of Service govern your use of the website located at <a href="https://nok.ie"

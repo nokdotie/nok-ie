@@ -1,15 +1,16 @@
 <script lang="ts">
 	import AdvertCardList from './AdvertCardList.svelte';
 	import NotFound from './NotFound.svelte';
-	import Search from './Search.svelte';
-	import Seo from './Seo.svelte';
+	import Meta from '$lib/seo/Meta.svelte';
 
 	export let data;
 </script>
 
-<Seo />
-
-<Search filters={data.filters} />
+<Meta
+	title="Properties"
+	description="Properties for sale around Ireland."
+	index={null === data.after}
+/>
 
 {#if data.adverts.edges.length === 0}
 	<NotFound />
