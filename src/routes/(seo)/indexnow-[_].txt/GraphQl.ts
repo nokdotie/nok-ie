@@ -1,7 +1,9 @@
 export type GraphQlQueryResponse = {
 	data: {
 		seo: {
-			isIndexNowKeyValid: boolean;
+			indexNow: {
+				isKeyValid: boolean;
+			};
 		};
 	};
 };
@@ -9,7 +11,9 @@ export type GraphQlQueryResponse = {
 export const graphQlQuery = `
     query($key: String) {
         seo {
-            isIndexNowKeyValid(key: $key)
+            indexNow {
+                isKeyValid(key: $key)
+            }
         }
     }
 `;

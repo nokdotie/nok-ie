@@ -5,7 +5,7 @@ import { error } from '@sveltejs/kit';
 export async function GET({ url }) {
 	const key = url.pathname.slice(1, -4);
 	const isIndexNowKeyValid = await query<GraphQlQueryResponse>(graphQlQuery, { key: key }).then(
-		(response) => response.data.seo.isIndexNowKeyValid
+		(response) => response.data.seo.indexNow.isKeyValid
 	);
 
 	if (false === isIndexNowKeyValid) {
