@@ -14,6 +14,7 @@
 	import AdvertMap from '$lib/adverts/identifier/AdvertMap.svelte';
 	import ContainerCenterLarge from '$lib/components/containers/ContainerCenterLarge.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
+	import Image from '$lib/components/images/Image.svelte';
 	import { priceInEur, priceInEurAbbrieviated } from '$lib/utils/Number.js';
 
 	export let data;
@@ -67,6 +68,11 @@
 			>
 				<HomeIcon class="w-[18px]" />
 				<span class="flex-1">{data.response.data.advert.propertyType}</span>
+				{#if data.response.data.advert.propertyBuildingEnergyRating != null}
+					<div>
+						<Image src="/images/ber/{data.response.data.advert.propertyBuildingEnergyRating}.png" alt="{data.response.data.advert.propertyBuildingEnergyRating}" class="h-[19px]" />
+					</div>
+				{/if}
 			</div>
 			<AdvertPills advert={data.response.data.advert} />
 		</div>
