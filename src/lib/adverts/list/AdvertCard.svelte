@@ -50,11 +50,6 @@
 					</div>
 				{/if}
 			</h3>
-			<!-- <h3>
-				{#if advert.propertyBuildingEnergyRating != null}
-					<Image src="/images/ber/{advert.propertyBuildingEnergyRating}.png" alt="{advert.propertyBuildingEnergyRating}" class="h-[17px]" />
-				{/if}
-			</h3> -->
 			<HorizontalLine class="mt-5 mb-3" />
 			<AdvertPills {advert} />
 		</div>

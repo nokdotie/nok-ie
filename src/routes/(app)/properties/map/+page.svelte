@@ -11,6 +11,7 @@
 	import FilterButton from '$lib/adverts/list/FilterButton.svelte';
 	import ListViewButton from '$lib/adverts/list/ListViewButton.svelte';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
+	import HomeIcon from '$lib/components/icons/HomeIcon.svelte';
 	import Image from '$lib/components/images/Image.svelte';
 	import { priceInEur } from '$lib/utils/Number';
 	import { AdvertMapMarker } from '$lib/adverts/map/AdvertMapMarker';
@@ -166,6 +167,25 @@
 						<div class="flex-1 text-neutral-600 text-sm font-medium leading-[1.125em] truncate">
 							{clickedAdvert.propertyAddress}
 						</div>
+					</div>
+					<div class="flex flex-row items-center gap-x-2 mb-3">
+						{#if clickedAdvert.propertyType != 'Unknown'}
+							<HomeIcon class="w-[12px] text-neutral-600" />
+						{/if}
+						<div class="flex-1 text-sm font-medium leading-[1.125em]">
+							{#if clickedAdvert.propertyType != 'Unknown'}
+								{clickedAdvert.propertyType}
+							{/if}
+						</div>
+						{#if clickedAdvert.propertyBuildingEnergyRating != null}
+							<div>
+								<Image
+									src="/images/ber/{clickedAdvert.propertyBuildingEnergyRating}.png"
+									alt={clickedAdvert.propertyBuildingEnergyRating}
+									class="h-[15px]"
+								/>
+							</div>
+						{/if}
 					</div>
 					<AdvertPills
 						advert={clickedAdvert}
