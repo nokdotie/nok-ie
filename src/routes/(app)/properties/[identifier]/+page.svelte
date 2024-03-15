@@ -70,7 +70,11 @@
 				<span class="flex-1">{data.response.data.advert.propertyType}</span>
 				{#if data.response.data.advert.propertyBuildingEnergyRating != null}
 					<div>
-						<Image src="/images/ber/{data.response.data.advert.propertyBuildingEnergyRating}.png" alt="{data.response.data.advert.propertyBuildingEnergyRating}" class="h-[19px]" />
+						<Image
+							src="/images/ber/{data.response.data.advert.propertyBuildingEnergyRating}.png"
+							alt={data.response.data.advert.propertyBuildingEnergyRating}
+							class="h-[19px]"
+						/>
 					</div>
 				{/if}
 			</div>

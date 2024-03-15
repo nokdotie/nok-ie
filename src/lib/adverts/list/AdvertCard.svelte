@@ -34,7 +34,7 @@
 			<h3 class="flex flex-row items-center gap-x-2 mb-2 min-h-[15px]">
 				{#if advert.propertyType != 'Unknown'}
 					<HomeIcon class="w-[15px] text-neutral-600" />
-				{/if}	
+				{/if}
 				<div class="flex-1 text-neutral-600 text-base font-medium leading-[1.125em]">
 					{#if advert.propertyType != 'Unknown'}
 						{advert.propertyType}
@@ -42,7 +42,11 @@
 				</div>
 				{#if advert.propertyBuildingEnergyRating != null}
 					<div>
-						<Image src="/images/ber/{advert.propertyBuildingEnergyRating}.png" alt="{advert.propertyBuildingEnergyRating}" class="h-[19px]" />
+						<Image
+							src="/images/ber/{advert.propertyBuildingEnergyRating}.png"
+							alt={advert.propertyBuildingEnergyRating}
+							class="h-[19px]"
+						/>
 					</div>
 				{/if}
 			</h3>

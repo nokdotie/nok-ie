@@ -3,7 +3,7 @@
 	import AdvertPillBathroomsCount from '$lib/adverts/pills/AdvertPillBathroomsCount.svelte';
 	import AdvertPillBedroomsCount from '$lib/adverts/pills/AdvertPillBedroomsCount.svelte';
 	import AdvertPillSizeInSqtMtr from '$lib/adverts/pills/AdvertPillSizeInSqtMtr.svelte';
-	
+
 	export let advert: Advert;
 </script>
 
