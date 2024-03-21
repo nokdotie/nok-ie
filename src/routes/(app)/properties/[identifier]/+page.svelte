@@ -4,7 +4,6 @@
 	import DocumentHeader from '$lib/components/document/DocumentHeader.svelte';
 	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
 	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
-	import HomeIcon from '$lib/components/icons/HomeIcon.svelte';
 	import AdvertImageWide from '$lib/adverts/identifier/AdvertImageWide.svelte';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
 	import AdvertAdvertiser from '$lib/adverts/identifier/AdvertAdvertiser.svelte';
@@ -14,7 +13,8 @@
 	import AdvertMap from '$lib/adverts/identifier/AdvertMap.svelte';
 	import ContainerCenterLarge from '$lib/components/containers/ContainerCenterLarge.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
-	import Image from '$lib/components/images/Image.svelte';
+	import BerIcon from '$lib/adverts/common/BerIcon.svelte';
+	import PropertyTypeIcon from '$lib/adverts/common/PropertyTypeIcon.svelte';
 	import { priceInEur, priceInEurAbbrieviated } from '$lib/utils/Number.js';
 
 	export let data;
@@ -66,17 +66,8 @@
 			<div
 				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
 			>
-				<HomeIcon class="w-[18px]" />
-				<span class="flex-1">{data.response.data.advert.propertyType}</span>
-				{#if data.response.data.advert.propertyBuildingEnergyRating != null}
-					<div>
-						<Image
-							src="/images/ber/{data.response.data.advert.propertyBuildingEnergyRating}.png"
-							alt={data.response.data.advert.propertyBuildingEnergyRating}
-							class="h-[19px]"
-						/>
-					</div>
-				{/if}
+				<PropertyTypeIcon advert={data.response.data.advert} />
+				<BerIcon advert={data.response.data.advert} />
 			</div>
 			<AdvertPills advert={data.response.data.advert} />
 		</div>

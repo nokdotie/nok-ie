@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { Advert } from '$lib/adverts/Adverts';
 	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
-	import HomeIcon from '$lib/components/icons/HomeIcon.svelte';
 	import PropertiesOneRoute from '$routes/(app)/properties/[identifier]/Route';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
 	import Image from '$lib/components/images/Image.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
+	import BerIcon from '$lib/adverts/common/BerIcon.svelte';
+	import PropertyTypeIcon from '$lib/adverts/common/PropertyTypeIcon.svelte';
 	import { priceInEur } from '$lib/utils/Number';
 
 	export let advert: Advert;
@@ -32,23 +33,8 @@
 				</div>
 			</h3>
 			<h3 class="flex flex-row items-center gap-x-2 mb-2 min-h-[15px]">
-				{#if advert.propertyType != 'Unknown'}
-					<HomeIcon class="w-[15px] text-neutral-600" />
-				{/if}
-				<div class="flex-1 text-neutral-600 text-base font-medium leading-[1.125em]">
-					{#if advert.propertyType != 'Unknown'}
-						{advert.propertyType}
-					{/if}
-				</div>
-				{#if advert.propertyBuildingEnergyRating != null}
-					<div>
-						<Image
-							src="/images/ber/{advert.propertyBuildingEnergyRating}.png"
-							alt={advert.propertyBuildingEnergyRating}
-							class="h-[19px]"
-						/>
-					</div>
-				{/if}
+				<PropertyTypeIcon {advert} />
+				<BerIcon {advert} />
 			</h3>
 			<HorizontalLine class="mt-5 mb-3" />
 			<AdvertPills {advert} />
