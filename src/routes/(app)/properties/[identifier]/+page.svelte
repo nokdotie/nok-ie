@@ -13,8 +13,7 @@
 	import AdvertMap from '$lib/adverts/identifier/AdvertMap.svelte';
 	import ContainerCenterLarge from '$lib/components/containers/ContainerCenterLarge.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
-	import BerIcon from '$lib/adverts/common/BerIcon.svelte';
-	import PropertyTypeIcon from '$lib/adverts/common/PropertyTypeIcon.svelte';
+	import PropertyType from '$lib/adverts/PropertyType.svelte';
 	import { priceInEur, priceInEurAbbrieviated } from '$lib/utils/Number.js';
 
 	export let data;
@@ -57,18 +56,17 @@
 			>
 				{priceInEur(data.response.data.advert.advertPriceInEur)}
 			</div>
-			<h1
-				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
-			>
-				<MapMarkerIcon class="w-[18px]" />
-				<span class="flex-1">{data.response.data.advert.propertyAddress}</span>
+
+			<h1 class="flex flex-row items-center gap-x-2 mb-[10px]">
+				<MapMarkerIcon class="w-[15px] text-neutral-600" />
+
+				<div class="flex-1 text-neutral-600 text-base font-medium leading-[1.125em] truncate">
+					{data.response.data.advert.propertyAddress}
+				</div>
 			</h1>
-			<div
-				class="text-neutral-600 text-lg font-medium leading-[1.111em] flex items-center gap-x-2.5 mb-5"
-			>
-				<PropertyTypeIcon advert={data.response.data.advert} />
-				<BerIcon advert={data.response.data.advert} />
-			</div>
+
+			<PropertyType propertyType={data.response.data.advert.propertyType} class="mb-[25px]" />
+
 			<AdvertPills advert={data.response.data.advert} />
 		</div>
 		<AdvertAdvertiser advert={data.response.data.advert} />

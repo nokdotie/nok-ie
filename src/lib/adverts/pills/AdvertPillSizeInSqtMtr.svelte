@@ -5,7 +5,9 @@
 	export let sizeInSqtMtr: number;
 </script>
 
-<AdvertPill>
-	<SizeIcon class="h-[17px] text-neutral-600" />
-	{sizeInSqtMtr.toLocaleString('en-IE', { maximumFractionDigits: 0 })} m²
+<AdvertPill class={$$props.class}>
+	<SizeIcon class="h-full" />
+	<div class="whitespace-nowrap">
+		{sizeInSqtMtr.toLocaleString('en-IE', { maximumFractionDigits: 0 })} m²
+	</div>
 </AdvertPill>
