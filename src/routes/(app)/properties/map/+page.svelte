@@ -4,18 +4,14 @@
 	import { page } from '$app/stores';
 	import { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
 	import { Adverts, type Advert } from '$lib/adverts/Adverts';
-	import PropertiesOneRoute from '$routes/(app)/properties/[identifier]/Route';
 	import Meta from '$lib/components/seo/Meta.svelte';
 	import DocumentHeader from '$lib/components/document/DocumentHeader.svelte';
 	import DocumentFooter from '$lib/components/document/DocumentFooter.svelte';
 	import FilterButton from '$lib/adverts/list/FilterButton.svelte';
 	import ListViewButton from '$lib/adverts/list/ListViewButton.svelte';
-	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
-	import Image from '$lib/components/images/Image.svelte';
-	import { priceInEur } from '$lib/utils/Number';
 	import { AdvertMapMarker } from '$lib/adverts/map/AdvertMapMarker';
 	import type { MarkerClusterer } from '@googlemaps/markerclusterer';
-	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
+	import AdvertCard from '$lib/adverts/map/AdvertCard.svelte';
 
 	const advertsSearch = AdvertsSearch.fromUrlSearchParams($page.url.searchParams);
 
@@ -146,33 +142,8 @@
 	</div>
 
 	{#if null !== clickedAdvert}
-		<div class="absolute bottom-0 p-2 w-full max-w-xl">
-			<a
-				href={PropertiesOneRoute(clickedAdvert.propertyIdentifier)}
-				class="flex items-center bg-neutral-100 overflow-hidden rounded-xl"
-			>
-				<Image
-					src={clickedAdvert.propertyImageUrls[0]}
-					alt=""
-					class="object-cover object-center aspect-square w-[120px] sm:w-[130px]"
-				/>
-				<div class="px-3 sm:px-6 overflow-hidden">
-					<div class="text-neutral-800 text-lg font-bold leading-[1.364em] mb-1">
-						{priceInEur(clickedAdvert.advertPriceInEur)}
-					</div>
-					<div class="flex flex-row items-center gap-x-2 mb-3">
-						<MapMarkerIcon class="w-[12px] text-neutral-600" />
-
-						<div class="flex-1 text-neutral-600 text-sm font-medium leading-[1.125em] truncate">
-							{clickedAdvert.propertyAddress}
-						</div>
-					</div>
-					<AdvertPills
-						advert={clickedAdvert}
-						class="origin-top-left scale-75 sm:scale-90 w-[calc(100%/0.75)] sm:w-[calc(100%/0.90)] -mb-4 flex-nowrap"
-					/>
-				</div>
-			</a>
+		<div class="absolute bottom-0 p-2 w-full sm:w-auto">
+			<AdvertCard advert={clickedAdvert} />
 		</div>
 	{/if}
 </div>

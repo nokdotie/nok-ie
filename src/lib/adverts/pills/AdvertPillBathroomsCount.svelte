@@ -5,7 +5,7 @@
 	export let count: number;
 </script>
 
-<AdvertPill>
-	<BathIcon class="h-[17px] text-neutral-600" />
+<AdvertPill class={$$props.class}>
+	<BathIcon class="h-full" />
 	{count}
 </AdvertPill>

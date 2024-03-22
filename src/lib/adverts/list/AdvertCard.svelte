@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { Advert } from '$lib/adverts/Adverts';
 	import MapMarkerIcon from '$lib/components/icons/MapMarkerIcon.svelte';
-	import HomeIcon from '$lib/components/icons/HomeIcon.svelte';
 	import PropertiesOneRoute from '$routes/(app)/properties/[identifier]/Route';
 	import AdvertPills from '$lib/adverts/pills/AdvertPills.svelte';
 	import Image from '$lib/components/images/Image.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
+	import PropertyType from '$lib/adverts/PropertyType.svelte';
 	import { priceInEur } from '$lib/utils/Number';
 
 	export let advert: Advert;
@@ -24,23 +24,17 @@
 			<div class="text-neutral-800 text-xl md:text-[22px] font-bold leading-[1.364em] mb-3">
 				{priceInEur(advert.advertPriceInEur)}
 			</div>
-			<h3 class="flex flex-row items-center gap-x-2 mb-2">
+			<h3 class="flex flex-row items-center gap-x-2 mb-[10px]">
 				<MapMarkerIcon class="w-[15px] text-neutral-600" />
 
 				<div class="flex-1 text-neutral-600 text-base font-medium leading-[1.125em] truncate">
 					{advert.propertyAddress}
 				</div>
 			</h3>
-			<h3 class="flex flex-row items-center gap-x-2 mb-2 min-h-[15px]">
-				{#if advert.propertyType != 'Unknown'}
-					<HomeIcon class="w-[15px] text-neutral-600" />
-
-					<div class="flex-1 text-neutral-600 text-base font-medium leading-[1.125em]">
-						{advert.propertyType}
-					</div>
-				{/if}
-			</h3>
-			<HorizontalLine class="mt-5 mb-3" />
+			<div class="h-[19px] mb-[10px]">
+				<PropertyType propertyType={advert.propertyType} />
+			</div>
+			<HorizontalLine class="mt-5 mb-5" />
 			<AdvertPills {advert} />
 		</div>
 	</a>
