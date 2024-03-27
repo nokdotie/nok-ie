@@ -6,6 +6,7 @@
 	import Image from '$lib/components/images/Image.svelte';
 	import { Counties } from '$lib/adverts/counties/Counties';
 	import PropertiesCountyRoute from '$routes/(app)/properties/counties/[identifier]/Route';
+	import CopyrightProtectionAndInfringementRoute from '$routes/(legal)/copyright-protection-and-infringement/Route';
 </script>
 
 <div class="pt-[70px] md:pt-10 pb-10 border-t-neutral-400 border-t border-solid">
@@ -54,6 +55,12 @@
 					href={TermsOfServiceRoute()}
 					target="_blank"
 					class="transition duration-300 text-neutral-800 hover:text-primary">Terms of Service</a
+				>
+				-
+				<a
+					href={CopyrightProtectionAndInfringementRoute()}
+					target="_blank"
+					class="transition duration-300 text-neutral-800 hover:text-primary">Copyright</a
 				>
 			</div>
 		</div>
