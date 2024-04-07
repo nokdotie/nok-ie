@@ -45,6 +45,10 @@ export type Advert = {
 				url: string;
 		  }
 		| {
+				__typename: 'MaherPropertyIeAdvert';
+				url: string;
+		  }
+		| {
 				__typename: 'BuildingEnergyRatingCertificate';
 				url: string;
 				number?: string;
@@ -92,6 +96,9 @@ const graphQlAdvertFragment = `
 			url
 		}
 		... on SherryFitzIeAdvert {
+			url
+		}
+		... on MaherPropertyIeAdvert {
 			url
 		}
 		... on BuildingEnergyRatingCertificate {
