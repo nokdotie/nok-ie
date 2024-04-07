@@ -43,6 +43,10 @@
 					url: string;
 			  }
 			| {
+					__typename: 'MaherPropertyIeAdvert';
+					url: string;
+			  }
+			| {
 					__typename: 'BuildingEnergyRatingCertificate';
 					url: string;
 					number?: string;

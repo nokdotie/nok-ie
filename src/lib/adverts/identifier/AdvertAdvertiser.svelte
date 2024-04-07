@@ -12,7 +12,8 @@
 		'DngIeAdvert',
 		'MyHomeIeAdvert',
 		'PropertyPalComAdvert',
-		'SherryFitzIeAdvert'
+		'SherryFitzIeAdvert',
+		'MaherPropertyIeAdvert'
 	];
 
 	let sources = advert.sources
