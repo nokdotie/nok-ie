@@ -1,5 +1,6 @@
 import { connectionFragment, type Connection, query } from '$lib/utils/GraphQl';
 import type { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
+import type { AdvertFacet } from './AdvertFacets';
 
 export type Advert = {
 	propertyIdentifier: string;
@@ -23,40 +24,7 @@ export type Advert = {
 		phoneNumbers: string[];
 		physicalAddresses: string[];
 	};
-	sources: Array<
-		| {
-				__typename: 'DaftIeAdvert';
-				url: string;
-		  }
-		| {
-				__typename: 'DngIeAdvert';
-				url: string;
-		  }
-		| {
-				__typename: 'MyHomeIeAdvert';
-				url: string;
-		  }
-		| {
-				__typename: 'PropertyPalComAdvert';
-				url: string;
-		  }
-		| {
-				__typename: 'SherryFitzIeAdvert';
-				url: string;
-		  }
-		| {
-				__typename: 'MaherPropertyIeAdvert';
-				url: string;
-		  }
-		| {
-				__typename: 'BuildingEnergyRatingCertificate';
-				url: string;
-				number?: string;
-				rating?: string;
-				energyRatingInKWhPerSqtMtrPerYear?: number;
-				carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear?: number;
-		  }
-	>;
+	facets: Array<AdvertFacet>;
 };
 
 const graphQlAdvertFragment = `
@@ -81,33 +49,8 @@ const graphQlAdvertFragment = `
 		phoneNumbers
 		physicalAddresses
 	}
-	sources {
-		__typename
-		... on DaftIeAdvert {
-			url
-		}
-		... on DngIeAdvert {
-			url
-		}
-		... on MyHomeIeAdvert {
-			url
-		}
-		... on PropertyPalComAdvert {
-			url
-		}
-		... on SherryFitzIeAdvert {
-			url
-		}
-		... on MaherPropertyIeAdvert {
-			url
-		}
-		... on BuildingEnergyRatingCertificate {
-			url
-			number
-			rating
-			energyRatingInKWhPerSqtMtrPerYear
-			carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear
-		}
+	facets {
+		url
 	}
 `;
 
