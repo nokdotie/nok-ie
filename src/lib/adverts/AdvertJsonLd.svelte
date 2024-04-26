@@ -1,6 +1,7 @@
 <script lang="ts">
 	import JsonLd from '$lib/components/seo/JsonLd.svelte';
 	import type { RealEstateListing, WithContext } from 'schema-dts';
+	import { AdvertFacets, type AdvertFacet } from '$lib/adverts/AdvertFacets';
 
 	export let advert: {
 		advertPriceInEur: number;
@@ -21,41 +22,10 @@
 			phoneNumbers: string[];
 			physicalAddresses: string[];
 		};
-		sources: Array<
-			| {
-					__typename: 'DaftIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'DngIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'MyHomeIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'PropertyPalComAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'SherryFitzIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'MaherPropertyIeAdvert';
-					url: string;
-			  }
-			| {
-					__typename: 'BuildingEnergyRatingCertificate';
-					url: string;
-					number?: string;
-					rating?: string;
-					energyRatingInKWhPerSqtMtrPerYear?: number;
-					carbonDioxideEmissionsIndicatorInKgCO2PerSqtMtrPerYear?: number;
-			  }
-		>;
+		facets: Array<AdvertFacet>;
 	};
+
+	const facets = AdvertFacets.filterAdvertisers(advert.facets);
 
 	const schema: WithContext<RealEstateListing> = {
 		'@context': 'https://schema.org',
@@ -92,7 +62,7 @@
 				'@type': 'ImageObject',
 				contentUrl: url
 			})),
-			sameAs: advert.sources.map((source) => source.url)
+			sameAs: facets.map((facet) => facet.url)
 		}
 	};
 </script>

@@ -4,24 +4,14 @@
 	import PhoneIcon from '$lib/components/icons/PhoneIcon.svelte';
 	import Image from '$lib/components/images/Image.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
+	import { AdvertFacets } from '$lib/adverts/AdvertFacets';
 
 	export let advert: Advert;
 
-	let sourcesTypeNames = [
-		'DaftIeAdvert',
-		'DngIeAdvert',
-		'MyHomeIeAdvert',
-		'PropertyPalComAdvert',
-		'SherryFitzIeAdvert',
-		'MaherPropertyIeAdvert'
-	];
-
-	let sources = advert.sources
-		.filter((source) => sourcesTypeNames.includes(source.__typename))
-		.map((source) => ({
-			url: source.url,
-			hostname: new URL(source.url).hostname.replace('www.', '')
-		}));
+	const facets = AdvertFacets.filterAdvertisers(advert.facets).map((facet) => ({
+		url: facet.url,
+		hostname: new URL(facet.url).hostname.replace('www.', '')
+	}));
 </script>
 
 <div class="mt-10 sm:mt-[50px] md:mt-[60px] lg:mt-0">
@@ -67,16 +57,16 @@
 				</div>
 			</div>
 		{/if}
-		{#if null !== advert.advertiser && 0 !== sources.length}
+		{#if null !== advert.advertiser && 0 !== facets.length}
 			<HorizontalLine class="mt-10 sm:mt-[42px] md:mt-[50px] lg:mt-[60px] mb-9" />
 		{/if}
-		{#if 0 !== sources.length}
+		{#if 0 !== facets.length}
 			<div class="flex justify-center gap-x-3">
-				{#each sources as source}
-					<a href={source.url} target="_blank">
+				{#each facets as facet}
+					<a href={facet.url} target="_blank">
 						<Image
 							class="h-[50px] w-[50px] rounded-full"
-							src="/images/services/{source.hostname}.png"
+							src="/images/services/{facet.hostname}.png"
 							alt=""
 						/>
 					</a>

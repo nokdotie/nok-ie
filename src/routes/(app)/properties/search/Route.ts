@@ -1,4 +1,4 @@
-import { AdvertsSearch } from '../../../../lib/adverts/search/AdvertsSearch';
+import { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
 
 export default (advertsSearch: null | AdvertsSearch) => {
 	const prefix = '/properties/search';
