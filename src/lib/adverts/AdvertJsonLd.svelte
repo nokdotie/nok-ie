@@ -1,7 +1,7 @@
 <script lang="ts">
 	import JsonLd from '$lib/components/seo/JsonLd.svelte';
 	import type { RealEstateListing, WithContext } from 'schema-dts';
-	import { AdvertFacets, type AdvertFacet } from './AdvertFacets';
+	import { AdvertFacets, type AdvertFacet } from '$lib/adverts/AdvertFacets';
 
 	export let advert: {
 		advertPriceInEur: number;

@@ -4,7 +4,7 @@
 	import PhoneIcon from '$lib/components/icons/PhoneIcon.svelte';
 	import Image from '$lib/components/images/Image.svelte';
 	import HorizontalLine from '$lib/components/HorizontalLine.svelte';
-	import { AdvertFacets } from '../AdvertFacets';
+	import { AdvertFacets } from '$lib/adverts/AdvertFacets';
 
 	export let advert: Advert;
 

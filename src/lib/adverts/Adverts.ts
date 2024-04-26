@@ -1,6 +1,6 @@
 import { connectionFragment, type Connection, query } from '$lib/utils/GraphQl';
 import type { AdvertsSearch } from '$lib/adverts/search/AdvertsSearch';
-import type { AdvertFacet } from './AdvertFacets';
+import type { AdvertFacet } from '$lib/adverts/AdvertFacets';
 
 export type Advert = {
 	propertyIdentifier: string;
