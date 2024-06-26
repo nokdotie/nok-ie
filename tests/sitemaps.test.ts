@@ -17,5 +17,5 @@ const generic = async (page: Page, sitemapPath: string) => {
 test('/sitemap.xml contains working urls', async ({ page }) => generic(page, '/sitemap.xml'));
 test('/properties/sitemap.xml contains working urls', async ({ page }) =>
 	generic(page, '/properties/sitemap.xml'));
-test('/properties/counties/sitemap.xml contains working urls', async ({ page }) =>
-	generic(page, '/properties/counties/sitemap.xml'));
+test('/counties/sitemap.xml contains working urls', async ({ page }) =>
+	generic(page, '/counties/sitemap.xml'));
