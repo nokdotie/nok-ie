@@ -5,7 +5,7 @@
 	import TermsOfServiceRoute from '$routes/(legal)/terms-of-service/Route';
 	import Image from '$lib/components/images/Image.svelte';
 	import { Counties } from '$lib/counties/Counties';
-	import CountyRoute from '$routes/(app)/counties/[identifier]/properties/Route';
+	import CountyPropertiesRoute from '$routes/(app)/counties/[identifier]/properties/Route';
 	import CopyrightProtectionAndInfringementRoute from '$routes/(legal)/copyright-protection-and-infringement/Route';
 </script>
 
@@ -18,7 +18,7 @@
 			<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-5">
 				{#each Counties.all as county}
 					<a
-						href={CountyRoute(county.identifier, null)}
+						href={CountyPropertiesRoute(county.identifier, null)}
 						class="text-neutral-700 text-base font-medium leading-[1.125em] transition duration-300 hover:text-primary"
 						>{county.name}</a
 					>

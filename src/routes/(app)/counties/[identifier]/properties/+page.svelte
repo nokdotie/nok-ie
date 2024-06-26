@@ -7,14 +7,14 @@
 	import FilterButton from '$lib/adverts/list/FilterButton.svelte';
 	import MapViewButton from '$lib/adverts/list/MapViewButton.svelte';
 	import PaginationButtons from '$lib/adverts/list/PaginationButtons.svelte';
-	import CountyRoute from '$routes/(app)/counties/[identifier]/properties/Route';
+	import CountyPropertiesRoute from '$routes/(app)/counties/[identifier]/properties/Route';
 	export let data;
 </script>
 
 <Meta
 	index={null === data.after}
 	title="County {data.county.name}"
-	description="Properties for sale in Ireland."
+	description="Properties for sale in County {data.county.name}."
 	images={['https://nok.ie/android-chrome-512x512.png']}
 />
 
@@ -56,7 +56,7 @@
 
 	<PaginationButtons
 		pageInfo={data.response.data.adverts.pageInfo}
-		nextPageHref={(after) => CountyRoute(data.county.identifier, after)}
+		nextPageHref={(after) => CountyPropertiesRoute(data.county.identifier, after)}
 	/>
 </ContainerCenterLarge>
 
