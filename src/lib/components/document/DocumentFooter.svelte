@@ -4,8 +4,8 @@
 	import PrivacyPolicyRoute from '$routes/(legal)/privacy-policy/Route';
 	import TermsOfServiceRoute from '$routes/(legal)/terms-of-service/Route';
 	import Image from '$lib/components/images/Image.svelte';
-	import { Counties } from '$lib/adverts/counties/Counties';
-	import PropertiesCountyRoute from '$routes/(app)/properties/counties/[identifier]/Route';
+	import { Counties } from '$lib/counties/Counties';
+	import CountyRoute from '$routes/(app)/counties/[identifier]/properties/Route';
 	import CopyrightProtectionAndInfringementRoute from '$routes/(legal)/copyright-protection-and-infringement/Route';
 </script>
 
@@ -13,12 +13,12 @@
 	<ContainerCenterLarge>
 		<div class="mb-12">
 			<h4 class="text-neutral-800 text-lg md:text-xl font-bold leading-[1.4em] mb-8 md:mb-10">
-				Properties per Counties
+				Counties
 			</h4>
 			<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-5">
 				{#each Counties.all as county}
 					<a
-						href={PropertiesCountyRoute(county.identifier, null)}
+						href={CountyRoute(county.identifier, null)}
 						class="text-neutral-700 text-base font-medium leading-[1.125em] transition duration-300 hover:text-primary"
 						>{county.name}</a
 					>

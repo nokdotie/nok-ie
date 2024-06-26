@@ -3,6 +3,8 @@ export const Counties = {
 		{
 			identifier: 'carlow',
 			name: 'Carlow',
+			description:
+				'Carlow offers charming rural landscapes with picturesque villages and historic sites. It’s ideal for those seeking a peaceful lifestyle amidst rolling hills and vibrant community life.',
 			advertsSearch: {
 				location: 'County Carlow',
 				locationNorthEastLat: 52.9179628,
@@ -14,6 +16,8 @@ export const Counties = {
 		{
 			identifier: 'cavan',
 			name: 'Cavan',
+			description:
+				'Cavan is known for its scenic lakes and lush countryside, perfect for outdoor enthusiasts. Enjoy tranquil living in charming villages with rich cultural and historical significance.',
 			advertsSearch: {
 				location: 'County Cavan',
 				locationNorthEastLat: 54.304548,
@@ -25,6 +29,8 @@ export const Counties = {
 		{
 			identifier: 'clare',
 			name: 'Clare',
+			description:
+				'Clare boasts stunning coastlines, including the Cliffs of Moher. Experience a vibrant cultural scene, traditional music, and breathtaking landscapes in this diverse county.',
 			advertsSearch: {
 				location: 'County Clare',
 				locationNorthEastLat: 53.1687693,
@@ -36,6 +42,8 @@ export const Counties = {
 		{
 			identifier: 'cork',
 			name: 'Cork',
+			description:
+				'Cork combines beautiful coastal areas with rich agricultural land and historic towns. It’s perfect for those seeking a blend of scenic countryside and lively communities.',
 			advertsSearch: {
 				location: 'County Cork',
 				locationNorthEastLat: 52.3879603,
@@ -47,6 +55,8 @@ export const Counties = {
 		{
 			identifier: 'donegal',
 			name: 'Donegal',
+			description:
+				'Donegal, part of the Wild Atlantic Way, features dramatic cliffs, serene beaches, and rugged landscapes. Ideal for outdoor enthusiasts and those seeking a peaceful, natural setting.',
 			advertsSearch: {
 				location: 'County Donegal',
 				locationNorthEastLat: 55.4351402,
@@ -58,6 +68,8 @@ export const Counties = {
 		{
 			identifier: 'dublin',
 			name: 'Dublin',
+			description:
+				'While Dublin city is bustling, County Dublin offers picturesque coastal villages and suburban areas with rich cultural heritage and easy access to urban amenities.',
 			advertsSearch: {
 				location: 'County Dublin',
 				locationNorthEastLat: 53.6347257,
@@ -69,6 +81,8 @@ export const Counties = {
 		{
 			identifier: 'galway',
 			name: 'Galway',
+			description:
+				'Galway is known for its vibrant arts scene, stunning landscapes, and coastal beauty. Enjoy traditional Irish culture in lively towns and serene countryside retreats.',
 			advertsSearch: {
 				location: 'County Galway',
 				locationNorthEastLat: 53.7189146,
@@ -80,6 +94,8 @@ export const Counties = {
 		{
 			identifier: 'kerry',
 			name: 'Kerry',
+			description:
+				'Kerry is renowned for its iconic landscapes, including the Ring of Kerry and Killarney National Park. The county offers outdoor adventures and charming towns with rich cultural heritage.',
 			advertsSearch: {
 				location: 'County Kerry',
 				locationNorthEastLat: 52.6024525,
@@ -91,6 +107,8 @@ export const Counties = {
 		{
 			identifier: 'kildare',
 			name: 'Kildare',
+			description:
+				'Kildare is the equestrian heartland of Ireland, with lush countryside and historic estates. It offers a blend of rural charm, modern amenities, and vibrant community life.',
 			advertsSearch: {
 				location: 'County Kildare',
 				locationNorthEastLat: 53.4512374,
@@ -102,6 +120,8 @@ export const Counties = {
 		{
 			identifier: 'kilkenny',
 			name: 'Kilkenny',
+			description:
+				'Kilkenny features rolling hills and historic towns with a thriving arts scene. It’s known for its well-preserved medieval heritage and vibrant festivals.',
 			advertsSearch: {
 				location: 'County Kilkenny',
 				locationNorthEastLat: 52.8939943,
@@ -113,6 +133,8 @@ export const Counties = {
 		{
 			identifier: 'laois',
 			name: 'Laois',
+			description:
+				'Laois offers rolling countryside, historic sites, and tranquil living. It’s perfect for those seeking a quiet, rural lifestyle with easy access to nature and outdoor activities.',
 			advertsSearch: {
 				location: 'County Laois',
 				locationNorthEastLat: 53.2156522,
@@ -124,6 +146,8 @@ export const Counties = {
 		{
 			identifier: 'leitrim',
 			name: 'Leitrim',
+			description:
+				'Leitrim is known for its scenic waterways, peaceful countryside, and outdoor activities. It’s ideal for nature lovers and those looking for a quiet, serene environment.',
 			advertsSearch: {
 				location: 'County Leitrim',
 				locationNorthEastLat: 54.4743667,
@@ -135,6 +159,8 @@ export const Counties = {
 		{
 			identifier: 'limerick',
 			name: 'Limerick',
+			description:
+				'Beyond Limerick city, the county offers a mix of lush countryside and historic sites. Enjoy rural charm, scenic beauty, and vibrant community activities.',
 			advertsSearch: {
 				location: 'County Limerick',
 				locationNorthEastLat: 52.7573993,
@@ -146,6 +172,8 @@ export const Counties = {
 		{
 			identifier: 'longford',
 			name: 'Longford',
+			description:
+				'Longford offers a quiet rural life with rich history and natural beauty. It’s ideal for those seeking a tranquil environment and close-knit community living.',
 			advertsSearch: {
 				location: 'County Longford',
 				locationNorthEastLat: 53.9420806,
@@ -157,6 +185,8 @@ export const Counties = {
 		{
 			identifier: 'louth',
 			name: 'Louth',
+			description:
+				'Louth combines coastal charm with historic landmarks and friendly communities. It’s perfect for those looking for scenic beauty and a rich cultural heritage.',
 			advertsSearch: {
 				location: 'County Louth',
 				locationNorthEastLat: 54.1139455,
@@ -168,6 +198,8 @@ export const Counties = {
 		{
 			identifier: 'mayo',
 			name: 'Mayo',
+			description:
+				'Mayo, part of the Wild Atlantic Way, features rugged landscapes and vibrant towns. It’s ideal for outdoor enthusiasts and those seeking a blend of natural beauty and community spirit.',
 			advertsSearch: {
 				location: 'County Mayo',
 				locationNorthEastLat: 54.3454432,
@@ -179,6 +211,8 @@ export const Counties = {
 		{
 			identifier: 'meath',
 			name: 'Meath',
+			description:
+				'Meath is known for its historic sites, lush landscapes, and charming villages. It offers a rich heritage and a peaceful, rural lifestyle with modern conveniences.',
 			advertsSearch: {
 				location: 'County Meath',
 				locationNorthEastLat: 53.91766879999999,
@@ -190,6 +224,8 @@ export const Counties = {
 		{
 			identifier: 'monaghan',
 			name: 'Monaghan',
+			description:
+				'Monaghan features rolling hills, lakes, and friendly rural communities. It’s ideal for those looking for a quiet, pastoral setting with beautiful natural surroundings.',
 			advertsSearch: {
 				location: 'County Monaghan',
 				locationNorthEastLat: 54.4213388,
@@ -201,6 +237,8 @@ export const Counties = {
 		{
 			identifier: 'offaly',
 			name: 'Offaly',
+			description:
+				'Offaly boasts rich heritage, scenic boglands, and welcoming towns. It’s perfect for those seeking a blend of natural beauty and a strong sense of community.',
 			advertsSearch: {
 				location: 'County Offaly',
 				locationNorthEastLat: 53.424279,
@@ -212,6 +250,8 @@ export const Counties = {
 		{
 			identifier: 'roscommon',
 			name: 'Roscommon',
+			description:
+				'Roscommon offers tranquil countryside, historic sites, and friendly communities. It’s ideal for those looking for a peaceful, rural lifestyle with cultural heritage.',
 			advertsSearch: {
 				location: 'County Roscommon',
 				locationNorthEastLat: 54.125239,
@@ -223,6 +263,8 @@ export const Counties = {
 		{
 			identifier: 'sligo',
 			name: 'Sligo',
+			description:
+				'Sligo features stunning coastline, cultural heritage, and outdoor activities. It’s perfect for those who appreciate natural beauty and a vibrant cultural scene.',
 			advertsSearch: {
 				location: 'County Sligo',
 				locationNorthEastLat: 54.4730236,
@@ -234,6 +276,8 @@ export const Counties = {
 		{
 			identifier: 'tipperary',
 			name: 'Tipperary',
+			description:
+				'Tipperary is known for its lush farmland, historic castles, and vibrant towns. It offers a rich blend of history, culture, and scenic beauty, ideal for family living.',
 			advertsSearch: {
 				location: 'County Tipperary',
 				locationNorthEastLat: 53.1675822,
@@ -245,6 +289,8 @@ export const Counties = {
 		{
 			identifier: 'waterford',
 			name: 'Waterford',
+			description:
+				'Beyond the city, County Waterford combines beautiful coastline and cultural festivals. It’s perfect for those who enjoy a mix of coastal beauty and rural charm.',
 			advertsSearch: {
 				location: 'County Waterford',
 				locationNorthEastLat: 52.3638915,
@@ -256,6 +302,8 @@ export const Counties = {
 		{
 			identifier: 'westmeath',
 			name: 'Westmeath',
+			description:
+				'Westmeath offers picturesque lakes, historic sites, and vibrant towns. It’s ideal for those seeking a blend of natural beauty, history, and modern living.',
 			advertsSearch: {
 				location: 'County Westmeath',
 				locationNorthEastLat: 53.7990522,
@@ -267,6 +315,8 @@ export const Counties = {
 		{
 			identifier: 'wexford',
 			name: 'Wexford',
+			description:
+				'Wexford, located in the sunny southeast, features beautiful beaches and rich history. It’s perfect for those looking for coastal beauty and a warm, welcoming community.',
 			advertsSearch: {
 				location: 'County Wexford',
 				locationNorthEastLat: 52.79747,
@@ -278,6 +328,8 @@ export const Counties = {
 		{
 			identifier: 'wicklow',
 			name: 'Wicklow',
+			description:
+				'Wicklow is known for its scenic mountains, lush gardens, and coastal beauty. It’s ideal for those seeking outdoor adventures and a picturesque living environment.',
 			advertsSearch: {
 				location: 'County Wicklow',
 				locationNorthEastLat: 53.23440970000001,
