@@ -20,6 +20,7 @@
 	let predictions: google.maps.places.AutocompletePrediction[] = [];
 	const onInput = async () => {
 		dirty = true;
+		getCurrentPositionState = GetCurrentPositionState.Pending;
 
 		const prediction = predictions.find(
 			(prediction) =>
