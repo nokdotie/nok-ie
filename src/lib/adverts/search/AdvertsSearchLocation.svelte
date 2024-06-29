@@ -3,6 +3,10 @@
 	import { AdvertsSearch, AdvertsSearchQueryStringNames } from '$lib/adverts/search/AdvertsSearch';
 	import Label from '$lib/components/forms/Label.svelte';
 	import Input from '$lib/components/forms/Input.svelte';
+	import { GetCurrentPositionState, Geolocation } from '$lib/utils/browser/Geolocation';
+	import Success from '$lib/components/icons/Success.svelte';
+	import Failure from '$lib/components/icons/Failure.svelte';
+	import Loading from '$lib/components/icons/Loading.svelte';
 
 	export let advertsSearch: AdvertsSearch;
 
@@ -44,7 +48,7 @@
 		const placePredictions = await autoCompleteService.getPlacePredictions({
 			input: value,
 			componentRestrictions: { country: 'ie' },
-			types: ['geocode']
+			types: ['locality', 'sublocality', 'postal_town']
 		});
 
 		return placePredictions.predictions.map((prediction) => {
@@ -69,6 +73,23 @@
 			locationSouthWestLat = null;
 			locationSouthWestLng = null;
 		}
+	};
+
+	let getCurrentPositionState: GetCurrentPositionState = GetCurrentPositionState.Pending;
+	const onCurrentLocation = async () => {
+		Geolocation.getCurrentPosition().subscribe((result) => {
+			getCurrentPositionState = result.state;
+
+			if (result.state == GetCurrentPositionState.Success) {
+				dirty = false;
+
+				location = 'Near Me';
+				locationNorthEastLat = result.latitude + 0.01;
+				locationNorthEastLng = result.longitude + 0.01;
+				locationSouthWestLat = result.latitude - 0.01;
+				locationSouthWestLng = result.longitude - 0.01;
+			}
+		});
 	};
 </script>
 
@@ -98,7 +119,25 @@
 />
 
 <div class="{$$props.class} relative">
-	<Label for={AdvertsSearchQueryStringNames.Location}>Location</Label>
+	<Label for={AdvertsSearchQueryStringNames.Location}>
+		<div class="flex justify-between items-center">
+			Location
+
+			<span class="text-sm font-normal text-neutral-600">
+				{#if getCurrentPositionState == GetCurrentPositionState.Pending}
+					<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions a11y-missing-attribute -->
+					<a class="hover:text-neutral-800" on:click={onCurrentLocation}>Near Me</a>
+				{:else if getCurrentPositionState == GetCurrentPositionState.Loading}
+					<Loading class="h-4 w-4 !text-neutral-800" />
+				{:else if getCurrentPositionState == GetCurrentPositionState.Success}
+					<Success class="h-5 w-5" />
+				{:else if getCurrentPositionState == GetCurrentPositionState.Failure}
+					<Failure class="h-5 w-5" />
+				{/if}
+			</span>
+		</div>
+	</Label>
+
 	<Input
 		id={AdvertsSearchQueryStringNames.Location}
 		bind:value={location}
